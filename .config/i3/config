@@ -1,0 +1,115 @@
+# keyboard
+exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2
+
+# pywal
+exec --no-startup-id chbg ~/wallpapers
+
+# font
+font pango:Mononoki Nerd Font 12
+
+# basic
+bindsym $mod+Return         split toggle
+bindsym $mod+Shift+Return   exec $term
+
+bindsym $mod+b              border pixel
+bindsym $mod+Shift+b        bar mode toggle
+
+bindsym $mod+r              exec --no-startup-id dmenu_run
+bindsym $mod+Shift+r        exec i3-msg reload
+
+bindsym $mod+f              fullscreen toggle
+bindsym $mod+Shift+f        floating toggle; sticky toggle
+
+bindsym $mod+z              fullscreen toggle
+bindsym $mod+Shift+z        fullscreen toggle
+
+bindsym $mod+d              floating toggle; sticky toggle
+bindsym $mod+Shift+d        floating toggle; sticky toggle
+
+bindsym $mod+w              exec --no-startup-id firefox
+bindsym $mod+Shift+w        exec $term -e nmtui
+
+bindsym $mod+h              focus left
+bindsym $mod+Shift+h        move left 30
+bindsym $mod+Ctrl+h         exec --no-startup-id i3resize left
+
+bindsym $mod+j              focus down
+bindsym $mod+Shift+j        move down 30
+bindsym $mod+Ctrl+j         exec --no-startup-id i3resize down
+
+bindsym $mod+k              focus up
+bindsym $mod+Shift+k        move up 30
+bindsym $mod+Ctrl+k         exec --no-startup-id i3resize up
+
+bindsym $mod+l              focus right
+bindsym $mod+Shift+l        move right 30
+bindsym $mod+Ctrl+l         exec --no-startup-id i3resize right
+
+# workspaces
+bindsym $mod+1    workspace $ws1
+bindsym $mod+2    workspace $ws2
+bindsym $mod+3    workspace $ws3
+bindsym $mod+4    workspace $ws4
+bindsym $mod+5    workspace $ws5
+bindsym $mod+6    workspace $ws6
+bindsym $mod+7    workspace $ws7
+bindsym $mod+8    workspace $ws8
+bindsym $mod+9    workspace $ws9
+bindsym $mod+0    workspace $ws10
+
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws10
+
+# #---Extra XF86 Keys---# #
+bindsym XF86AudioMute           exec --no-startup-id amixer set Master toggle \
+                                && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume    exec --no-startup-id amixer set Master 1%- \
+                                && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer set Master 1%+ \
+                                && pkill -RTMIN+10 i3blocks
+
+# Set colors from Xresources
+# Set the color i3 will use if it fails to get colors from Xresources.
+set $tp #00000000
+set $ub #aa0000
+set $uf #ffffff
+set $tx #cccccc
+
+set_from_resource $bl i3wm.color0 #f0f0f0
+set_from_resource $bg i3wm.color1 #f0f0f0
+set_from_resource $fg i3wm.color4 #f0f0f0
+set_from_resource $hi i3wm.color7 #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+client.focused          $hi     $hi     $fg  $bg       $hi
+client.focused_inactive $bg     $bg     $fg  $bg       $tp
+client.unfocused        $bg     $bg     $fg  $bg       $tp
+client.urgent           $bg     $bg     $fg  $bg       $tp
+client.placeholder      $bg     $bg     $fg  $bg       $tp
+
+client.background       $bg
+
+bar {
+    # i3bar_command i3bar --transparency
+    status_command i3blocks
+    position top
+    mode dock
+    modifier none
+    colors {
+        background $bl
+        # class            border  background  text
+        focused_workspace  $bg     $bg         $tx
+        active_workspace   $hi     $hi         $tx
+        inactive_workspace $bl     $bl         $tx
+        urgent_workspace   $fg     $fg         $tx
+    }
+}
+

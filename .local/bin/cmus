@@ -1,0 +1,19 @@
+#!/bin/bash 
+
+x=$(cmus-remote -Q | sed -n -e 's/^.*file//p' | head -n 1 | tr -d '<>,&')
+y=${x%.*}
+
+echo -e ${y##*/}
+
+#PAUSE TRACK
+if [[ "${BLOCK_BUTTON}" -eq 1 ]];then
+	cmus-remote --pause
+
+## PREVIOUS TRACK
+elif [[ "${BLOCK_BUTTON}" -eq 2 ]];then 
+	cmus-remote --previous
+
+## NEXT TRACK
+elif [[ "${BLOCK_BUTTON}" -eq 3 ]];then
+	cmus-remote --next
+fi
