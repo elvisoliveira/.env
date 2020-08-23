@@ -1,30 +1,31 @@
 # global
+# dependency: nerd-fonts-mononoki
 full_text=|
 align=center
 color=#CCCCCC
 markup=pango
 separator=true
 separator_block_width=20
-script_dir=~/.local/bin
 
 [music]
-command=$script_dir/cmus
+command=$HOME/.local/bin/cmus
 interval=5
 
 [volume]
 label=VOL 
-command=$script_dir/volume
+# dependency: alsa-utils
+command=$HOME/.local/bin/volume
 interval=once
 signal=10
 
 [temperature]
 label=TEMP 
-command=$script_dir/temperature
+command=$HOME/.local/bin/temperature
 interval=10
 
 [memory]
 label=MEM 
-command=$script_dir/memory
+command=$HOME/.local/bin/memory
 interval=30
 
 [battery]
@@ -34,11 +35,11 @@ label=BAT
 bat_number=1
 
 [iface]
-command=$script_dir/iface
+command=$HOME/.local/bin/iface
 interval=30
 
 [disk]
-command=$script_dir/disk
+command=$HOME/.local/bin/disk
 label=DISK 
 dir=/
 interval=30

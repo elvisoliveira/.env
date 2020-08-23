@@ -7,6 +7,24 @@ exec --no-startup-id chbg ~/wallpapers
 # font
 font pango:Mononoki Nerd Font 12
 
+set $term --no-startup-id alacritty
+set $mod Mod4
+
+set $ws1 "1" 
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+for_window [class="^.*"] border pixel 2
+gaps inner 10
+gaps outer 5
+
 # basic
 bindsym $mod+Return         split toggle
 bindsym $mod+Shift+Return   exec $term
@@ -75,6 +93,8 @@ bindsym XF86AudioLowerVolume    exec --no-startup-id amixer set Master 1%- \
                                 && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer set Master 1%+ \
                                 && pkill -RTMIN+10 i3blocks
+
+for_window [class="mpv"] floating enable, sticky enable, resize set 480
 
 # Set colors from Xresources
 # Set the color i3 will use if it fails to get colors from Xresources.
