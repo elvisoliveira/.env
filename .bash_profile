@@ -1,9 +1,7 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-export PATH     = "$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd)"
-export EDITOR   = "vim"
-export BROWSER  = "qutebrowser"
-export TERMINAL = "alacritty"
+export PATH="$PATH:$HOME/.local/bin/"
+export XAUTHORITY="$HOME/.xauthority"
 
 if [[ "$(tty)" = "/dev/tty1" ]]; then
     pgrep i3 || startx

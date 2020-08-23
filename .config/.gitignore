@@ -1,0 +1,9 @@
+*
+!.gitignore
+
+!alacritty/
+!fish/
+!fontconfig
+!i3/
+!i3blocks/
+!qutebrowser/
