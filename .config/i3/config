@@ -32,7 +32,7 @@ bindsym $mod+Shift+Return   exec $term
 bindsym $mod+b              border pixel
 bindsym $mod+Shift+b        bar mode toggle
 
-bindsym $mod+r              exec --no-startup-id dmenu_run
+bindsym $mod+r              exec --no-startup-id rofi -combi-modi drun#run -show combi
 bindsym $mod+Shift+r        exec i3-msg reload
 
 bindsym $mod+f              fullscreen toggle
@@ -40,12 +40,6 @@ bindsym $mod+Shift+f        floating toggle; sticky toggle
 
 bindsym $mod+z              fullscreen toggle
 bindsym $mod+Shift+z        fullscreen toggle
-
-bindsym $mod+d              floating toggle; sticky toggle
-bindsym $mod+Shift+d        floating toggle; sticky toggle
-
-bindsym $mod+w              exec --no-startup-id firefox
-bindsym $mod+Shift+w        exec $term -e nmtui
 
 bindsym $mod+h              focus left
 bindsym $mod+Shift+h        move left 30
@@ -62,6 +56,9 @@ bindsym $mod+Ctrl+k         exec --no-startup-id i3resize up
 bindsym $mod+l              focus right
 bindsym $mod+Shift+l        move right 30
 bindsym $mod+Ctrl+l         exec --no-startup-id i3resize right
+
+bindsym $mod+Mod1+l         workspace next
+bindsym $mod+Mod1+h         workspace prev
 
 # workspaces
 bindsym $mod+1    workspace $ws1
@@ -93,6 +90,11 @@ bindsym XF86AudioLowerVolume    exec --no-startup-id amixer set Master 1%- \
                                 && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer set Master 1%+ \
                                 && pkill -RTMIN+10 i3blocks
+
+bindsym XF86AudioNext       exec --no-startup-id cmus-remote --next
+bindsym XF86AudioPlay       exec --no-startup-id cmus-remote --pause
+bindsym XF86AudioPrev       exec --no-startup-id cmus-remote --previous
+bindsym XF86AudioStop       exec --no-startup-id cmus-remote --stop
 
 for_window [class="mpv"] floating enable, sticky enable, resize set 480
 

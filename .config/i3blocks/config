@@ -8,7 +8,7 @@ separator=true
 separator_block_width=20
 
 [music]
-command=$HOME/.local/bin/cmus
+command=$HOME/.local/bin/cmusic
 interval=5
 
 [volume]
@@ -40,9 +40,14 @@ interval=30
 
 [disk]
 command=$HOME/.local/bin/disk
-label=DISK 
-dir=/
+label=HOME 
 interval=30
+
+[disk]
+command=$HOME/.local/bin/disk
+label=SLASH 
+interval=30
+DIR=/
 
 [time]
 command=date '+%d/%m/%y %H:%M:%S'
