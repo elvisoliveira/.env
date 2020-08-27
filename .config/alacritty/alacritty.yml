@@ -316,7 +316,7 @@ selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: false
+  save_to_clipboard: true
 
 # Allow terminal applications to change Alacritty's window title.
 #dynamic_title: true
@@ -358,8 +358,8 @@ selection:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
+shell:
+  program: /usr/bin/fish
 #  args:
 #    - --login
 
@@ -699,28 +699,28 @@ selection:
 # BEGIN ACE
 colors:
   primary:
-    background: '0x060911'
-    foreground: '0xc4cddb'
+    background: '0x090c0b'
+    foreground: '0xc4cbdc'
   cursor:
-    text:       '0x060911'
-    cursor:     '0xc4cddb'
+    text:       '0x090c0b'
+    cursor:     '0xc4cbdc'
   normal:
-    black:      '0x060911'
-    red:        '0xA17460'
-    green:      '0x345588'
-    yellow:     '0x61708B'
-    blue:       '0x7888A1'
-    magenta:    '0x7C98C2'
-    cyan:       '0x8C99AE'
-    white:      '0xc4cddb'
+    black:      '0x090c0b'
+    red:        '0x798569'
+    green:      '0x8C8F76'
+    yellow:     '0x607995'
+    blue:       '0x738B9F'
+    magenta:    '0x7A8EC8'
+    cyan:       '0x939CA2'
+    white:      '0xc4cbdc'
   bright:
-    black:      '0x898f99'
-    red:        '0xA17460'
-    green:      '0x345588'
-    yellow:     '0x61708B'
-    blue:       '0x7888A1'
-    magenta:    '0x7C98C2'
-    cyan:       '0x8C99AE'
-    white:      '0xc4cddb'
+    black:      '0x898e9a'
+    red:        '0x798569'
+    green:      '0x8C8F76'
+    yellow:     '0x607995'
+    blue:       '0x738B9F'
+    magenta:    '0x7A8EC8'
+    cyan:       '0x939CA2'
+    white:      '0xc4cbdc'
 
 # END ACE
