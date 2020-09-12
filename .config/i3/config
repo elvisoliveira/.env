@@ -26,39 +26,56 @@ gaps inner 10
 gaps outer 5
 
 # basic
-bindsym $mod+Return         split toggle
-bindsym $mod+Shift+Return   exec $term
+bindsym $mod+Return               split toggle
+bindsym $mod+Shift+Return         exec $term
 
-bindsym $mod+b              border pixel
-bindsym $mod+Shift+b        bar mode toggle
+bindsym $mod+b                    border pixel
+bindsym $mod+Shift+b              bar mode toggle
 
-bindsym $mod+r              exec --no-startup-id rofi -combi-modi drun#run -show combi
-bindsym $mod+Shift+r        exec i3-msg reload
+bindsym $mod+q                    [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Shift+q              [con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
-bindsym $mod+f              fullscreen toggle
-bindsym $mod+Shift+f        floating toggle; sticky toggle
+bindsym $mod+r                    exec --no-startup-id rofi -combi-modi drun#run -show combi
+bindsym $mod+Shift+r              exec i3-msg reload
 
-bindsym $mod+z              fullscreen toggle
-bindsym $mod+Shift+z        fullscreen toggle
+# bindsym --release $mod+s          exec --no-startup-id scrot
+bindsym --release $mod+Shift+s    exec --no-startup-id scrot -s
 
-bindsym $mod+h              focus left
-bindsym $mod+Shift+h        move left 30
-bindsym $mod+Ctrl+h         exec --no-startup-id i3resize left
+bindsym $mod+f                    floating toggle;
+bindsym $mod+Shift+f              floating toggle; sticky toggle
 
-bindsym $mod+j              focus down
-bindsym $mod+Shift+j        move down 30
-bindsym $mod+Ctrl+j         exec --no-startup-id i3resize down
+bindsym $mod+z                    fullscreen toggle
+bindsym $mod+Shift+z              fullscreen toggle
 
-bindsym $mod+k              focus up
-bindsym $mod+Shift+k        move up 30
-bindsym $mod+Ctrl+k         exec --no-startup-id i3resize up
+bindsym $mod+t                    exec --no-startup-id pcmanfm
+bindsym $mod+Shift+t              exec --no-startup-id pcmanfm
 
-bindsym $mod+l              focus right
-bindsym $mod+Shift+l        move right 30
-bindsym $mod+Ctrl+l         exec --no-startup-id i3resize right
+bindsym $mod+n                    exec --no-startup-id notepadpp
+bindsym $mod+Shift+n              exec --no-startup-id notepadpp
 
-bindsym $mod+Mod1+l         workspace next
-bindsym $mod+Mod1+h         workspace prev
+bindsym $mod+c                    exec $TERM --class "float"
+bindsym $mod+Shift+c              exec $TERM --class "float"
+
+bindsym $mod+h                    focus left
+bindsym $mod+Shift+h              move left 30
+bindsym $mod+Mod1+h               exec --no-startup-id i3resize left
+
+bindsym $mod+j                    focus down
+bindsym $mod+Shift+j              move down 30
+bindsym $mod+Mod1+j               exec --no-startup-id i3resize down
+
+bindsym $mod+k                    focus up
+bindsym $mod+Shift+k              move up 30
+bindsym $mod+Mod1+k               exec --no-startup-id i3resize up
+
+bindsym $mod+l                    focus right
+bindsym $mod+Shift+l              move right 30
+bindsym $mod+Mod1+l               exec --no-startup-id i3resize right
+
+bindsym $mod+Ctrl+l               workspace next
+bindsym $mod+Ctrl+h               workspace prev
+
+bindsym $mod+space                focus mode_toggle
 
 # workspaces
 bindsym $mod+1    workspace $ws1
@@ -91,24 +108,34 @@ bindsym XF86AudioLowerVolume    exec --no-startup-id amixer set Master 1%- \
 bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer set Master 1%+ \
                                 && pkill -RTMIN+10 i3blocks
 
-bindsym XF86AudioNext       exec --no-startup-id cmus-remote --next
-bindsym XF86AudioPlay       exec --no-startup-id cmus-remote --pause
-bindsym XF86AudioPrev       exec --no-startup-id cmus-remote --previous
-bindsym XF86AudioStop       exec --no-startup-id cmus-remote --stop
+# bindsym XF86AudioNext       exec --no-startup-id cmus-remote --next
+# bindsym XF86AudioPlay       exec --no-startup-id cmus-remote --pause
+# bindsym XF86AudioPrev       exec --no-startup-id cmus-remote --previous
+# bindsym XF86AudioStop       exec --no-startup-id cmus-remote --stop
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 for_window [class="mpv"] floating enable, sticky enable, resize set 480
+for_window [class="scrcpy"] floating enable, sticky enable
+for_window [class="notepadpp"] floating enable, sticky enable
+for_window [title="Picture-in-Picture"] sticky enable, sticky enable
+
+floating_modifier $mod
 
 # Set colors from Xresources
 # Set the color i3 will use if it fails to get colors from Xresources.
 set $tp #00000000
-set $ub #aa0000
-set $uf #ffffff
-set $tx #cccccc
+set $ub #AA0000
+set $uf #FFFFFF
+set $tx #CCCCCC
 
-set_from_resource $bl i3wm.color0 #f0f0f0
-set_from_resource $bg i3wm.color1 #f0f0f0
-set_from_resource $fg i3wm.color4 #f0f0f0
-set_from_resource $hi i3wm.color7 #f0f0f0
+set_from_resource $bl i3wm.color0 #F0F0F0
+set_from_resource $bg i3wm.color1 #F0F0F0
+set_from_resource $fg i3wm.color4 #F0F0F0
+set_from_resource $hi i3wm.color7 #F0F0F0
 
 # class                 border  backgr. text indicator child_border
 client.focused          $hi     $hi     $fg  $bg       $hi
@@ -134,4 +161,3 @@ bar {
         urgent_workspace   $fg     $fg         $tx
     }
 }
-

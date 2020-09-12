@@ -3,14 +3,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+  TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -359,7 +359,8 @@ selection:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /usr/bin/fish
+  program: /bin/bash
+#  program: /usr/bin/fish
 #  args:
 #    - --login
 
@@ -583,15 +584,15 @@ shell:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
   #- { key: L,         mods: Control,             action: ClearLogNotice }
   #- { key: L,         mods: Control, mode: ~Vi,  chars: "\x0c"          }
   #- { key: PageUp,    mods: Shift,   mode: ~Alt, action: ScrollPageUp,  }
   #- { key: PageDown,  mods: Shift,   mode: ~Alt, action: ScrollPageDown }
-  #- { key: Home,      mods: Shift,   mode: ~Alt, action: ScrollToTop,   }
-  #- { key: End,       mods: Shift,   mode: ~Alt, action: ScrollToBottom }
+  - { key: Home,      mods: Shift,   mode: ~Alt, action: ScrollToTop,   }
+  - { key: End,       mods: Shift,   mode: ~Alt, action: ScrollToBottom }
 
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: Vi, action: ScrollToBottom          }
@@ -699,28 +700,28 @@ shell:
 # BEGIN ACE
 colors:
   primary:
-    background: '0x090c0b'
-    foreground: '0xc4cbdc'
+    background: '0x060C0A'
+    foreground: '0xd9d2e0'
   cursor:
-    text:       '0x090c0b'
-    cursor:     '0xc4cbdc'
+    text:       '0x060C0A'
+    cursor:     '0xd9d2e0'
   normal:
-    black:      '0x090c0b'
-    red:        '0x798569'
-    green:      '0x8C8F76'
-    yellow:     '0x607995'
-    blue:       '0x738B9F'
-    magenta:    '0x7A8EC8'
-    cyan:       '0x939CA2'
-    white:      '0xc4cbdc'
+    black:      '0x060C0A'
+    red:        '0x4863B0'
+    green:      '0x9676A9'
+    yellow:     '0x7088B2'
+    blue:       '0x6C9FE5'
+    magenta:    '0x9EA7DA'
+    cyan:       '0x8FB7EB'
+    white:      '0xd9d2e0'
   bright:
-    black:      '0x898e9a'
-    red:        '0x798569'
-    green:      '0x8C8F76'
-    yellow:     '0x607995'
-    blue:       '0x738B9F'
-    magenta:    '0x7A8EC8'
-    cyan:       '0x939CA2'
-    white:      '0xc4cbdc'
+    black:      '0x97939c'
+    red:        '0x4863B0'
+    green:      '0x9676A9'
+    yellow:     '0x7088B2'
+    blue:       '0x6C9FE5'
+    magenta:    '0x9EA7DA'
+    cyan:       '0x8FB7EB'
+    white:      '0xd9d2e0'
 
 # END ACE
