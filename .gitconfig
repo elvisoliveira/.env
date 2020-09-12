@@ -3,3 +3,8 @@
 	email = elvis.olv@gmail.com
 [core]
 	autocrlf = true
+[pull]
+	rebase = false
+	ff = only
+[gc]
+	autoDetach = false

@@ -28,12 +28,6 @@ label=MEM
 command=$HOME/.local/bin/memory
 interval=30
 
-[battery]
-command=$script_dir/battery
-interval=30
-label=BAT 
-bat_number=1
-
 [iface]
 command=$HOME/.local/bin/iface
 interval=30
@@ -48,6 +42,12 @@ command=$HOME/.local/bin/disk
 label=SLASH 
 interval=30
 DIR=/
+
+[disk]
+command=$HOME/.local/bin/disk
+label=WINDOWS 
+interval=30
+DIR=/windows/
 
 [time]
 command=date '+%d/%m/%y %H:%M:%S'
