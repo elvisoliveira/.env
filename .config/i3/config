@@ -2,10 +2,10 @@
 exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2
 
 # pywal
-exec --no-startup-id chbg ~/wallpapers
+# exec --no-startup-id chbg ~/wallpapers
 
 # font
-font pango:Mononoki Nerd Font 12
+font pango:Mononoki Nerd Font 10
 
 set $term --no-startup-id alacritty
 set $mod Mod4
@@ -25,36 +25,36 @@ for_window [class="^.*"] border pixel 2
 gaps inner 10
 gaps outer 5
 
-# basic
+# bindsym
+bindsym --border button1 nop
+bindsym --border button2 nop
+bindsym --border button3 nop
+
 bindsym $mod+Return               split toggle
 bindsym $mod+Shift+Return         exec $term
 
 bindsym $mod+b                    border pixel
 bindsym $mod+Shift+b              bar mode toggle
 
-bindsym $mod+q                    [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
-bindsym $mod+Shift+q              [con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
-
 bindsym $mod+r                    exec --no-startup-id rofi -combi-modi drun#run -show combi
 bindsym $mod+Shift+r              exec i3-msg reload
+bindsym $mod+Shift+q              exec i3-msg exit
 
-# bindsym --release $mod+s          exec --no-startup-id scrot
-bindsym --release $mod+Shift+s    exec --no-startup-id scrot -s
+bindsym --release $mod+Shift+s    exec --no-startup-id flameshot gui
 
-bindsym $mod+f                    floating toggle;
-bindsym $mod+Shift+f              floating toggle; sticky toggle
+bindsym $mod+f                    floating toggle, resize set 100 ppt 100 ppt, move position center
+bindsym $mod+Shift+f              focus mode_toggle
 
 bindsym $mod+z                    fullscreen toggle
 bindsym $mod+Shift+z              fullscreen toggle
 
-bindsym $mod+t                    exec --no-startup-id pcmanfm
-bindsym $mod+Shift+t              exec --no-startup-id pcmanfm
+bindsym $mod+t                    exec --no-startup-id spacefm
+bindsym $mod+Shift+t              exec --no-startup-id spacefm
 
-bindsym $mod+n                    exec --no-startup-id notepadpp
-bindsym $mod+Shift+n              exec --no-startup-id notepadpp
+# rofi pulseaudio select sink
+bindsym $mod+p                    exec --no-startup-id "~/.config/rofi/scripts/rofi-pulseaudio-select-sink.sh &>> /tmp/i3-rofi-pulseaudio-select-sink-log"
 
-bindsym $mod+c                    exec $TERM --class "float"
-bindsym $mod+Shift+c              exec $TERM --class "float"
+bindsym $mod+v                    exec --no-startup-id clipmenu
 
 bindsym $mod+h                    focus left
 bindsym $mod+Shift+h              move left 30
@@ -75,7 +75,10 @@ bindsym $mod+Mod1+l               exec --no-startup-id i3resize right
 bindsym $mod+Ctrl+l               workspace next
 bindsym $mod+Ctrl+h               workspace prev
 
-bindsym $mod+space                focus mode_toggle
+bindsym $mod+Tab [con_mark="con"] scratchpad show, fullscreen enable
+bindsym $mod+Shift+Tab            mark "con", move scratchpad
+
+bindsym $mod+q      kill
 
 # workspaces
 bindsym $mod+1    workspace $ws1
@@ -113,14 +116,21 @@ bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer set Master 1%+ \
 # bindsym XF86AudioPrev       exec --no-startup-id cmus-remote --previous
 # bindsym XF86AudioStop       exec --no-startup-id cmus-remote --stop
 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioStop exec playerctl stop
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86MonBrightnessDown    exec --no-startup-id xbacklight -dec 15
+bindsym XF86MonBrightnessUp      exec --no-startup-id xbacklight -inc 15
 
-for_window [class="mpv"] floating enable, sticky enable, resize set 480
-for_window [class="scrcpy"] floating enable, sticky enable
+bindsym XF86AudioPlay exec playerctl --player=vlc play-pause
+bindsym XF86AudioStop exec playerctl --player=vlc stop
+bindsym XF86AudioNext exec playerctl --player=vlc next
+bindsym XF86AudioPrev exec playerctl --player=vlc previous
+
+for_window [class="vlc"] floating enable, sticky enable, resize set 480
+for_window [class="scrcpy"] floating enable
 for_window [class="notepadpp"] floating enable, sticky enable
+# for_window [class="Eclipse"] floating disable
+for_window [class="2010-02-23aragexere.exe"] floating disable
+# focus_follows_mouse no
+
 for_window [title="Picture-in-Picture"] sticky enable, sticky enable
 
 floating_modifier $mod
@@ -152,12 +162,17 @@ bar {
     position top
     mode dock
     modifier none
+    # output HDMI1
     colors {
         background $bl
         # class            border  background  text
-        focused_workspace  $bg     $bg         $tx
-        active_workspace   $hi     $hi         $tx
+        focused_workspace  $bg     $bg         $hi
+        active_workspace   $hi     $hi         $bg
         inactive_workspace $bl     $bl         $tx
         urgent_workspace   $fg     $fg         $tx
     }
 }
+
+# pactl list short sinks
+# pactl set-default-sink ''
+focus_on_window_activation focus

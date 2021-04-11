@@ -10,11 +10,14 @@
 bg="$HOME/.config/bg"
 
 [ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bg"
-
 [ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bg"
 
+# Convert to gray
+# convert "$bg" -colorspace Gray "$bg"
+# convert "$bg" -fill gray -colorize 50% "$bg"
+
 # If pywal is installed, use it.
-wal -i "$(readlink -f "$bg")" -o "$HOME/.config/wal/postrun" >/dev/null 2>&1
+wal -i "$(readlink -f "$bg")" # -o "$HOME/.config/wal/postrun"
 
 xwallpaper --zoom "$bg"
 
