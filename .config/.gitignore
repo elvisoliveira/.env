@@ -2,10 +2,25 @@
 !.gitignore
 
 !alacritty/
+!alacritty/*
+
 !fish/
+!fish/*
+
 !fontconfig
+!fontconfig/*
+
 !i3/
+!i3/*
+
 !i3blocks/
+!i3blocks/*
+
 !qutebrowser/
+!qutebrowser/*
+
 !neofetch/
+!neofetch/*
+
 !rofi/
+!rofi/*
