@@ -7,7 +7,7 @@ exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2
 # font
 font pango:Mononoki Nerd Font 10
 
-set $term --no-startup-id alacritty
+set $term --no-startup-id tabbed alacritty --embed
 set $mod Mod4
 
 set $ws1 "1" 
@@ -35,6 +35,7 @@ bindsym $mod+Shift+Return         exec $term
 
 bindsym $mod+b                    border pixel
 bindsym $mod+Shift+b              bar mode toggle
+bindsym $mod+Shift+Ctrl+b         exec --no-startup-id fish -c "vf activate pywal && chbg"
 
 bindsym $mod+r                    exec --no-startup-id rofi -combi-modi drun#run -show combi
 bindsym $mod+Shift+r              exec i3-msg reload
@@ -77,6 +78,7 @@ bindsym $mod+Ctrl+h               workspace prev
 
 bindsym $mod+Tab [con_mark="con"] scratchpad show, fullscreen enable
 bindsym $mod+Shift+Tab            mark "con", move scratchpad
+bindsym $mod+Shift+Ctrl+Tab       unmark "con", floating toggle, fullscreen disable
 
 bindsym $mod+q      kill
 
@@ -124,16 +126,25 @@ bindsym XF86AudioStop exec playerctl --player=vlc stop
 bindsym XF86AudioNext exec playerctl --player=vlc next
 bindsym XF86AudioPrev exec playerctl --player=vlc previous
 
-for_window [class="vlc"] floating enable, sticky enable, resize set 480
-for_window [class="scrcpy"] floating enable
-for_window [class="notepadpp"] floating enable, sticky enable
-# for_window [class="Eclipse"] floating disable
-for_window [class="2010-02-23aragexere.exe"] floating disable
-# focus_follows_mouse no
+# for_window [class="Eclipse"]               floating disable
+# for_window [class="vlc"]                   floating enable, sticky enable, resize set 480
+for_window [class="vlc"]                     move to workspace $ws9
+for_window [class="scrcpy"]                  floating enable
+for_window [class="notepadpp"]               floating enable, sticky enable
 
-for_window [title="Picture-in-Picture"] sticky enable, sticky enable
+# Ragnarok
+for_window [class="2010-02-23aragexere.exe"] floating disable
+
+# Firefox
+for_window [title="Picture-in-Picture"]      sticky enable, sticky enable
+
+# Zoom
+# for_window [class="^zoom$"]                floating enable, sticky enable, move to workspace $ws9
+# for_window [title="as_toolbar"]            floating enable, sticky enable, move to workspace $ws9
 
 floating_modifier $mod
+
+# focus_follows_mouse no
 
 # Set colors from Xresources
 # Set the color i3 will use if it fails to get colors from Xresources.

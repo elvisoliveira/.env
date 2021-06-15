@@ -49,6 +49,18 @@ label=WINDOWS
 interval=30
 DIR=/windows/
 
+[disk]
+command=$HOME/.local/bin/disk
+label=HDD EXT4 
+interval=30
+DIR=/hdd/
+
+[disk]
+command=$HOME/.local/bin/disk
+label=HDD NTFS 
+interval=30
+DIR=/hdd2/
+
 [time]
 command=date '+%d/%m/%y %H:%M:%S'
 interval=5
