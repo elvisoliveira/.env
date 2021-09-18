@@ -1,6 +1,9 @@
 # keyboard
 exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2
 
+# wallpaper
+exec --no-startup-id hsetroot -solid "#67645B"
+
 # pywal
 # exec --no-startup-id chbg ~/wallpapers
 
