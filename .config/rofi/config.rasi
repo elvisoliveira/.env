@@ -1,5 +1,5 @@
 configuration {
-    theme: "~/.cache/wal/colors-rofi-dark";
+    theme: "solarized";
     font: "Mononoki Nerd Font 12";
     modi: "drun,run,combi";
 }
