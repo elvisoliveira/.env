@@ -158,6 +158,10 @@ font:
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
+cursor:
+  style:
+    blinking: Always
+  blink_interval: 500
 
 # Colors (Tomorrow Night)
 #colors:
