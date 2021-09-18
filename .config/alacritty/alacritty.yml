@@ -702,30 +702,60 @@ key_bindings:
   # Print all received window events.
   #print_events: false
 # BEGIN ACE
+# Campbell (Windows 10 default)
 colors:
+  # COLORSCHEME: xterm.yaml
+  # Default colors
   primary:
-    background: '0x010011'
-    foreground: '0xa4d2f1'
-  cursor:
-    text:       '0x010011'
-    cursor:     '0xa4d2f1'
+    # hard contrast: background = '0x1d2021'
+    background: '0x000000'
+    foreground: '0xffffff'
+  # Normal colors
   normal:
-    black:      '0x010011'
-    red:        '0x3542CE'
-    green:      '0x0153FE'
-    yellow:     '0x0170FE'
-    blue:       '0xAE45DC'
-    magenta:    '0x0A8BFD'
-    cyan:       '0x2E97F8'
-    white:      '0xa4d2f1'
-  bright:
-    black:      '0x7293a8'
-    red:        '0x3542CE'
-    green:      '0x0153FE'
-    yellow:     '0x0170FE'
-    blue:       '0xAE45DC'
-    magenta:    '0x0A8BFD'
-    cyan:       '0x2E97F8'
-    white:      '0xa4d2f1'
+  # Bright colors
+    black: '0x000000'
+    red: '0xcd0000'
+    green: '0x00cd00'
+    yellow: '0xcdcd00'
+    blue: '0x0000ee'
+    magenta: '0xcd00cd'
+    cyan: '0x00cdcd'
+    white: '0xe5e5e5'
 
-# END ACE
+  # Bright colors
+  bright:
+    black: '0x7f7f7f'
+    red: '0xff0000'
+    green: '0x00ff00'
+    yellow: '0xffff00'
+    blue: '0x5c5cff'
+    magenta: '0xff00ff'
+    cyan: '0x00ffff'
+    white: '0xffffff'
+  cursor:
+    text: '#061822'
+    cursor: '#feaf3c'
+
+  dim:
+    black: '0x000000'
+    red: '0xa90000'
+    green: '0x049f2b'
+    yellow: '0xa3b106'
+    blue: '0x530aba'
+    magenta: '0xbb006b'
+    cyan: '0x433364'
+    white: '0x5f5f5f'
+  search:
+    matches:
+      foreground: '0xb2b2b2'
+      background: '0xb26818'
+    focused_match:
+      foreground: CellBackground
+      background: CellForeground
+
+  selection:
+    text: '#ffe9d7'
+    background: '#265b75'
+
+  # Normal colors
+  indexed_colors: []
