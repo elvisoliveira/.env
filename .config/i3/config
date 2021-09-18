@@ -124,10 +124,13 @@ bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer set Master 1%+ \
 bindsym XF86MonBrightnessDown    exec --no-startup-id xbacklight -dec 15
 bindsym XF86MonBrightnessUp      exec --no-startup-id xbacklight -inc 15
 
-bindsym XF86AudioPlay exec playerctl --player=vlc play-pause
-bindsym XF86AudioStop exec playerctl --player=vlc stop
-bindsym XF86AudioNext exec playerctl --player=vlc next
-bindsym XF86AudioPrev exec playerctl --player=vlc previous
+bindsym XF86AudioLowerVolume    exec --no-startup-id playerctl --player=mpv volume 0.1-
+bindsym XF86AudioRaiseVolume    exec --no-startup-id playerctl --player=mpv volume 0.1+
+
+bindsym XF86AudioPlay           exec --no-startup-id playerctl --player=mpv play-pause
+bindsym XF86AudioStop           exec --no-startup-id playerctl --player=mpv stop
+bindsym XF86AudioNext           exec --no-startup-id playerctl --player=mpv next
+bindsym XF86AudioPrev           exec --no-startup-id playerctl --player=mpv previous
 
 # for_window [class="Eclipse"]               floating disable
 # for_window [class="vlc"]                   floating enable, sticky enable, resize set 480
