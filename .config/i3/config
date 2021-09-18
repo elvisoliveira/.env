@@ -154,40 +154,51 @@ floating_modifier $mod
 
 # Set colors from Xresources
 # Set the color i3 will use if it fails to get colors from Xresources.
-set $tp #00000000
-set $ub #AA0000
-set $uf #FFFFFF
-set $tx #CCCCCC
 
-set_from_resource $bl i3wm.color0 #F0F0F0
-set_from_resource $bg i3wm.color1 #F0F0F0
-set_from_resource $fg i3wm.color4 #F0F0F0
-set_from_resource $hi i3wm.color7 #F0F0F0
+# set $tp #00000000
+# set $ub #AA0000
+# set $uf #FFFFFF
+# set $tx #CCCCCC
 
-# class                 border  backgr. text indicator child_border
-client.focused          $hi     $hi     $fg  $bg       $hi
-client.focused_inactive $bg     $bg     $fg  $bg       $tp
-client.unfocused        $bg     $bg     $fg  $bg       $tp
-client.urgent           $bg     $bg     $fg  $bg       $tp
-client.placeholder      $bg     $bg     $fg  $bg       $tp
+# set_from_resource $bl i3wm.color0 #F0F0F0
+# set_from_resource $bg i3wm.color1 #F0F0F0
+# set_from_resource $fg i3wm.color4 #F0F0F0
+# set_from_resource $hi i3wm.color7 #F0F0F0
 
-client.background       $bg
+# # class                 border  backgr. text indicator child_border
+# client.focused          $hi     $hi     $fg  $bg       $hi
+# client.focused_inactive $bg     $bg     $fg  $bg       $tp
+# client.unfocused        $bg     $bg     $fg  $bg       $tp
+# client.urgent           $bg     $bg     $fg  $bg       $tp
+# client.placeholder      $bg     $bg     $fg  $bg       $tp
+
+# client.background       $bg
+
+client.focused          #b58900 #b58900 #fdf6e3 #cb4b16
+client.focused_inactive #073642 #073642 #fdf6e3 #073642
+client.unfocused        #073642 #073642 #fdf6e3 #073642
 
 bar {
-    # i3bar_command i3bar --transparency
-    status_command i3blocks
-    position top
-    mode dock
-    modifier none
-    # output HDMI1
-    colors {
-        background $bl
-        # class            border  background  text
-        focused_workspace  $bg     $bg         $hi
-        active_workspace   $hi     $hi         $bg
-        inactive_workspace $bl     $bl         $tx
-        urgent_workspace   $fg     $fg         $tx
-    }
+	# i3bar_command i3bar --transparency
+	status_command i3blocks
+	position top
+	mode dock
+	modifier none
+	# colors {
+	#     background $bl
+	#     # class            border  background  text
+	#     focused_workspace  $bg     $bg         $hi
+	#     active_workspace   $hi     $hi         $bg
+	#     inactive_workspace $bl     $bl         $tx
+	#     urgent_workspace   $fg     $fg         $tx
+	# }
+	colors {
+		background #073642
+		statusline #eee8d5
+		focused_workspace #cb4b16 #cb4b16 #eee8d5
+		active_workspace #cb4b16 #cb4b16 #eee8d5
+		inactive_workspace #b58900 #b58900 #eee8d5
+	}
 }
 
 # pactl list short sinks
