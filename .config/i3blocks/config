@@ -2,21 +2,31 @@
 # dependency: nerd-fonts-mononoki
 full_text=|
 align=center
-color=#CCCCCC
+color=#BEBAAA
 markup=pango
 separator=true
 separator_block_width=20
 
-[music]
-command=$HOME/.local/bin/cmusic
-interval=5
+# [music]
+# command=$HOME/.local/bin/cmusic
+# interval=5
 
-[volume]
-label=VOL 
-# dependency: alsa-utils
-command=$HOME/.local/bin/volume
+# [volume]
+# label=VOL 
+# # dependency: alsa-utils
+# # command=$HOME/.local/bin/volume
+# interval=once
+# signal=10
+
+[VGA]
+command=$HOME/.local/bin/ddcutil 2
 interval=once
-signal=10
+label=VGA 
+
+[HDMI]
+command=$HOME/.local/bin/ddcutil 1
+interval=once
+label=HDMI 
 
 [temperature]
 label=TEMP 
@@ -26,6 +36,11 @@ interval=10
 [memory]
 label=MEM 
 command=$HOME/.local/bin/memory
+interval=30
+
+[cpu]
+label=CPU 
+command=$HOME/.local/bin/cpu_usage
 interval=30
 
 [iface]
@@ -57,7 +72,7 @@ DIR=/hdd/
 
 [disk]
 command=$HOME/.local/bin/disk
-label=HDD NTFS 
+label=HDD[2] NTFS 
 interval=30
 DIR=/hdd2/
 

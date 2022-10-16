@@ -35,8 +35,12 @@ if [ ! -a ~/.inputrc ]; then echo '$include /etc/inputrc' > ~/.inputrc; fi
 # Add shell-option to ~/.inputrc to enable case-insensitive tab completion
 echo 'set completion-ignore-case On' >> ~/.inputrc
 
- bind '"\e[A": history-search-backward'
- bind '"\e[B": history-search-forward'
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+# Android Dev
+export ANDROID_HOME=/hdd2/Android/linux/
+export ANDROID_SDK_ROOT=/hdd2/Android/linux/
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/elvisoliveira/.sdkman"
