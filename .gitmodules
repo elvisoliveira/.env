@@ -1,12 +1,9 @@
-[submodule ".local/yay"]
-	path = .local/yay
-	url = https://aur.archlinux.org/yay.git
 [submodule ".env/.vimrc"]
 	path = .env/.vimrc
-	url = git@github.com:elvisoliveira/.vimrc.git
+	url = https://github.com/elvisoliveira/.vimrc.git
 [submodule ".env/.tmux.conf"]
 	path = .env/.tmux.conf
-	url = git@github.com:elvisoliveira/.tmux.conf.git
-[submodule ".vim/bundle/Vundle.vim"]
-	path = .vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim.git
+	url = https://github.com/elvisoliveira/tmux.conf.git
+[submodule ".env/config.fish"]
+	path = .env/config.fish
+	url = https://github.com/elvisoliveira/config.fish.git
