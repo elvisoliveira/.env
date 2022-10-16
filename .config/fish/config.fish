@@ -7,9 +7,11 @@ fish_vi_key_bindings
 set -Ux PYENV_ROOT $HOME/.pyenv
 # set -Ux fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 
-set -Ux EDITOR vim
+set -Ux EDITOR nvim
 set -Ux XAUTHORITY $HOME/.xauthority
 set -Ux CM_LAUNCHER rofi
+
+set -gx TERM xterm-256color
 
 # set -Ux GSETTINGS_SCHEMA_DIR /usr/share/glib-2.0/schemas
 
@@ -21,7 +23,36 @@ set -Ux CM_LAUNCHER rofi
 # set -gx GTK_THEME "gnome"
 
 alias ls="ls --color=always"
-alias vi="vim"
+alias vi="nvim"
+
+# xhost +
+alias fireworks="docker run --rm -it \
+                 --name=fireworks \
+                 --ipc=host \
+                 -e DISPLAY=$DISPLAY \
+                 -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+                 -v /home/elvisoliveira/:/root/home/ \
+                 fireworks"
+
+alias notepadpp="docker run --rm -it \
+                 --name=notepadpp \
+                 --ipc=host \
+                 -e DISPLAY=$DISPLAY \
+                 -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+                 -v /home/elvisoliveira/downloads/:/root/home/ \
+                 notepadpp"
+
+alias sen="docker run --rm -it \
+           -v /var/run/docker.sock:/run/docker.sock \
+           -e TERM \
+           tomastomecek/sen"
+
+alias soapui="docker run --rm -it \
+              --name=soapui \
+              --ipc=host \
+              -e DISPLAY=$DISPLAY \
+              -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+              soapui"
 
 function c
     cat $argv ^/dev/null | tr -d '\n' | read -l input
@@ -74,3 +105,5 @@ end
 # end
 
 # neofetch
+
+vf activate python3

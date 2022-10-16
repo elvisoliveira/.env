@@ -10,6 +10,7 @@ exec --no-startup-id hsetroot -solid "#67645B"
 # font
 font pango:Mononoki Nerd Font 10
 
+# set $term --no-startup-id __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia DRI_PRIME=1 tabbed alacritty --embed
 set $term --no-startup-id tabbed alacritty --embed
 set $mod Mod4
 
@@ -34,32 +35,40 @@ bindsym --border button2 nop
 bindsym --border button3 nop
 
 bindsym $mod+Return               split toggle
+bindsym $mod+Shift+b              bar mode toggle
 bindsym $mod+Shift+Return         exec $term
 
-bindsym $mod+b                    border pixel
-bindsym $mod+Shift+b              bar mode toggle
-bindsym $mod+Shift+Ctrl+b         exec --no-startup-id fish -c "vf activate pywal && chbg"
-
+bindsym $mod+q                    kill
 bindsym $mod+r                    exec --no-startup-id rofi -combi-modi drun#run -show combi
 bindsym $mod+Shift+r              exec i3-msg reload
 bindsym $mod+Shift+q              exec i3-msg exit
+bindsym $mod+y                    exec --no-startup-id ytfzf -fD
 
 bindsym --release $mod+Shift+s    exec --no-startup-id flameshot gui
 
-bindsym $mod+f                    floating toggle, resize set 100 ppt 100 ppt, move position center
+bindsym $mod+f                    floating toggle, resize set 50 ppt 50 ppt, move position center
 bindsym $mod+Shift+f              focus mode_toggle
+
+focus_follows_mouse yes
+
+mouse_warping none
 
 bindsym $mod+z                    fullscreen toggle
 bindsym $mod+Shift+z              fullscreen toggle
 
-bindsym $mod+t                    exec --no-startup-id spacefm
-bindsym $mod+Shift+t              exec --no-startup-id spacefm
+bindsym $mod+t                    exec --no-startup-id pcmanfm-qt
+bindsym $mod+Shift+t              exec --no-startup-id pcmanfm-qt
 
-# rofi pulseaudio select sink
-bindsym $mod+p                    exec --no-startup-id "~/.config/rofi/scripts/rofi-pulseaudio-select-sink.sh &>> /tmp/i3-rofi-pulseaudio-select-sink-log"
+# Rofi PulseAudio Select SINK
+bindsym $mod+p                    exec --no-startup-id "~/.config/rofi/scripts/rofi-pulseaudio-select-sink.sh &>> /tmp/gVgRzCZ"
 
+# Rofi Input Keyboard Layout
+bindsym $mod+i                    exec --no-startup-id "~/.config/rofi/scripts/rofi-select-keyboard-layout.sh &>> /tmp/LGFYZv"
+
+# Rofi paste menu
 bindsym $mod+v                    exec --no-startup-id clipmenu
 
+# Window management
 bindsym $mod+h                    focus left
 bindsym $mod+Shift+h              move left 30
 bindsym $mod+Mod1+h               exec --no-startup-id i3resize left
@@ -76,14 +85,15 @@ bindsym $mod+l                    focus right
 bindsym $mod+Shift+l              move right 30
 bindsym $mod+Mod1+l               exec --no-startup-id i3resize right
 
-bindsym $mod+Ctrl+l               workspace next
-bindsym $mod+Ctrl+h               workspace prev
+# Not used very often
+# bindsym $mod+Ctrl+l               workspace next
+# bindsym $mod+Ctrl+h               workspace prev
 
-bindsym $mod+Tab [con_mark="con"] scratchpad show, fullscreen enable
-bindsym $mod+Shift+Tab            mark "con", move scratchpad
-bindsym $mod+Shift+Ctrl+Tab       unmark "con", floating toggle, fullscreen disable
-
-bindsym $mod+q      kill
+# bindsym $mod+Tab [con_mark="terminal"] scratchpad show, fullscreen enable
+bindsym $mod+Tab exec --no-startup-id "~/.config/rofi/scripts/rofi-scratchpad.sh &>> /tmp/HjdS8hD"
+bindsym $mod+Escape exec --no-startup-id "~/.config/rofi/scripts/rofi-scratchpad.sh &>> /tmp/HjdS8hD"
+bindsym $mod+Shift+Tab mark "terminal", move scratchpad
+bindsym $mod+Shift+Ctrl+Tab unmark "terminal", floating toggle, fullscreen disable
 
 # workspaces
 bindsym $mod+1    workspace $ws1
@@ -113,16 +123,11 @@ bindsym $mod+Shift+0    move container to workspace $ws10
 #                                 && pkill -RTMIN+10 i3blocks
 # bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer set Master 1%+ \
 #                                 && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute           exec --no-startup-id amixer set Master toggle \
-                                && pkill -RTMIN+10 i3blocks
+# bindsym XF86AudioMute           exec --no-startup-id amixer set Master toggle \
+#                                 && pkill -RTMIN+10 i3blocks
 
-# bindsym XF86AudioNext       exec --no-startup-id cmus-remote --next
-# bindsym XF86AudioPlay       exec --no-startup-id cmus-remote --pause
-# bindsym XF86AudioPrev       exec --no-startup-id cmus-remote --previous
-# bindsym XF86AudioStop       exec --no-startup-id cmus-remote --stop
-
-bindsym XF86MonBrightnessDown    exec --no-startup-id xbacklight -dec 15
-bindsym XF86MonBrightnessUp      exec --no-startup-id xbacklight -inc 15
+bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 15
+bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 15
 
 bindsym XF86AudioLowerVolume    exec --no-startup-id playerctl --player=mpv volume 0.1-
 bindsym XF86AudioRaiseVolume    exec --no-startup-id playerctl --player=mpv volume 0.1+
@@ -132,51 +137,41 @@ bindsym XF86AudioStop           exec --no-startup-id playerctl --player=mpv stop
 bindsym XF86AudioNext           exec --no-startup-id playerctl --player=mpv next
 bindsym XF86AudioPrev           exec --no-startup-id playerctl --player=mpv previous
 
-# for_window [class="Eclipse"]               floating disable
-# for_window [class="vlc"]                   floating enable, sticky enable, resize set 480
-for_window [class="vlc"]                     move to workspace $ws9
-for_window [class="scrcpy"]                  floating enable
-for_window [class="notepadpp"]               floating enable, sticky enable
+# General
+for_window [class="Sxiv"]            floating enable
+for_window [class="anbox"]           floating enable
+for_window [class="scrcpy"]          floating enable
+for_window [class="mpv"]             floating enable
+for_window [window_type="tooltip"]   floating enable
 
 # Ragnarok
 for_window [class="2010-02-23aragexere.exe"] floating disable
 
-# Firefox
-for_window [title="Picture-in-Picture"]      sticky enable, sticky enable
+# LibreWolf / Firefox
+for_window [title="Picture-in-Picture"] sticky enable, sticky enable
 
-# Zoom
-# for_window [class="^zoom$"]                floating enable, sticky enable, move to workspace $ws9
-# for_window [title="as_toolbar"]            floating enable, sticky enable, move to workspace $ws9
+# Meetings
+for_window [class="^zoom$"] floating enable, move to workspace $ws10
+# for_window [class="^zoom$" instance="^zoom$" title="^Zoom Meeting$"] move to workspace $ws10
+# for_window [class="^zoom$" instance="^zoom$" title="^Zoom Cloud Meetings$"] move to workspace $ws10
+# for_window [class="^zoom$" instance="^zoom$" title="^Zoom - Licensed Account$"] floating enable, move to workspace $ws10
+# for_window [class="^zoom$" instance="^zoom$" title="^Chat$"] floating enable, move to workspace $ws10
+
+# Video player for meeting
+for_window [window_role="vlc-video"] floating enable, resize set 1280px 720px, move to workspace $ws10
+for_window [class="Selenium"] move to workspace $ws7
 
 floating_modifier $mod
 
 # focus_follows_mouse no
 
-# Set colors from Xresources
-# Set the color i3 will use if it fails to get colors from Xresources.
-
-# set $tp #00000000
-# set $ub #AA0000
-# set $uf #FFFFFF
-# set $tx #CCCCCC
-
-# set_from_resource $bl i3wm.color0 #F0F0F0
-# set_from_resource $bg i3wm.color1 #F0F0F0
-# set_from_resource $fg i3wm.color4 #F0F0F0
-# set_from_resource $hi i3wm.color7 #F0F0F0
-
-# # class                 border  backgr. text indicator child_border
-# client.focused          $hi     $hi     $fg  $bg       $hi
-# client.focused_inactive $bg     $bg     $fg  $bg       $tp
-# client.unfocused        $bg     $bg     $fg  $bg       $tp
-# client.urgent           $bg     $bg     $fg  $bg       $tp
-# client.placeholder      $bg     $bg     $fg  $bg       $tp
-
-# client.background       $bg
-
-client.focused          #b58900 #b58900 #fdf6e3 #cb4b16
-client.focused_inactive #073642 #073642 #fdf6e3 #073642
-client.unfocused        #073642 #073642 #fdf6e3 #073642
+# class                 border   background  text indicator  child_border
+client.focused          #B58900  #B58900     #FDF6E3         #CB4B16
+client.focused_inactive #073642  #073642     #FDF6E3         #073642
+client.unfocused        #073642  #073642     #FDF6E3         #073642
+client.background       #67645B
+# client.urgent
+# client.placeholder
 
 bar {
 	# i3bar_command i3bar --transparency
@@ -184,23 +179,15 @@ bar {
 	position top
 	mode dock
 	modifier none
-	# colors {
-	#     background $bl
-	#     # class            border  background  text
-	#     focused_workspace  $bg     $bg         $hi
-	#     active_workspace   $hi     $hi         $bg
-	#     inactive_workspace $bl     $bl         $tx
-	#     urgent_workspace   $fg     $fg         $tx
-	# }
 	colors {
 		background #073642
-		statusline #eee8d5
-		focused_workspace #cb4b16 #cb4b16 #eee8d5
-		active_workspace #cb4b16 #cb4b16 #eee8d5
-		inactive_workspace #b58900 #b58900 #eee8d5
+		statusline #EEE8D5
+		active_workspace #CB4B16 #CB4B16 #EEE8D5
+		focused_workspace #CB4B16 #CB4B16 #EEE8D5
+		inactive_workspace #B58900 #B58900 #EEE8D5
 	}
 }
 
 # pactl list short sinks
 # pactl set-default-sink ''
-focus_on_window_activation focus
+# focus_on_window_activation focus
