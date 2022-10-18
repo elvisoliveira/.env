@@ -14,6 +14,8 @@ dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XA
 
 clipmenud &
 picom --config ~/.config/picom/picom.conf -b --experimental-backends --backend glx &
+
+# for Stylus
 # gromit-mpx &
 
 # How to deactivate a dsplay
@@ -33,14 +35,20 @@ for output in eDP DP HDMI; do
     export $output=$(xrandr | awk "$REGEX")
 done
 
-xrandr --output $eDP --auto --scale 1x1 --primary
-# xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync
-# xrandr --addmode $DP "1920x1080_60.00"
-# xrandr --output $DP --auto --scale 1x1 --mode "1920x1080_60.00" --right-of $eDP --rotate left
-xrandr --output $HDMI --auto --scale 1x1 --mode 1920x1080 --left-of $eDP
+xrandr --output eDP1 --auto --scale 0.7 --primary --output DP2 --auto --scale 1 --above eDP1
 
 # Display VR
 # xrandr --output "HDMI1" --auto --scale 1x1 --mode 1024x768
+
+export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+
+export GTK_THEME="Dracula"
+
+export XDG_DESKTOP_DIR=$HOME/downloads
+export XDG_DOWNLOAD_DIR=$HOME/downloads
+
+export CM_LAUNCHER=rofi
 
 # WM
 exec i3

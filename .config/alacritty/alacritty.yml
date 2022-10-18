@@ -16,59 +16,8 @@ selection:
   save_to_clipboard: true
 shell:
   program: /bin/bash
+import:
+  - dracula.yml
 key_bindings:
   - {key: Home, mods: Shift, mode: ~Alt, action: ScrollToTop}
   - {key: End, mods: Shift, mode: ~Alt, action: ScrollToBottom}
-colors:
-  primary:
-    background: '0x0A0A11'
-    foreground: '0xe7d2ce'
-  cursor:
-    text:       '0x0A0A11'
-    cursor:     '0xe7d2ce'
-  normal:
-    black:      '0x0A0A11'
-    red:        '0x644E5D'
-    green:      '0x995F69'
-    yellow:     '0xCB4C59'
-    blue:       '0xDFA36A'
-    magenta:    '0x6257B0'
-    cyan:       '0xB26AA3'
-    white:      '0xe7d2ce'
-  bright:
-    black:      '0xa19390'
-    red:        '0x644E5D'
-    green:      '0x995F69'
-    yellow:     '0xCB4C59'
-    blue:       '0xDFA36A'
-    magenta:    '0x6257B0'
-    cyan:       '0xB26AA3'
-    white:      '0xe7d2ce'
-# BEGIN ACE
-colors:
-  primary:
-    background: '0x0c0e14'
-    foreground: '0xe0e5eb'
-  cursor:
-    text:       '0x0c0e14'
-    cursor:     '0xe0e5eb'
-  normal:
-    black:      '0x0c0e14'
-    red:        '0x8F745C'
-    green:      '0x5C718E'
-    yellow:     '0x738CA7'
-    blue:       '0x939EB1'
-    magenta:    '0xA0B4CB'
-    cyan:       '0xB6C8DA'
-    white:      '0xe0e5eb'
-  bright:
-    black:      '0x9ca0a4'
-    red:        '0x8F745C'
-    green:      '0x5C718E'
-    yellow:     '0x738CA7'
-    blue:       '0x939EB1'
-    magenta:    '0xA0B4CB'
-    cyan:       '0xB6C8DA'
-    white:      '0xe0e5eb'
-
-# END ACE
