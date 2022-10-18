@@ -25,8 +25,26 @@
 !rofi/
 !rofi/*
 
+!rofi/scripts/
+!rofi/scripts/*
+
 !nvim
 !nvim/*
 
 !gtk-3.0
 !gtk-3.0/*
+
+!zathura
+!zathura/*
+
+!ranger
+!ranger/*
+
+!pcmanfm-qt
+!pcmanfm-qt/*
+
+!mpv
+!mpv/*
+
+!flameshot
+!flameshot/*
