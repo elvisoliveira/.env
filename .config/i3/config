@@ -181,11 +181,11 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 
 bar {
-	# i3bar_command i3bar --transparency
-	status_command i3blocks
-	position top
-	mode dock
-	modifier none
+    # i3bar_command i3bar --transparency
+    status_command i3blocks
+    position top
+    mode dock
+    modifier none
     colors {
         background #282A36
         statusline #F8F8F2
