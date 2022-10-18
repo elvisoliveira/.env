@@ -4,26 +4,17 @@
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
 
 # Alternative (blocks terminal for 0-3ms)
-cat ~/.cache/wal/sequences
+# cat ~/.cache/wal/sequences
 
 PS1="[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\h\[\033[1;33m\] >\[\033[0m\]"
 
 # To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
-
-alias vi='vim'
-alias ls='ls --color=auto'
-
-export CM_LAUNCHER=rofi
+# source ~/.cache/wal/colors-tty.sh
 
 export TERM="xterm-256color"
-export XAUTHORITY="$HOME/.xauthority"
-
-export GTK_THEME="Adwaita-dark"
-# export GTK_THEME="Adwaita"
 
 # export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/bin"
 # export PATH="$PATH:$XDG_DATA_DIRS"
@@ -45,5 +36,9 @@ export ANDROID_SDK_ROOT=/hdd2/Android/linux/
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/elvisoliveira/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # neofetch

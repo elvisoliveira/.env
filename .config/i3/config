@@ -1,5 +1,5 @@
 # keyboard
-exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2
+# exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2
 
 # wallpaper
 exec --no-startup-id hsetroot -solid "#67645B"
@@ -53,6 +53,8 @@ focus_follows_mouse yes
 
 mouse_warping none
 
+bindsym $mod+c                    exec --no-startup-id "i3lock -c 000000"
+
 bindsym $mod+z                    fullscreen toggle
 bindsym $mod+Shift+z              fullscreen toggle
 
@@ -89,8 +91,8 @@ bindsym $mod+Mod1+l               exec --no-startup-id i3resize right
 # bindsym $mod+Ctrl+l               workspace next
 # bindsym $mod+Ctrl+h               workspace prev
 
-# bindsym $mod+Tab [con_mark="terminal"] scratchpad show, fullscreen enable
-bindsym $mod+Tab exec --no-startup-id "~/.config/rofi/scripts/rofi-scratchpad.sh &>> /tmp/HjdS8hD"
+bindsym $mod+Tab [con_mark="terminal"] scratchpad show, fullscreen enable
+# bindsym $mod+Tab exec --no-startup-id "~/.config/rofi/scripts/rofi-scratchpad.sh &>> /tmp/HjdS8hD"
 bindsym $mod+Escape exec --no-startup-id "~/.config/rofi/scripts/rofi-scratchpad.sh &>> /tmp/HjdS8hD"
 bindsym $mod+Shift+Tab mark "terminal", move scratchpad
 bindsym $mod+Shift+Ctrl+Tab unmark "terminal", floating toggle, fullscreen disable
@@ -151,7 +153,7 @@ for_window [class="2010-02-23aragexere.exe"] floating disable
 for_window [title="Picture-in-Picture"] sticky enable, sticky enable
 
 # Meetings
-for_window [class="^zoom$"] floating enable, move to workspace $ws10
+# for_window [class="^zoom$"] floating enable, move to workspace $ws10
 # for_window [class="^zoom$" instance="^zoom$" title="^Zoom Meeting$"] move to workspace $ws10
 # for_window [class="^zoom$" instance="^zoom$" title="^Zoom Cloud Meetings$"] move to workspace $ws10
 # for_window [class="^zoom$" instance="^zoom$" title="^Zoom - Licensed Account$"] floating enable, move to workspace $ws10
@@ -165,13 +167,18 @@ floating_modifier $mod
 
 # focus_follows_mouse no
 
-# class                 border   background  text indicator  child_border
-client.focused          #B58900  #B58900     #FDF6E3         #CB4B16
-client.focused_inactive #073642  #073642     #FDF6E3         #073642
-client.unfocused        #073642  #073642     #FDF6E3         #073642
-client.background       #67645B
-# client.urgent
-# client.placeholder
+# pactl list short sinks
+# pactl set-default-sink ''
+# focus_on_window_activation focus
+
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
 
 bar {
 	# i3bar_command i3bar --transparency
@@ -179,15 +186,15 @@ bar {
 	position top
 	mode dock
 	modifier none
-	colors {
-		background #073642
-		statusline #EEE8D5
-		active_workspace #CB4B16 #CB4B16 #EEE8D5
-		focused_workspace #CB4B16 #CB4B16 #EEE8D5
-		inactive_workspace #B58900 #B58900 #EEE8D5
-	}
-}
+    colors {
+        background #282A36
+        statusline #F8F8F2
+        separator  #44475A
 
-# pactl list short sinks
-# pactl set-default-sink ''
-# focus_on_window_activation focus
+        focused_workspace  #44475A #44475A #F8F8F2
+        active_workspace   #282A36 #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #BFBFBF
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
+    }
+}
