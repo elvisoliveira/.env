@@ -1,9 +1,9 @@
-[submodule ".env/.vimrc"]
-	path = .env/.vimrc
-	url = https://github.com/elvisoliveira/.vimrc.git
-[submodule ".env/.tmux.conf"]
-	path = .env/.tmux.conf
-	url = https://github.com/elvisoliveira/tmux.conf.git
-[submodule ".env/config.fish"]
-	path = .env/config.fish
-	url = https://github.com/elvisoliveira/config.fish.git
+[submodule ".tmux.conf"]
+	path = .tmux.conf
+	url = http://github.com/elvisoliveira/.tmux.conf
+[submodule ".vimrc"]
+	path = .vimrc
+	url = http://github.com/elvisoliveira/.vimrc.git
+[submodule "config.fish"]
+	path = config.fish
+	url = http://github.com/elvisoliveira/config.fish
