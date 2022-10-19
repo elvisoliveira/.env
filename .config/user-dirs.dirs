@@ -1,0 +1,9 @@
+# sudo pacman -S xdg-user-dirs
+XDG_DESKTOP_DIR="$HOME/downloads"
+XDG_DOWNLOAD_DIR="$HOME/downloads"
+XDG_TEMPLATES_DIR="$HOME/downloads"
+XDG_PUBLICSHARE_DIR="$HOME/downloads"
+XDG_DOCUMENTS_DIR="$HOME/downloads"
+XDG_MUSIC_DIR="$HOME/downloads"
+XDG_PICTURES_DIR="$HOME/downloads"
+XDG_VIDEOS_DIR="$HOME/downloads"
