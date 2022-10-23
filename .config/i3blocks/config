@@ -45,5 +45,20 @@ interval=30
 DIR=/
 
 [time]
-command=date '+%d/%m/%y %H:%M:%S'
+command=date '+%d/%m/%y'
+interval=5
+
+[time-br]
+label=BR 
+command=TZ=":America/Sao_Paulo" date '+%H:%M'
+interval=5
+
+[time-uk]
+label=UK 
+command=TZ=":Europe/London" date '+%H:%M'
+interval=5
+
+[time-nl]
+label=NL 
+command=TZ=":Europe/Amsterdam" date '+%H:%M'
 interval=5
