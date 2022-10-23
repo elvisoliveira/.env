@@ -50,4 +50,7 @@
 !flameshot
 !flameshot/*
 
+!qt5ct
+!qt5ct/*
+
 !mimeapps.list
