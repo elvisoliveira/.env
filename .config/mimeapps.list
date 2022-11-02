@@ -9,8 +9,8 @@ image/x-eps=zathura.desktop
 
 image/bmp=sxiv.desktop
 image/gif=sxiv.desktop
-image/jpeg=sxiv.desktop
 image/jpg=sxiv.desktop
+image/jpeg=sxiv.desktop
 image/png=sxiv.desktop
 image/tiff=sxiv.desktop
 image/x-bmp=sxiv.desktop
@@ -19,3 +19,13 @@ image/x-portable-bitmap=sxiv.desktop
 image/x-portable-graymap=sxiv.desktop
 image/x-tga=sxiv.desktop
 image/x-xpixmap=sxiv.desktop
+
+text/html=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/about=firefox.desktop
+x-scheme-handler/unknown=firefox.desktop
+x-scheme-handler/postman=Postman.desktop
+
+[Added Associations]
+text/plain=SciTE.desktop
