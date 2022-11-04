@@ -34,7 +34,7 @@ export ANDROID_HOME=/hdd2/Android/linux/
 export ANDROID_SDK_ROOT=/hdd2/Android/linux/
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/elvisoliveira/.sdkman"
+export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 export NVM_DIR="$HOME/.nvm"
