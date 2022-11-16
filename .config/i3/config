@@ -70,6 +70,8 @@ bindsym $mod+i                    exec --no-startup-id "~/.config/rofi/scripts/r
 # Rofi paste menu
 bindsym $mod+v                    exec --no-startup-id clipmenu
 
+bindsym $mod+s                    exec --no-startup-id "~/.config/rofi/scripts/rofi-bookmarks.sh &>> /tmp/LGFYZv"
+
 # Window management
 bindsym $mod+h                    focus left
 bindsym $mod+Shift+h              move left 30
@@ -91,8 +93,8 @@ bindsym $mod+Mod1+l               exec --no-startup-id i3resize right
 # bindsym $mod+Ctrl+l               workspace next
 # bindsym $mod+Ctrl+h               workspace prev
 
-bindsym $mod+Tab [con_mark="terminal"] scratchpad show, fullscreen enable
-# bindsym $mod+Tab exec --no-startup-id "~/.config/rofi/scripts/rofi-scratchpad.sh &>> /tmp/HjdS8hD"
+# bindsym $mod+Tab [con_mark="terminal"] scratchpad show, fullscreen enable
+bindsym $mod+Tab exec --no-startup-id "~/.config/rofi/scripts/rofi-scratchpad.sh &>> /tmp/HjdS8hD"
 bindsym $mod+Escape exec --no-startup-id "~/.config/rofi/scripts/rofi-scratchpad.sh &>> /tmp/HjdS8hD"
 bindsym $mod+Shift+Tab mark "terminal", move scratchpad
 bindsym $mod+Shift+Ctrl+Tab unmark "terminal", floating toggle, fullscreen disable
@@ -152,12 +154,19 @@ for_window [class="2010-02-23aragexere.exe"] floating disable
 # LibreWolf / Firefox
 for_window [title="Picture-in-Picture"] sticky enable, sticky enable
 
+# Toolstation
+for_window [title="Toolstation EPOS"] floating enable
+
 # Meetings
 # for_window [class="^zoom$"] floating enable, move to workspace $ws10
 # for_window [class="^zoom$" instance="^zoom$" title="^Zoom Meeting$"] move to workspace $ws10
 # for_window [class="^zoom$" instance="^zoom$" title="^Zoom Cloud Meetings$"] move to workspace $ws10
 # for_window [class="^zoom$" instance="^zoom$" title="^Zoom - Licensed Account$"] floating enable, move to workspace $ws10
 # for_window [class="^zoom$" instance="^zoom$" title="^Chat$"] floating enable, move to workspace $ws10
+
+# Chrome extension popups
+for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
+for_window [instance="^crx.*$" window_role="pop-up"]  sticky enable
 
 # Video player for meeting
 for_window [window_role="vlc-video"] floating enable, resize set 1280px 720px, move to workspace $ws10

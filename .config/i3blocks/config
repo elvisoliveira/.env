@@ -24,6 +24,13 @@ label=MEM
 command=$HOME/.local/bin/memory
 interval=30
 
+
+[battery]
+command=$HOME/.local/bin/battery
+interval=30
+label=BAT 
+bat_number=1
+
 # [cpu]
 # label=CPU 
 # command=$HOME/.local/bin/cpu_usage
