@@ -13,7 +13,7 @@ fi
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
 clipmenud &
-picom --config ~/.config/picom/picom.conf -b --experimental-backends --backend glx &
+picom --config ~/.config/picom/picom.conf -b --backend glx &
 
 # for Stylus
 # gromit-mpx &

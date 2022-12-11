@@ -6,7 +6,6 @@ application/x-eps=zathura.desktop
 image/eps=zathura.desktop
 image/vnd.djvu=zathura.desktop
 image/x-eps=zathura.desktop
-
 image/bmp=sxiv.desktop
 image/gif=sxiv.desktop
 image/jpg=sxiv.desktop
@@ -19,7 +18,6 @@ image/x-portable-bitmap=sxiv.desktop
 image/x-portable-graymap=sxiv.desktop
 image/x-tga=sxiv.desktop
 image/x-xpixmap=sxiv.desktop
-
 text/html=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/http=firefox.desktop
@@ -29,3 +27,5 @@ x-scheme-handler/postman=Postman.desktop
 
 [Added Associations]
 text/plain=SciTE.desktop
+application/x-shellscript=SciTE.desktop;
+application/octet-stream=SciTE.desktop;
