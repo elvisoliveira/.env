@@ -144,9 +144,10 @@ bindsym XF86AudioPrev           exec --no-startup-id playerctl previous
 # General
 for_window [class="Sxiv"]            floating enable
 for_window [class="anbox"]           floating enable
-for_window [class="scrcpy"]          floating enable
+for_window [class="scrcpy"]          floating enable, sticky enable
 for_window [class="mpv"]             floating enable
 for_window [window_type="tooltip"]   floating enable
+for_window [instance="^Devtools$"]   floating enable
 
 # Ragnarok
 for_window [class="2010-02-23aragexere.exe"] floating disable
@@ -178,7 +179,7 @@ floating_modifier $mod
 
 # pactl list short sinks
 # pactl set-default-sink ''
-# focus_on_window_activation focus
+focus_on_window_activation focus
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #44475A
