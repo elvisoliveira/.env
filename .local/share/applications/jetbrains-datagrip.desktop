@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=JetBrains DataGrip
+Exec=/home/elvisoliveira/apps/datagrip/bin/datagrip.sh %f
+Comment=IDE for Databases and SQL
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-datagrip

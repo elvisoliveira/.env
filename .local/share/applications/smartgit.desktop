@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=SmartGit
+Comment=Graphical Git/Hg client
+Exec=/home/elvisoliveira/apps/smartgit/bin/smartgit.sh %f
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Categories=Development;
+StartupWMClass=SmartGit
+MimeType=application/smartgit;application/x-smartgit;

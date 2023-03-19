@@ -1,5 +1,7 @@
-share
 yay
 lib
 include
 state
+
+share/*
+!share/applications
