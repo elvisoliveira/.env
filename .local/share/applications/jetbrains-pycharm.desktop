@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=JetBrains PyCharm Community Edition
+Comment=Python IDE for Professional Developers
+Exec=/home/elvisoliveira/apps/pycharm/bin/pycharm.sh %f
+Terminal=false
+StartupNotify=true
+StartupWMClass=jetbrains-pycharm-ce
+Categories=Development;IDE;Python;

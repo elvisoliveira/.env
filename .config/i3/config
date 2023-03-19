@@ -14,7 +14,7 @@ font pango:Mononoki Nerd Font 10
 set $term --no-startup-id tabbed alacritty --embed
 set $mod Mod4
 
-set $ws1 "1" 
+set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
@@ -71,6 +71,7 @@ bindsym $mod+i                    exec --no-startup-id "~/.config/rofi/scripts/r
 bindsym $mod+v                    exec --no-startup-id clipmenu
 
 bindsym $mod+s                    exec --no-startup-id "~/.config/rofi/scripts/rofi-bookmarks.sh &>> /tmp/LGFYZv"
+bindsym $mod+Insert               exec --no-startup-id "~/.config/rofi/scripts/cliptype.sh &>> /tmp/LGFYZv"
 
 # Window management
 bindsym $mod+h                    focus left
@@ -147,7 +148,13 @@ for_window [class="anbox"]           floating enable
 for_window [class="scrcpy"]          floating enable, sticky enable
 for_window [class="mpv"]             floating enable
 for_window [window_type="tooltip"]   floating enable
-for_window [instance="^Devtools$"]   floating enable
+# for_window [title="DevTools - .*"]   floating enable, move to workspace $ws2
+
+# Kill update notifications, I want to use SmartGit on version 20
+for_window [class="SmartGit" title="Restart(.*)"] kill
+for_window [class="SmartGit" title="Upgrade SmartGit(.*)"] kill
+
+bindsym $mod+Shift+u i3-msg '[class="scrcpy"] floating disable'
 
 # Ragnarok
 for_window [class="2010-02-23aragexere.exe"] floating disable

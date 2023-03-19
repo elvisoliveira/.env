@@ -1,6 +1,6 @@
 [Default Applications]
 application/eps=zathura.desktop
-application/pdf=zathura.desktop
+application/pdf=qpdfview.desktop
 application/postscript=zathura.desktop
 application/x-eps=zathura.desktop
 image/eps=zathura.desktop
@@ -24,8 +24,10 @@ x-scheme-handler/http=firefox.desktop
 x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/postman=Postman.desktop
+x-scheme-handler/lens=OpenLens.desktop
 
 [Added Associations]
 text/plain=SciTE.desktop
 application/x-shellscript=SciTE.desktop;
 application/octet-stream=SciTE.desktop;
+application/pdf=qpdfview.desktop;

@@ -8,9 +8,9 @@ https://crontab.guru/every-5-minutes
 https://dedupelist.com
 https://emn178.github.io/online-tools/base64_decode.html
 https://hoppscotch.io
-https://ip.bramp.net#ipv4
-https://jakearchibald.github.io/svgomg
-https://jsonformatter.curiousconcept.com
+https://ip.bramp.net                     # (A better) What's My IP Address
+https://jakearchibald.github.io/svgomg   # Easy & visual compression of SVG images
+https://jsonformatter.curiousconcept.com # JSON Formatter & Validator
 https://lipsum.com
 https://meyerweb.com/eric/tools/dencoder
 https://mraffaele.com/labs/php-date-format-generator
@@ -21,6 +21,7 @@ https://urldecoder.org
 https://webformatter.com/html
 https://webglsamples.org/aquarium/aquarium.html
 https://developers.whatismybrowser.com/useragents/parse
+https://huggingface.co/spaces/Salesforce/BLIP
 
 # BHEC
 https://bhec.com.br
@@ -48,8 +49,8 @@ https://feedly.com
 https://github.com
 https://instagram.com
 https://keep.google.com
-https://mail.google.com/mail/mu/mp#gmail mobile
-https://mail.google.com/mail/u/0/h/nmvl63ldseng#gmail html
+https://mail.google.com/mail/mu/mp              # gmail mobile
+https://mail.google.com/mail/u/0/h/nmvl63ldseng # gmail html
 https://open.spotify.com
 https://podcasts.google.com
 https://translate.google.com
@@ -63,20 +64,44 @@ https://youtube.com
 https://mstdn.social#mastodon
 
 # Blast from the past
-https://web.archive.org/web/20160109163246/http://hospitalbelohorizonte.com.br
-https://web.archive.org/web/20170525010716/http://brutman.com.br
+https://web.archive.org/web/20081205024010/http://74.86.141.23/CP/ # Linharok
+https://web.archive.org/web/20090221100908/http://www.pousadavoangelica.com.br/
+https://web.archive.org/web/20090302194440/http://acaplinhares.com.br/
+https://web.archive.org/web/20100101164117/http://www.hospitalriodoce.com.br
+https://web.archive.org/web/20100502015057/http://www.hollo.com.br:80/clientes/avs/
+https://web.archive.org/web/20101007093719/http://www.montele.com.br/
+https://web.archive.org/web/20110203100910/http://www.basenuclear.com.br/
 https://web.archive.org/web/20110208200725/http://www.sancruza.com.br
+https://web.archive.org/web/20110226194317/http://www.basenuclear.com.br/
+https://web.archive.org/web/20110827223530/http://www.elvisoliveira.com.br/TIG/
+https://web.archive.org/web/20120111161520/http://www.precon.com.br:80/preconengenharia
+https://web.archive.org/web/20130523061945/http://poloatacado.com.br
+https://web.archive.org/web/20131012000911/http://www.associacaoavs.com.br/
+https://web.archive.org/web/20141218120537/http://cssantamaria.com.br
+https://web.archive.org/web/20141218145208/http://grupoabaco.com.br/
+https://web.archive.org/web/20150717004152/http://www.feirashop.com.br/#expand
+https://web.archive.org/web/20151122043446/http://www.gestaorh.com.br:80/website
+https://web.archive.org/web/20160109163246/http://hospitalbelohorizonte.com.br
+https://web.archive.org/web/20160327073956/http://martinssalomao.com.br/beta
+https://web.archive.org/web/20170518181544/http://lgbtrading.com.br
+https://web.archive.org/web/20170525010716/http://brutman.com.br
+https://web.archive.org/web/20170914061948is_/http://axisshipping.com.br
 https://web.archive.org/web/20171109182857/http://www.habit.eng.br:80
 https://web.archive.org/web/20200220214325/http://www.mineralimage.com:80
-https://web.archive.org/web/20100101164117/http://www.hospitalriodoce.com.br
-https://web.archive.org/web/20151122043446/http://www.gestaorh.com.br:80/website
-https://web.archive.org/web/20160327073956/http://martinssalomao.com.br/beta
-https://web.archive.org/web/20141218120537/http://cssantamaria.com.br
-https://web.archive.org/web/20170518181544/http://lgbtrading.com.br
-https://web.archive.org/web/20130523061945/http://poloatacado.com.br
-https://web.archive.org/web/20120111161520/http://www.precon.com.br:80/preconengenharia
-https://web.archive.org/web/20150717004152/http://www.feirashop.com.br/#expand
-https://web.archive.org/web/20170914061948is_/http://axisshipping.com.br
+
+https://web.archive.org/web/20060313054254/http://luk-ro.6te.net/
+https://web.archive.org/web/20060503110151/http://lucasramone.6te.net/
+https://web.archive.org/web/20061023092624/http://www.clicknetlanhouse.com/
+https://web.archive.org/web/20070127011157/http://www.luk-ro.com/home/index.php
+https://web.archive.org/web/20070822064258/http://z6.invisionfree.com/Luk_Ragnarok_Forum/index.php
+https://web.archive.org/web/20071110204915/http://www.linharesnaweb.com.br/
+https://web.archive.org/web/20080119102122/http://www.linhasites.com/
+https://web.archive.org/web/20080212222858/http://www.premierpropaganda.com/
+https://web.archive.org/web/20080320074928/http://www.premierstudio.com.br/
+https://web.archive.org/web/20080709104941/http://www.stilomaq.com.br/
+https://web.archive.org/web/20080710125435/http://www.ferrariweb.com.br/
+
+https://web.archive.org/web/20060106025718/http://www.norock.com.br:80/eventos.php
 
 # give to Caesar what belongs to Caesar
 https://contagem.ginfes.com.br
