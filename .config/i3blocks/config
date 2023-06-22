@@ -14,6 +14,10 @@ separator_block_width=20
 # interval=once
 # signal=10
 
+[window]
+command=xtitle -s | cat
+interval=persist
+
 [keyboard]
 command=setxkbmap -query | awk '/layout/ {print toupper($2)}'
 interval=repeat
