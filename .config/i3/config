@@ -163,7 +163,7 @@ for_window [class="2010-02-23aragexere.exe"] floating disable
 for_window [title="Picture-in-Picture"] sticky enable, sticky enable
 
 # Toolstation
-for_window [title="Toolstation EPOS"] floating enable
+# for_window [title="Toolstation EPOS"] floating enable
 
 # Meetings
 # for_window [class="^zoom$"] floating enable, move to workspace $ws10
@@ -173,8 +173,8 @@ for_window [title="Toolstation EPOS"] floating enable
 # for_window [class="^zoom$" instance="^zoom$" title="^Chat$"] floating enable, move to workspace $ws10
 
 # Chrome extension popups
-for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
-for_window [instance="^crx.*$" window_role="pop-up"]  sticky enable
+# for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
+# for_window [instance="^crx.*$" window_role="pop-up"]  sticky enable
 
 # Video player for meeting
 for_window [window_role="vlc-video"] floating enable, resize set 1280px 720px, move to workspace $ws10
