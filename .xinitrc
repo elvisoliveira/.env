@@ -35,7 +35,9 @@ for output in eDP DP HDMI; do
     export $output=$(xrandr | awk "$REGEX")
 done
 
-xrandr --output eDP1 --auto --scale 0.7 --primary --output DP2 --auto --scale 1 --above eDP1
+# xrandr --output eDP1 --auto --scale 0.7 --primary --output DP2 --auto --scale 1 --left-of eDP1
+xrandr --output eDP1 --auto --scale 0.7 --primary --output DP2-1 --auto --scale 1 --right-of eDP1 --output DP2-2 --auto --scale 1 --right-of DP2-1
+# xrandr --output eDP1 --auto --scale 0.7 --primary --output DP3-1 --auto --scale 1 --left-of DP3-2 --output DP3-2 --auto --scale 1 --above eDP1
 
 # Display VR
 # xrandr --output "HDMI1" --auto --scale 1x1 --mode 1024x768

@@ -8,11 +8,11 @@ https://crontab.guru/every-5-minutes
 https://dedupelist.com
 https://emn178.github.io/online-tools/base64_decode.html
 https://hoppscotch.io
-https://ip.bramp.net                     # (A better) What's My IP Address
-https://jakearchibald.github.io/svgomg   # Easy & visual compression of SVG images
+https://ip.bramp.net # (A better) What's My IP Address
+https://jakearchibald.github.io/svgomg # Easy & visual compression of SVG images
 https://jsonformatter.curiousconcept.com # JSON Formatter & Validator
-https://lipsum.com
-https://meyerweb.com/eric/tools/dencoder
+https://lipsum.com # Lorem Ipsum (Lipsum) generator
+https://meyerweb.com/eric/tools/dencoder # URL Decoder / Encoder
 https://mraffaele.com/labs/php-date-format-generator
 https://prizz.github.io/multi-hash
 https://regexr.com
@@ -101,8 +101,6 @@ https://web.archive.org/web/20080320074928/http://www.premierstudio.com.br/
 https://web.archive.org/web/20080709104941/http://www.stilomaq.com.br/
 https://web.archive.org/web/20080710125435/http://www.ferrariweb.com.br/
 
-https://web.archive.org/web/20060106025718/http://www.norock.com.br:80/eventos.php
-
 # give to Caesar what belongs to Caesar
 https://contagem.ginfes.com.br
 
@@ -138,3 +136,11 @@ about:profiles
 chrome://apps
 chrome://device-log
 chrome://extensions
+
+# SEO
+https://test.schema.dev/
+https://validator.schema.org/
+https://search.google.com/test/rich-results
+https://www.bing.com/webmasters/
+https://www.jsonschemavalidator.net/
+https://search.google.com/search-console

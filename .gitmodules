@@ -9,4 +9,4 @@
 	url = http://github.com/elvisoliveira/config.fish
 [submodule "bookmarks/bookmarks"]
 	path = bookmarks/bookmarks
-	url = git@github.com:elvisoliveira/bookmarks.git
+	url = git@personal:elvisoliveira/bookmarks.git
