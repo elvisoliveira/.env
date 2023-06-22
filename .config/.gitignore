@@ -17,6 +17,9 @@
 !i3blocks/
 !i3blocks/*
 
+!dunst/
+!dunst/*
+
 !qutebrowser/
 !qutebrowser/*
 
