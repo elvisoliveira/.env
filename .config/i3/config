@@ -40,7 +40,7 @@ bindsym $mod+Shift+Return         exec $term
 
 bindsym $mod+q                    kill
 bindsym $mod+r                    exec --no-startup-id rofi -combi-modi drun#run -show combi
-bindsym $mod+Shift+r              exec i3-msg reload
+bindsym $mod+Shift+r              exec i3-msg reload & killall i3bar & i3-msg  -s $(i3 --get-socket) 'exec i3bar'
 bindsym $mod+Shift+q              exec i3-msg exit
 bindsym $mod+y                    exec --no-startup-id ytfzf -fD
 
