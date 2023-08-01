@@ -15,28 +15,43 @@ separator_block_width=20
 # signal=10
 
 [window]
-command=xtitle -s | cat
-interval=persist
+# command=xtitle -s | cat
+command=playerctl --player=vlc metadata --format "{{ title }}" | cat
+interval=1
+
+[prev]
+full_text=󰒮
+command=playerctl --player=vlc previous
+
+[play-pause]
+full_text=󰐎
+command=playerctl --player=vlc play-pause
+
+[stop]
+full_text=󰓛
+command=playerctl --player=vlc stop
+
+[next]
+full_text=󰒭
+command=playerctl --player=vlc next
 
 [keyboard]
 command=setxkbmap -query | awk '/layout/ {print toupper($2)}'
-interval=repeat
+interval=1
 
 [temperature]
-label=TEMP 
 command=$HOME/.local/bin/temperature
 interval=10
 
 [memory]
-label=MEM 
+label=󰍛 
 command=$HOME/.local/bin/memory
 interval=30
-
 
 [battery]
 command=$HOME/.local/bin/battery
 interval=30
-label=BAT 
+label=󱊣 
 bat_number=1
 
 # [cpu]
