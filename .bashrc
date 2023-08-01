@@ -18,6 +18,7 @@ export TERM="xterm-256color"
 
 # export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/bin"
 # export PATH="$PATH:$XDG_DATA_DIRS"
+export PATH="$PATH:/home/elvisoliveira/.local/bin"
 
 # If ~/.inputrc doesn't exist yet: First include the original /etc/inputrc
 # so it won't get overriden
@@ -42,3 +43,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # neofetch
+# -- START ACTIVESTATE INSTALLATION
+export PATH="/home/elvisoliveira/.komodoide/12.0/XRE/state/bin:$PATH"
+# -- STOP ACTIVESTATE INSTALLATION
+# -- START ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
+export PATH="/home/elvisoliveira/.cache/activestate/bin:$PATH"
+# -- STOP ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
