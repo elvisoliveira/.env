@@ -62,21 +62,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *
  *   Ctrl + Up/Down    => Page Up / Page Down
  *   Shift + Backspace => Delete (forward delete, without reaching the top row)
- *   Shift + Del       => Shift + Insert (paste)
  *
- * Two distinct tricks depending on whether the held modifier should survive in
- * the report sent to the host:
- *
- *   STRIP (Ctrl+arrows, Shift+Backspace): the modifier must NOT reach the host
- *   or it would change meaning — Ctrl+PgUp is "previous tab" in many apps, and
- *   Shift+Del is now our paste. So del_mods() clears it before register_code(),
- *   then set_mods() restores it in the internal state right after, WITHOUT
- *   re-sending the report. A second press still sees the modifier and other
- *   combos keep working.
- *
- *   KEEP (Shift+Del): we WANT Shift in the report. Shift is already held, so
- *   registering plain Insert makes the host see Shift+Insert = paste. No mod
- *   juggling needed.
+ * In both cases the held modifier must NOT reach the host or it would change
+ * meaning — Ctrl+PgUp is "previous tab" in many apps, and Shift+Del is a cut /
+ * permanent-delete. So del_mods() clears it before register_code(), then
+ * set_mods() restores it in the internal state right after, WITHOUT re-sending
+ * the report. A second press still sees the modifier and other combos keep
+ * working.
  *
  * Holding the key keeps the substitute registered, so the OS auto-repeats.
  * MOD_MASK_CTRL / MOD_MASK_SHIFT match both left and right, on every layer.
@@ -84,7 +76,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 static bool ctrl_pgup_held  = false;
 static bool ctrl_pgdn_held  = false;
 static bool shift_fdel_held = false;   // Shift+Backspace -> Delete
-static bool shift_ins_held  = false;   // Shift+Del       -> Shift+Insert (paste)
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_keychron_common(keycode, record)) {
@@ -136,19 +127,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else if (shift_fdel_held) {
                 shift_fdel_held = false;
                 unregister_code(KC_DEL);
-                return false;
-            }
-            return true;
-        case KC_DEL:
-            if (record->event.pressed) {
-                if (get_mods() & MOD_MASK_SHIFT) {
-                    shift_ins_held = true;
-                    register_code(KC_INS);     // Shift already held => Shift+Insert (paste)
-                    return false;
-                }
-            } else if (shift_ins_held) {
-                shift_ins_held = false;
-                unregister_code(KC_INS);
                 return false;
             }
             return true;
