@@ -1,5 +1,14 @@
-#!/bin/sh
-userresources=$HOME/.Xresources
+# Read settings
+SETTINGS_FILE="$HOME/.config/settings.json"
+SCREENLAYOUT_DIR="$HOME/.screenlayout"
+
+# Default to home if file doesn't exist or location is not set
+if [ -f "$SETTINGS_FILE" ]; then
+    LOCATION=$(jq -r '.location // "home"' "$SETTINGS_FILE")
+else
+    LOCATION="home"
+fi
+
 usermodmap=$HOME/.xmodmap
 
 if [ -f "$userresources" ]; then
@@ -14,6 +23,7 @@ dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XA
 
 clipmenud &
 picom --config ~/.config/picom/picom.conf -b --backend glx &
+(sleep 10; conky -q -d -c ~/.config/conky/conky.conf) &
 
 # for Stylus
 # gromit-mpx &
@@ -28,16 +38,13 @@ picom --config ~/.config/picom/picom.conf -b --backend glx &
 # DPI
 # xrandr --dpi 80
 
-# Display Screens
-for output in eDP DP HDMI; do
-    REGEX="/^$output/{print "
-    REGEX+='$1}'
-    export $output=$(xrandr | awk "$REGEX")
-done
-
-# xrandr --output eDP1 --auto --scale 0.7 --primary --output DP2 --auto --scale 1 --left-of eDP1
-xrandr --output eDP1 --auto --scale 0.7 --primary --output DP2-1 --auto --scale 1 --right-of eDP1 --output DP2-2 --auto --scale 1 --right-of DP2-1
-# xrandr --output eDP1 --auto --scale 0.7 --primary --output DP3-1 --auto --scale 1 --left-of DP3-2 --output DP3-2 --auto --scale 1 --above eDP1
+# Execute the arandr profile script
+profile_script="$SCREENLAYOUT_DIR/${LOCATION}.sh"
+if [ -f "$profile_script" ]; then
+    sh "$profile_script"
+else
+    echo "Warning: Monitor profile $profile_script not found, skipping xrandr configuration"
+fi
 
 # Display VR
 # xrandr --output "HDMI1" --auto --scale 1x1 --mode 1024x768

@@ -1,11 +1,12 @@
 # global
 # dependency: nerd-fonts-mononoki
+# runtime deps: curl, setxkbmap, acpi, lm-sensors, iproute2, xclip
 full_text=
 align=center
 color=#BEBAAA
 markup=pango
 separator=true
-separator_block_width=20
+separator_block_width=19
 
 # [volume]
 # label=VOL 
@@ -14,44 +15,62 @@ separator_block_width=20
 # interval=once
 # signal=10
 
-[window]
-# command=xtitle -s | cat
-command=playerctl --player=vlc metadata --format "{{ title }}" | cat
-interval=1
+[btc]
+label=󰠓 BTC 
+command=$HOME/.config/i3blocks/scripts/crypto-rate BTC
+interval=3600
+color=#D7C27A
 
-[prev]
-full_text=󰒮
-command=playerctl --player=vlc previous
+[xmr]
+label=ɱ XMR 
+command=$HOME/.config/i3blocks/scripts/crypto-rate XMR
+interval=3600
+color=#9BB7A2
 
-[play-pause]
-full_text=󰐎
-command=playerctl --player=vlc play-pause
-
-[stop]
-full_text=󰓛
-command=playerctl --player=vlc stop
-
-[next]
-full_text=󰒭
-command=playerctl --player=vlc next
+# [window]
+# # command=xtitle -s | cat
+# command=playerctl --player=vlc metadata --format "{{ title }}" | cat
+# interval=1
+#
+# [prev]
+# full_text=󰒮
+# command=playerctl --player=vlc previous
+#
+# [play-pause]
+# full_text=󰐎
+# command=playerctl --player=vlc play-pause
+#
+# [stop]
+# full_text=󰓛
+# command=playerctl --player=vlc stop
+#
+# [next]
+# full_text=󰒭
+# command=playerctl --player=vlc next
 
 [keyboard]
+label=󰌌 KEY 
 command=setxkbmap -query | awk '/layout/ {print toupper($2)}'
-interval=1
+interval=once
+signal=11
+color=#BEBAAA
 
 [temperature]
+label=󰈸 TEMP 
+# Set SENSOR_CHIP here if `sensors` exposes a different temperature label.
 command=$HOME/.local/bin/temperature
-interval=10
+interval=30
 
 [memory]
-label=󰍛 
+label=󰍛 MEM 
 command=$HOME/.local/bin/memory
 interval=30
+color=#BEBAAA
 
 [battery]
+label=󱊣 BAT 
 command=$HOME/.local/bin/battery
-interval=30
-label=󱊣 
+interval=60
 bat_number=1
 
 # [cpu]
@@ -60,35 +79,60 @@ bat_number=1
 # interval=30
 
 [iface]
+label=󰩟 NET 
 command=$HOME/.local/bin/iface
-interval=30
+interval=60
+color=#BEBAAA
 
-[disk]
+[disk-home]
+# Home filesystem
+label=󰋊 ~ 
 command=$HOME/.local/bin/disk
-label=HOME 
-interval=30
+interval=300
+color=#AFA99A
 
-[disk]
+[disk-root]
+# Root filesystem
+label=󰋊 / 
 command=$HOME/.local/bin/disk
-label=SLASH 
-interval=30
+interval=300
 DIR=/
+color=#AFA99A
+
+[disk-vms]
+# VM storage
+label=󰋊 VM 
+command=$HOME/.local/bin/disk
+interval=300
+DIR=/vms/
+color=#AFA99A
 
 [time]
+label=󰃭 DATE 
 command=date '+%d/%m/%y'
-interval=5
+interval=3600
+color=#A8C0D8
+
+[time-ag]
+label=󰥔 AG 
+command=TZ=":Atlantic/Reykjavik" date '+%H:%M'
+interval=60
+color=#8FA1B3
 
 [time-br]
-label=BR 
+label=󰥔 BR 
 command=TZ=":America/Sao_Paulo" date '+%H:%M'
-interval=5
+interval=60
+color=#8FA1B3
 
 [time-uk]
-label=UK 
+label=󰥔 UK 
 command=TZ=":Europe/London" date '+%H:%M'
-interval=5
+interval=60
+color=#8FA1B3
 
 [time-nl]
-label=NL 
+label=󰥔 NL 
 command=TZ=":Europe/Amsterdam" date '+%H:%M'
-interval=5
+interval=60
+color=#A8C0D8
