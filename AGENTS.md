@@ -29,7 +29,6 @@ the **font configuration** across the system so it stays consistent and any agen
 | sway window titles | `.config/sway/config` (~line 10) | `font pango:` | Mononoki Nerd Font 11 |
 | swaybar (workspaces, `mode hide`) | `.config/sway/config` (`bar {}`) | `font pango:` | Mononoki Nerd Font 11 |
 | WezTerm terminal (`$term` in sway) | `.config/wezterm/wezterm.lua` | `config.font` + `freetype_load_target = "Mono"` (aliased) | Mononoki Nerd Font Mono |
-| SciTE editor | `.SciTEUser.properties` | `font.monospace` | `Courier New` → falls back to Mononoki Nerd Font Mono via fontconfig |
 | gVim GUI | `.vimrc/.vimrc` | `set guifont` | `Fira Mono Medium 10` → falls back to Mononoki Nerd Font Mono (Fira not installed) |
 
 ### Why `sans-serif` needs a `<match>`, not a `<prefer>` alias
