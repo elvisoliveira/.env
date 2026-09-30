@@ -9,7 +9,7 @@ function markOccurrences()
     end
     clearOccurrences()
     scite.SendEditor(SCI_INDICSETSTYLE, 0, INDIC_ROUNDBOX)
-    scite.SendEditor(SCI_INDICSETFORE, 0, 255)
+    scite.SendEditor(SCI_INDICSETFORE, 0, 0x1CFF71)
     local txt = GetCurrentWord()
     local flags = SCFIND_WHOLEWORD
     local s,e = editor:findtext(txt,flags,0)
