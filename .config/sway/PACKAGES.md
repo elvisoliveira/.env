@@ -8,7 +8,7 @@ This file is intentionally limited to Sway/Wayland-related packages.
 sudo pacman -S --needed \
   sway swaybg swaylock swayidle \
   grim slurp wl-clipboard cliphist wtype jq \
-  satty rofi-wayland kanshi
+  satty rofi-wayland kanshi brightnessctl imv
 ```
 
 What these cover:
@@ -18,10 +18,12 @@ What these cover:
 - `grim` + `slurp` + `wl-clipboard`: Wayland screenshot + clipboard flow.
 - `satty`: screenshot annotator (`$mod+Shift+s` bind: slurp -> grim -> satty; salva + copia path).
 - `cliphist`: Wayland clipboard history used in your `$mod+v` bind.
-- `wtype`: Wayland-native key typing used by your question-mark helper binding.
+- `wtype`: Wayland-native key typing (rofi bookmarks / cliptype helpers).
 - `jq`: parses `swaymsg` JSON for saving the current layout into Kanshi config.
 - `rofi-wayland`: launcher on Wayland.
 - `kanshi`: output profiles for multi-monitor setups on Wayland.
+- `brightnessctl`: backlight keys (no xbacklight fallback).
+- `imv`: Wayland image viewer, default for `image/*` in mimeapps.list and rifle.conf.
 
 ## Optional but recommended
 
@@ -29,4 +31,4 @@ What these cover:
 sudo pacman -S --needed xorg-xwayland
 ```
 
-Install `xorg-xwayland` if you run X11 apps under Sway.
+Install `xorg-xwayland` for the X11 apps still in use here (JetBrains IDEs, SmartGit, IDA, wine).

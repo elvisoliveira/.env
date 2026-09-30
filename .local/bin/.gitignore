@@ -1,11 +1,4 @@
 *
 !.gitignore
-!ace
-!battery
 !chbg
-!disk
-!iface
-!memory
-!temperature
-!volume
 !fzf-bat-preview
