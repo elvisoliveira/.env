@@ -63,3 +63,6 @@ export PATH=$BUN_INSTALL/bin:$PATH
 export PATH=$PATH:$HOME/.maestro/bin
 
 . "/home/elvisoliveira/.deno/env"
+
+# sudo without a tty: password popup on the active tmux client (see .tmux.conf/bin/sudo/README.md)
+export SUDO_ASKPASS="$HOME/.env/.tmux.conf/bin/sudo/askpass-tmux"
