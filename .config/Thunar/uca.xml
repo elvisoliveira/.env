@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1781600467196218-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>edit-copy</icon>
+	<name>Copy absolute path</name>
+	<submenu></submenu>
+	<unique-id>1781600467196218-2</unique-id>
+	<command>sh -c &apos;if [ &quot;$#&quot; -eq 1 ]; then printf &quot;%%s&quot; &quot;$1&quot;; else printf &quot;%%s\n&quot; &quot;$@&quot;; fi | wl-copy&apos; sh %F</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+</actions>

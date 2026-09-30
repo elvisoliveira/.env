@@ -1,2 +1,39 @@
 [global]
 follow = mouse
+stack_duplicates = true
+show_indicators = true
+mouse_left_click = context
+dmenu = /usr/bin/rofi -dmenu
+force_xwayland = false
+per_monitor_dpi = false
+font = Mononoki Nerd Font 11
+# Notificações no tema Dracula: fundo escuro, texto claro;
+# a moldura sinaliza a urgência.
+frame_width = 2
+corner_radius = 0
+transparency = 0
+separator_height = 2
+offset = (10, 10)
+
+background = "#282A36"
+foreground = "#F8F8F2"
+frame_color = "#BD93F9"
+highlight = "#8BE9FD"
+
+[urgency_low]
+background = "#282A36"
+foreground = "#F8F8F2"
+frame_color = "#6272A4"
+timeout = 5
+
+[urgency_normal]
+background = "#282A36"
+foreground = "#F8F8F2"
+frame_color = "#BD93F9"
+timeout = 8
+
+[urgency_critical]
+background = "#282A36"
+foreground = "#F8F8F2"
+frame_color = "#FF5555"
+timeout = 0
