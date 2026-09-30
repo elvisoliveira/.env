@@ -1,24 +1,110 @@
 #!/bin/sh
 
-# This script does the following:
-#	Run by itself, set the wallpaper (at X start).
-#	If given a file, set that as the new wallpaper.
-#	If given a directory, choose random file in it.
-#	If wal is installed, also generates a colorscheme.
+set -eu
 
-# Location of link to wallpaper link.
-bg="$HOME/.config/bg"
+# chbg — set the (desaturated) desktop wallpaper on sway, per output.
+#   chbg          Download a random photo per output from picsum.photos, sized
+#                 to that output, saved under $wpdir/picsum/ (default).
+#   chbg -l       Local: pick a random image per output from $wpdir.
+#   chbg -k       Keep: reprocess the current per-output sources (no new image).
+#   chbg FILE     Use FILE on every output.
+#   chbg DIR      Pick a random image per output from DIR.
+#   chbg -r ...   Raw: skip the gray/dim processing, use the image as-is.
+#
+# A processed (grayed + dimmed) copy is written to $bg-<output> for each active
+# output; swaybg shows them. Originals are NEVER modified — $src records the
+# pristine "output<TAB>path" mapping so `chbg -k` re-derives from it instead
+# of re-graying an already-gray image.
 
-[ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bg"
-[ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bg"
+wpdir="${WALLPAPER_DIR:-$HOME/pictures/wallpapers}"
+bg="$HOME/.config/bg"        # base path; per-output files are $bg-<output>
+src="$HOME/.config/bg.src"   # TSV pointer: <output>\t<pristine source path>
 
-# Convert to gray
-convert "$bg" -colorspace Gray "$bg"
-convert "$bg" -fill gray -colorize 50% "$bg"
+pick_random() {
+	find "$1" -type f -iregex '.*\.\(jpe?g\|png\|gif\)' | shuf -n 1
+}
 
-# Dropping pywal in favor of dracula (@TODO: test again in the future to check if it's improved)
-# wal -i "$(readlink -f "$bg")" # -o "$HOME/.config/wal/postrun"
+active_outputs() {
+	swaymsg -t get_outputs | jq -r '.[] | select(.active) | .name'
+}
 
-xwallpaper --zoom "$bg"
+# Fetch a random picsum photo at the output's logical size (rect already
+# accounts for transform/rotation and scale). Prints the saved path.
+fetch_picsum() {
+	out="$1"
+	size=$(swaymsg -t get_outputs | jq -r ".[] | select(.name==\"$out\") | \"\(.rect.width)/\(.rect.height)\"")
+	mkdir -p "$wpdir/picsum"
+	file="$wpdir/picsum/$(date +%s)-$out.jpg"
+	curl -fsSL "https://picsum.photos/$size" -o "$file" || {
+		echo "chbg: download failed for '$out' (https://picsum.photos/$size)" >&2
+		rm -f "$file"
+		return 1
+	}
+	printf '%s\n' "$file"
+}
 
-# ~/.local/bin/ace
+# Resolve the pristine source for one output ($1 = output name).
+resolve_source() {
+	out="$1"
+	if [ "${arg:-}" ] && [ -f "$arg" ]; then
+		readlink -f "$arg"                       # same FILE on every output
+	elif [ "${arg:-}" ] && [ -d "$arg" ]; then
+		pick_random "$(readlink -f "$arg")"      # random per output from DIR
+	elif [ "$mode" = local ]; then
+		pick_random "$wpdir"
+	elif [ "$mode" = keep ] && [ -f "$src" ] && grep -q "^$out	" "$src"; then
+		prev=$(grep "^$out	" "$src" | head -n1 | cut -f2-)
+		if [ -f "$prev" ]; then printf '%s\n' "$prev"; else fetch_picsum "$out"; fi
+	else
+		fetch_picsum "$out"                       # default: new random photo
+	fi
+}
+
+raw=
+mode=picsum
+while [ $# -gt 0 ]; do
+	case "$1" in
+		-r) raw=1 ;;
+		-l) mode=local ;;
+		-k) mode=keep ;;
+		-*) echo "chbg: unknown option '$1'" >&2; exit 2 ;;
+		*) break ;;
+	esac
+	shift
+done
+arg="${1:-}"
+
+outputs=$(active_outputs)
+if [ -z "$outputs" ]; then
+	echo "chbg: no active outputs (is sway running?)" >&2
+	exit 1
+fi
+
+# Resolve every source before touching $bg/$src, so a failed download leaves
+# the current wallpaper untouched.
+resolved=$(for out in $outputs; do
+	source=$(resolve_source "$out") || exit 1
+	if [ -z "${source:-}" ] || [ ! -f "$source" ]; then
+		echo "chbg: no source image for '$out' (looked in '$wpdir')" >&2
+		exit 1
+	fi
+	printf '%s\t%s\n' "$out" "$source"
+done)
+
+# Clear stale symlinks/files and rebuild the source mapping fresh.
+rm -f "$bg" "$bg"-* 2>/dev/null || true
+printf '%s\n' "$resolved" >"$src"
+
+while IFS='	' read -r out source; do
+	# Desaturate + dim from the pristine source into $bg-<output> (format forced
+	# since the target has no extension — swaybg sniffs content, not the name).
+	if [ "$raw" ]; then
+		cp "$source" "$bg-$out"
+	else
+		magick "$source" -colorspace Gray -fill gray -colorize 50% \
+			-brightness-contrast -12x-6 PNG:"$bg-$out"
+	fi
+done <"$src"
+
+# Apply via sway: stops any running video wallpaper and (re)starts swaybg.
+"$HOME/.config/sway/scripts/wallpaper.sh"

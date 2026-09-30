@@ -61,7 +61,13 @@ fi
 IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^ \/]+).* scope global/ && print \$1 and exit")
 
 case $BLOCK_BUTTON in
-  3) echo -n "$IPADDR" | xclip -q -se c ;;
+  3)
+    if [[ -n "$WAYLAND_DISPLAY" ]]; then
+      echo -n "$IPADDR" | wl-copy
+    else
+      echo -n "$IPADDR" | xclip -q -se c
+    fi
+    ;;
 esac
 
 #------------------------------------------------------------------------

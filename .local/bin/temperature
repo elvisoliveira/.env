@@ -63,7 +63,7 @@ if ($temperature >= $t_crit) {
     print "#FF0000\n";
     exit 33;
 } elsif ($temperature >= $t_warn) {
-    print "#FFFC00\n";
+    print "#806000\n";
 }
 
 exit 0;

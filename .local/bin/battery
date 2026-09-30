@@ -41,12 +41,16 @@ elsif ($acpi !~ /: ([\w\s]+), (\d+)%/) {
 
 $status = $1;
 $percent = $2;
-$full_text = "$label$percent%";
+$full_text = "$label $percent%";
 
 if ($status eq 'Discharging') {
 	$full_text .= ' DIS';
 } elsif ($status eq 'Charging') {
 	$full_text .= ' CHR';
+    # hide block if battery is charging and level is > 90%
+	if ($percent > 90) {
+        exit(0);
+	}
 } elsif ($status eq 'Unknown') {
 	open (AC_ADAPTER, "acpi -a |") or die;
 	$ac_adapt = <AC_ADAPTER>;
@@ -79,11 +83,11 @@ if ($status eq 'Discharging') {
 	if ($percent < 20) {
 		print "#FF0000\n";
 	} elsif ($percent < 40) {
-		print "#FFAE00\n";
+		print "#B35900\n";
 	} elsif ($percent < 60) {
-		print "#FFF600\n";
+		print "#806000\n";
 	} elsif ($percent < 85) {
-		print "#A8FF00\n";
+		print "#006400\n";
 	}
 
 	if ($percent < 5) {

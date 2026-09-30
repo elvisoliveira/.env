@@ -16,6 +16,11 @@
 
 TYPE="${BLOCK_INSTANCE:-mem}"
 
+# left-click on the swap block: flush swap back to RAM (needs polkit agent running)
+if [ "$BLOCK_BUTTON" = "1" ] && [ "$TYPE" = "swap" ]; then
+	setsid -f swapflush >/dev/null 2>&1
+fi
+
 awk -v type=$TYPE '
 /^MemTotal:/ {
 	mem_total=$2
@@ -61,9 +66,9 @@ END {
 	if (pct > 90) {
 		print("#FF0000")
 	} else if (pct > 80) {
-		print("#FFAE00")
+		print("#B35900")
 	} else if (pct > 70) {
-		print("#FFF600")
+		print("#806000")
 	}
 }
 ' /proc/meminfo
