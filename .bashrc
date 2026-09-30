@@ -64,5 +64,5 @@ export PATH=$PATH:$HOME/.maestro/bin
 
 . "/home/elvisoliveira/.deno/env"
 
-# sudo without a tty: password popup on the active tmux client (see .tmux.conf/bin/sudo/README.md)
-export SUDO_ASKPASS="$HOME/.env/.tmux.conf/bin/sudo/askpass-tmux"
+# sudo without a tty: password popup on the active tmux client (see .tmux.conf/bin/askpass/README.md)
+export SUDO_ASKPASS="$HOME/.env/.tmux.conf/bin/askpass/askpass-tmux"
