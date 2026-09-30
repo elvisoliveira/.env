@@ -1,5 +1,5 @@
 configuration {
-    font: "Mononoki Nerd Font 12";
+    font: "Mononoki Nerd Font 11";
     modi: "drun,run,combi";
 }
 @import "dracula"
