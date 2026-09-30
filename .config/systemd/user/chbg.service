@@ -1,0 +1,20 @@
+[Unit]
+Description=Rotate desktop wallpaper (chbg, per output)
+Documentation=man:swaybg(1)
+# Only meaningful inside a graphical session.
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+# wallpaper.sh backgrounds swaybg; default control-group kill would reap it when
+# this oneshot exits. Kill only the wrapper, let swaybg keep painting.
+KillMode=process
+# sway exports WAYLAND_DISPLAY to the user manager but NOT SWAYSOCK, so
+# rediscover the newest sway IPC socket before running chbg.
+# DIR arg forces a fresh random image per output (bare chbg would reuse the
+# recorded sources, defeating rotation).
+ExecStart=/bin/sh -c 'export SWAYSOCK="$(ls -t /run/user/%U/sway-ipc.%U.*.sock 2>/dev/null | head -n1)"; [ -S "$SWAYSOCK" ] || { echo "no sway socket"; exit 0; }; exec %h/.local/bin/chbg "${WALLPAPER_DIR:-%h/pictures/wallpapers}"'
+
+[Install]
+WantedBy=graphical-session.target

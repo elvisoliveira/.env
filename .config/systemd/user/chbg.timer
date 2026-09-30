@@ -1,0 +1,10 @@
+[Unit]
+Description=Rotate desktop wallpaper hourly (chbg)
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

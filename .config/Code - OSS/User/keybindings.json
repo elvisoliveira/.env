@@ -1,0 +1,45 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+v",
+        "command": "-editor.action.clipboardPasteAction"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    // Buffer actions (hábitos do vim: C-k/C-j/C-x/C-h)
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.nextEditor",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.previousEditor",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+x",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.openPreviousRecentlyUsedEditor",
+        "when": "editorFocus"
+    },
+    // C-u/C-d = 10 linhas (como o 10k/10j do .vimrc), só fora do insert mode
+    {
+        "key": "ctrl+u",
+        "command": "cursorMove",
+        "args": { "to": "up", "by": "wrappedLine", "value": 10 },
+        "when": "editorTextFocus && amVim.mode != 'INSERT'"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "cursorMove",
+        "args": { "to": "down", "by": "wrappedLine", "value": 10 },
+        "when": "editorTextFocus && amVim.mode != 'INSERT'"
+    }
+]

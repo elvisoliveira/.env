@@ -1,0 +1,74 @@
+{
+    "chat.disableAIFeatures": true,
+    "diffEditor.renderSideBySide": false,
+    "editor.rulers": [100],
+    "telemetry.telemetryLevel": "off",
+    "update.mode": "none",
+    "update.showReleaseNotes": false,
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "extensions.ignoreRecommendations": true,
+    "npm.fetchOnlinePackageInfo": false,
+    "editor.renderWhitespace": "all",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "git.openRepositoryInParentFolders": "never",
+    "perl.fileFilter": null,
+    "editor.minimap.enabled": false,
+    "terminal.integrated.shell.linux": "/usr/bin/fish",
+    "editor.tabSize": 4,
+    "editor.indentSize": "tabSize",
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "dart.flutterSdkPath": "/home/elvisoliveira/projects/flutter",
+    "rubyLsp.rubyVersionManager": {
+        "identifier": "rbenv"
+    },
+    "redhat.telemetry.enabled": false,
+    "[erb]": {
+        "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "stylelint.config": {
+        "rules": {
+            "at-rule-name-case": "lower",
+            "at-rule-name-space-after": "always-single-line",
+            "at-rule-semicolon-newline-after": "always",
+        }
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "files.exclude": {
+        "**/*.profraw": true
+    },
+    "files.associations": {
+        "*.njk": "html"
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "explorer.confirmDelete": false,
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "security.workspace.trust.untrustedFiles": "open",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    }
+}

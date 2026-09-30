@@ -76,3 +76,24 @@
 !GIMP/3.2/
 !GIMP/3.2/gimprc
 !GIMP/3.2/shortcutsrc
+
+# editor / tools (hand-edited files only; caches stay local)
+!Code - OSS/
+!Code - OSS/User/
+!Code - OSS/User/settings.json
+!Code - OSS/User/keybindings.json
+!htop/
+!htop/htoprc
+!btop/
+!btop/btop.conf
+!lazygit/
+!lazygit/*
+!git/
+!git/ignore
+
+# sway session pieces outside .config/sway
+!xdg-desktop-portal/
+!xdg-desktop-portal/*
+!systemd/
+!systemd/user/
+!systemd/user/chbg.*
