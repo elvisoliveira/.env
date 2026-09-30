@@ -8,7 +8,7 @@ This file is intentionally limited to Sway/Wayland-related packages.
 sudo pacman -S --needed \
   sway swaybg swaylock swayidle \
   grim slurp wl-clipboard cliphist wtype jq \
-  satty rofi-wayland kanshi brightnessctl imv
+  satty rofi-wayland kanshi brightnessctl swayimg
 ```
 
 What these cover:
@@ -23,7 +23,7 @@ What these cover:
 - `rofi-wayland`: launcher on Wayland.
 - `kanshi`: output profiles for multi-monitor setups on Wayland.
 - `brightnessctl`: backlight keys (no xbacklight fallback).
-- `imv`: Wayland image viewer, default for `image/*` in mimeapps.list and rifle.conf.
+- `swayimg`: Wayland image viewer, default for `image/*` in mimeapps.list and rifle.conf (imv would clash with renameutils).
 
 ## Optional but recommended
 

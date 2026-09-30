@@ -190,8 +190,8 @@ for_window [app_id="(?i)^waydroid"] floating enable, resize set 364 px 804 px
 for_window [class="^Handy$" title="^Recording$"] border none
 for_window [app_id="mpv"] floating enable
 for_window [window_type="tooltip"] floating enable
-# imv image viewer — always floating
-for_window [app_id="imv"] floating enable
+# swayimg image viewer — always floating
+for_window [app_id="swayimg"] floating enable
 
 # Restaurar a barra de título (border normal) em apps específicos.
 # O padrão é 'pixel 1' (sem barra). Adicione mais app_ids aqui conforme precisar.
