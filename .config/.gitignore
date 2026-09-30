@@ -1,27 +1,31 @@
 *
 !.gitignore
 !user-dirs.dirs
+!mimeapps.list
+!pavucontrol.ini
 
 !alacritty/
 !alacritty/*
 
+!wezterm/
+!wezterm/*
+
+!kanshi/
+!kanshi/*
+
 !fish/
 !fish/*
+
+!sway/
+!sway/*
 
 !fontconfig
 !fontconfig/*
 
-!i3/
-!i3/*
-
-!i3blocks/
-!i3blocks/*
 
 !dunst/
 !dunst/*
 
-!qutebrowser/
-!qutebrowser/*
 
 !neofetch/
 !neofetch/*
@@ -44,8 +48,8 @@
 !ranger
 !ranger/*
 
-!pcmanfm-qt
-!pcmanfm-qt/*
+!Thunar
+!Thunar/*
 
 !mpv
 !mpv/*
@@ -56,4 +60,17 @@
 !qt5ct
 !qt5ct/*
 
-!mimeapps.list
+!conky
+!conky/*
+
+!weylus
+!weylus/*
+
+!zathura
+!zathura/*
+# GIMP 3.2: versionar só as configs editáveis (tema/ícones/atalhos),
+# não o estado/cache (sessionrc, dockrc, pluginrc, tags.xml, devicerc...).
+!GIMP/
+!GIMP/3.2/
+!GIMP/3.2/gimprc
+!GIMP/3.2/shortcutsrc
