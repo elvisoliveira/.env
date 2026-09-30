@@ -7,6 +7,3 @@
 [submodule "config.fish"]
 	path = config.fish
 	url = http://github.com/elvisoliveira/config.fish
-[submodule "bookmarks/bookmarks"]
-	path = bookmarks/bookmarks
-	url = git@personal:elvisoliveira/bookmarks.git

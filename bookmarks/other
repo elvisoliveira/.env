@@ -1,0 +1,2 @@
+# USB video card on vlc
+vlc v4l2:///dev/video2
