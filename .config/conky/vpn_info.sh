@@ -1,103 +1,42 @@
 #!/usr/bin/env bash
-
+# VPN type / interface / IPv4 for conky (prints the two "VPN" panel lines).
+# Type is guessed from the client process, interface from what is up.
 set -u
 
-all_ps="$(ps -eo comm=,args= 2>/dev/null)"
+all_ps="$(ps -eo args= 2>/dev/null)"
 
-is_up() {
-    local iface="$1"
-    [[ -r "/sys/class/net/$iface/operstate" ]] && [[ "$(cat "/sys/class/net/$iface/operstate" 2>/dev/null)" == "up" ]]
-}
-
-first_up_matching() {
-    local pattern="$1"
+# First interface matching the glob whose operstate is "up", if any.
+first_up() {
     local iface
-
-    for iface in /sys/class/net/*; do
+    for iface in /sys/class/net/$1; do
         iface="${iface##*/}"
-        [[ "$iface" == $pattern ]] || continue
-        if is_up "$iface"; then
-            printf '%s\n' "$iface"
-            return 0
-        fi
+        [[ "$(cat "/sys/class/net/$iface/operstate" 2>/dev/null)" =~ ^(up|unknown)$ ]] && { echo "$iface"; return 0; }
     done
-
     return 1
 }
 
-detect_type() {
-    if iface="$(first_up_matching 'wg*')"; then
-        printf 'WireGuard|%s\n' "$iface"
-        return
+detect() {
+    local iface
+    if iface="$(first_up 'wg*')"; then                                  echo "WireGuard|$iface"
+    elif grep -Eqi 'openconnect .*(--protocol(=| )gp|globalprotect)' <<<"$all_ps"; then
+                                                                        echo "GlobalProtect|$(first_up 'tun*' || echo tun0)"
+    elif grep -Eqi 'openfortivpn|forticlientsslvpn|fortivpn' <<<"$all_ps"; then
+                                                                        echo "Fortinet|$(first_up 'ppp*' || first_up 'tun*' || echo ppp0)"
+    elif grep -qi 'openconnect' <<<"$all_ps"; then                       echo "OpenConnect|$(first_up 'tun*' || echo tun0)"
+    elif iface="$(first_up 'tun*')" || iface="$(first_up 'ppp*')"; then  echo "VPN|$iface"
+    else                                                                echo "Off|-"
     fi
-
-    if grep -Eqi 'openconnect .*--protocol(=| )gp|openconnect .*globalprotect' <<<"$all_ps"; then
-        iface="$(first_up_matching 'tun*')"
-        printf 'GlobalProtect|%s\n' "${iface:-tun0}"
-        return
-    fi
-
-    if grep -Eqi 'openfortivpn|forticlientsslvpn|fortivpn' <<<"$all_ps"; then
-        iface="$(first_up_matching 'ppp*')"
-        if [[ -z "${iface:-}" ]]; then
-            iface="$(first_up_matching 'tun*')"
-        fi
-        printf 'Fortinet|%s\n' "${iface:-ppp0}"
-        return
-    fi
-
-    if grep -Eqi 'openconnect' <<<"$all_ps"; then
-        iface="$(first_up_matching 'tun*')"
-        printf 'OpenConnect|%s\n' "${iface:-tun0}"
-        return
-    fi
-
-    if iface="$(first_up_matching 'tun*')"; then
-        printf 'VPN|%s\n' "$iface"
-        return
-    fi
-
-    if iface="$(first_up_matching 'ppp*')"; then
-        printf 'VPN|%s\n' "$iface"
-        return
-    fi
-
-    printf 'Off|-\n'
 }
 
-get_ip() {
-    local iface="$1"
+vpn="$(detect)"
+type="${vpn%%|*}"
+iface="${vpn##*|}"
 
-    if [[ "$iface" == "-" ]]; then
-        printf '-\n'
-        return
-    fi
-
-    ip -o -4 addr show dev "$iface" 2>/dev/null | awk '{print $4}' | cut -d/ -f1 | head -n1
-}
-
-vpn="$(detect_type)"
-vpn_type="${vpn%%|*}"
-vpn_iface="${vpn##*|}"
-
-case "${1:-summary}" in
-    type)
-        printf '%s\n' "$vpn_type"
-        ;;
-    iface)
-        printf '%s\n' "$vpn_iface"
-        ;;
-    ip)
-        get_ip "$vpn_iface"
-        ;;
-    summary)
-        if [[ "$vpn_type" == "Off" ]]; then
-            printf 'Off\n'
-        else
-            printf '%s / %s\n' "$vpn_type" "$vpn_iface"
-        fi
-        ;;
-    *)
-        printf 'N/A\n'
-        ;;
-esac
+if [[ "$type" == Off ]]; then
+    summary=Off ip4=-
+else
+    summary="$type / $iface"
+    ip4="$(ip -o -4 addr show dev "$iface" 2>/dev/null | awk '{ sub("/.*", "", $4); print $4; exit }')"
+fi
+printf '| ${color grey}VPN:         ${color} %s\n' "$summary"
+printf '| ${color grey}VPN IP:      ${color} %s\n' "${ip4:--}"

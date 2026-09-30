@@ -11,7 +11,7 @@ format_minutes() {
     local hours mins
 
     if [[ -z "$minutes" || "$minutes" -le 0 ]]; then
-        printf '--'
+        printf '%s' --
         return
     fi
 
@@ -39,7 +39,7 @@ if [[ -z "$power_now" || "$power_now" == "0" ]]; then
     if [[ "$status" == "Charging" ]]; then
         printf 'AC\n'
     else
-        printf '--\n'
+        printf '%s\n' --
     fi
     exit 0
 fi
