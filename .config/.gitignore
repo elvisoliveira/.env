@@ -90,3 +90,7 @@
 !systemd/
 !systemd/user/
 !systemd/user/chbg.*
+
+# appman: install dir + list of managed AppImages (regenerate with the command in sway/PACKAGES.md)
+!appman/
+!appman/*

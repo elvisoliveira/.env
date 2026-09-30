@@ -35,3 +35,19 @@ Install `xorg-xwayland` for the X11 apps still in use here (JetBrains IDEs, Smar
 
 Text editor: NotepadNext comes from appman (`appman -i notepadnext`); mimeapps.list
 points text/json types at its generated `notepadnext-AM.desktop`.
+
+## AppImages (appman)
+
+GUI apps that are not in pacman come from [appman](https://github.com/ivan-hc/AM)
+into `~/appimages`. `.config/appman/am-clone.source` is the list of managed apps;
+restore it on a new machine with:
+
+```bash
+CLONE_FILE=~/.config/appman/am-clone.source appman --clone -i
+```
+
+The list is a snapshot: after `appman -i`/`-r`, regenerate it and commit:
+
+```bash
+rm ~/.config/appman/am-clone.source && SCRIPTDIR=~/.config/appman appman --clone
+```
