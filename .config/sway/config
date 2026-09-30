@@ -1,0 +1,277 @@
+# Sway configuration based on ~/.config/i3/config
+
+# Ensure that Desktop Portal is running (required by Chromium)
+exec --no-startup-id /usr/lib/xdg-desktop-portal -r
+
+# Clipboard management
+exec_always --no-startup-id ~/.config/sway/scripts/autostart.sh
+
+# font
+font pango:Mononoki Nerd Font 11
+
+set $alt Mod1
+set $mod Mod4
+
+set $ws1 "1:I"
+set $ws2 "2:II"
+set $ws3 "3:III"
+set $ws4 "4:IV"
+set $ws5 "5:V"
+set $ws6 "6:VI"
+set $ws7 "7:VII"
+set $ws8 "8:VIII"
+set $ws9 "9:IX"
+set $ws10 "10:X"
+
+# Terminal
+set $term wezterm
+
+# Startup
+exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP
+# Static image wallpaper at startup. Video wallpaper is manual (mod+w). See scripts/wallpaper.sh
+exec --no-startup-id "~/.config/sway/scripts/wallpaper.sh"
+
+# input
+input type:keyboard {
+    # ABNT2 (br) é o primeiro -> layout padrão no start/reload. us fica como alternativo.
+    xkb_layout custom,custom
+    xkb_variant br,us
+}
+
+# TTY switching
+bindsym $alt+Control+1            exec sudo chvt 1
+bindsym $alt+Control+2            exec sudo chvt 2
+bindsym $alt+Control+3            exec sudo chvt 3
+bindsym $alt+Control+4            exec sudo chvt 4
+bindsym $alt+Control+5            exec sudo chvt 5
+bindsym $alt+Control+6            exec sudo chvt 6
+
+for_window [class="^.*"] border pixel 3
+default_border pixel 3
+default_floating_border pixel 3
+smart_borders on
+hide_edge_borders smart
+gaps inner 14
+gaps outer 10
+
+# bindsym
+bindsym --border button1 nop
+bindsym --border button2 nop
+bindsym --border button3 nop
+
+bindsym $mod+Return               split toggle
+bindsym $mod+Shift+b              bar mode toggle
+bindsym $mod+Shift+x              exec --no-startup-id swapflush
+bindsym $mod+Shift+Return         exec $term
+
+bindsym $mod+q                    kill
+bindsym $mod+r                    exec --no-startup-id rofi -combi-modi drun#run -show combi
+bindsym $mod+y                    exec --no-startup-id "~/.config/sway/scripts/play-youtube-mpv.sh"
+# Video wallpaper via mpvpaper (AUR, reinstalado — PKGBUILD auditado, fonte upstream
+# GhostNaN/mpvpaper, b2sum fixado). swaylock-plugin segue removido (lockscreen estático).
+bindsym $mod+w                    exec --no-startup-id "~/.config/sway/scripts/play-youtube-mpv.sh --wallpaper"
+bindsym $mod+Shift+w              exec --no-startup-id "~/.config/sway/scripts/wallpaper.sh"
+bindsym $mod+Shift+r              reload
+bindsym $mod+Shift+q              exec swaymsg exit
+
+bindsym --release $mod+Shift+s    exec --no-startup-id "~/.config/sway/scripts/screenshot-area.sh"
+
+bindsym $mod+f                    floating toggle, resize set 50 ppt 50 ppt, move position center
+bindsym $mod+Shift+f              focus mode_toggle
+
+focus_follows_mouse yes
+mouse_warping none
+
+bindsym $mod+c                    exec --no-startup-id "~/.config/sway/scripts/lock.sh"
+
+bindsym $mod+z                    fullscreen toggle
+bindsym $mod+Shift+z              fullscreen toggle
+
+bindsym $mod+t                    exec --no-startup-id thunar
+bindsym $mod+Shift+t              exec --no-startup-id thunar
+
+mode "handy" {
+    bindsym Escape                exec --no-startup-id handy --cancel; mode "default"
+    bindsym Control+Delete        exec --no-startup-id handy --toggle-transcription; mode "default"
+}
+bindsym Control+Delete            exec --no-startup-id handy --toggle-transcription; mode "handy"
+
+# Output profiles under Sway should be handled by kanshi or swaymsg output rules
+bindsym $mod+m                    exec --no-startup-id "~/.config/sway/scripts/apply-output-profile.sh"
+
+# Toggle which output conky renders on
+bindsym $mod+Shift+c              exec --no-startup-id "~/.config/sway/scripts/conky-output.sh toggle"
+
+# Rofi PulseAudio Select SINK
+bindsym $mod+p                    exec --no-startup-id "~/.config/rofi/scripts/rofi-pulseaudio-select-sink.sh &>> /tmp/gVgRzCZ"
+
+# Keyboard layout toggle for Sway
+bindsym $mod+i                    exec --no-startup-id "~/.config/sway/scripts/select-keyboard-layout.sh"
+
+# Clipboard menu (Wayland first, X11 fallback)
+bindsym $mod+v                    exec --no-startup-id "~/.config/sway/scripts/clipboard-menu.sh"
+
+bindsym $mod+s                    exec --no-startup-id "~/.config/rofi/scripts/rofi-bookmarks.sh &>> /tmp/LGFYZv"
+bindsym $mod+Insert               exec --no-startup-id "~/.config/rofi/scripts/cliptype.sh &>> /tmp/LGFYZv"
+
+# Window management
+bindsym $mod+h                    focus left
+bindsym $mod+Shift+h              move left 30
+bindsym $mod+Mod1+h               exec --no-startup-id swayresize left
+
+bindsym $mod+j                    focus down
+bindsym $mod+Shift+j              move down 30
+bindsym $mod+Mod1+j               exec --no-startup-id swayresize down
+
+bindsym $mod+k                    focus up
+bindsym $mod+Shift+k              move up 30
+bindsym $mod+Mod1+k               exec --no-startup-id swayresize up
+
+bindsym $mod+l                    focus right
+bindsym $mod+Shift+l              move right 30
+bindsym $mod+Mod1+l               exec --no-startup-id swayresize right
+
+bindsym $mod+Next                 workspace next
+bindsym $mod+Prior                workspace prev
+
+set $scratchpad exec --no-startup-id "~/.config/sway/scripts/sway-scratchpad.sh &>> /tmp/HjdS8hD"
+
+bindsym $alt+Tab $scratchpad
+bindsym $mod+Tab $scratchpad
+
+bindsym $mod+Shift+Tab mark "scratchpad", move scratchpad
+bindsym $mod+Shift+Ctrl+Tab unmark "scratchpad", floating toggle, fullscreen disable
+
+# workspaces
+bindsym $mod+1    workspace $ws1
+bindsym $mod+2    workspace $ws2
+bindsym $mod+3    workspace $ws3
+bindsym $mod+4    workspace $ws4
+bindsym $mod+5    workspace $ws5
+bindsym $mod+6    workspace $ws6
+bindsym $mod+7    workspace $ws7
+bindsym $mod+8    workspace $ws8
+bindsym $mod+9    workspace $ws9
+bindsym $mod+0    workspace $ws10
+
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws10
+
+bindsym XF86MonBrightnessDown   exec --no-startup-id sh -c 'command -v brightnessctl >/dev/null 2>&1 && brightnessctl set 15%- || xbacklight -dec 15'
+bindsym XF86MonBrightnessUp     exec --no-startup-id sh -c 'command -v brightnessctl >/dev/null 2>&1 && brightnessctl set +15% || xbacklight -inc 15'
+
+bindsym XF86AudioLowerVolume    exec --no-startup-id playerctl volume 0.1-
+bindsym XF86AudioRaiseVolume    exec --no-startup-id playerctl volume 0.1+
+
+bindsym XF86AudioPlay           exec --no-startup-id playerctl play-pause
+bindsym XF86AudioStop           exec --no-startup-id playerctl stop
+bindsym XF86AudioNext           exec --no-startup-id playerctl next
+bindsym XF86AudioPrev           exec --no-startup-id playerctl previous
+
+# scrcpy
+for_window [class="scrcpy"] floating enable, sticky enable
+for_window [app_id="scrcpy"] floating enable, sticky enable
+
+bindsym $mod+Up   [class="scrcpy"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 0"
+bindsym $mod+Down [class="scrcpy"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 1"
+
+# Waydroid — floating com proporção de smartphone (mesmo tamanho do scrcpy)
+for_window [app_id="(?i)^waydroid"] floating enable, resize set 364 px 804 px
+
+# General
+for_window [class="^Handy$" title="^Recording$"] border none
+for_window [app_id="mpv"] floating enable
+for_window [window_type="tooltip"] floating enable
+# sxiv image viewer (X11/XWayland) — always floating
+for_window [class="(?i)sxiv"] floating enable
+for_window [app_id="(?i)sxiv"] floating enable
+
+# Restaurar a barra de título (border normal) em apps específicos.
+# O padrão é 'pixel 1' (sem barra). Adicione mais app_ids aqui conforme precisar.
+for_window [app_id="thunar"] border normal
+
+# Kill update notifications, I want to use SmartGit on version 20
+for_window [class="SmartGit" title="Restart(.*)"] kill
+for_window [class="SmartGit" title="Upgrade SmartGit(.*)"] kill
+
+# Ragnarok
+for_window [class="2010-02-23aragexere.exe"] floating disable
+
+# LibreWolf / Firefox
+for_window [title="Picture-in-Picture"] sticky enable, sticky enable
+
+# Video player for meeting
+for_window [window_role="vlc-video"] floating enable, resize set 1280px 720px, move to workspace $ws10
+
+# Generated windows.
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_type="popup_menu"] floating enable
+for_window [window_type="dropdown_menu"] floating enable
+# Tray apps that (incorrectly) spawn their context menu as a bare toplevel
+for_window [app_id="^$" title="^$"] floating enable, move position cursor
+for_window [app_id = "xdg-desktop-portal-gtk"] floating enable;
+for_window [app_id="com.gabm.satty"] floating enable
+for_window [title="^EPOS Print Preview$"] move to workspace $ws1, floating enable, exec swaymsg '[app_id="chromium"] opacity 0.99, opacity 1'
+for_window [title="^data:application/pdf"] move to workspace $ws1, floating enable, exec swaymsg '[app_id="chromium"] opacity 0.99, opacity 1'
+
+floating_modifier $mod
+focus_on_window_activation focus
+
+# Paleta Dracula para a barra de título / bordas de janela.
+# Foco em ciano, urgente em vermelho — combina com o lock.sh (já dracula).
+# class                 border  bground text    indicator child_border
+client.focused          #8BE9FD #282A36 #F8F8F2 #FF79C6   #8BE9FD
+client.focused_inactive #44475A #282A36 #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #6272A4 #282A36   #282A36
+client.urgent           #FF5555 #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #282A36
+
+# Barra nativa fixa: workspaces + status de texto puro (status.sh, que
+# reaproveita os scripts da barra do tmux). O resto das métricas é do conky.
+bar {
+    output *
+    position top
+    mode dock
+    modifier none
+    status_command ~/.config/sway/scripts/status.sh
+    font pango:Mononoki Nerd Font 11
+    workspace_buttons yes
+    strip_workspace_numbers yes
+    tray_output none
+    colors {
+        background #282A36
+        statusline #F8F8F2
+        separator  #6272A4
+        focused_workspace  #8BE9FD #8BE9FD #282A36
+        active_workspace   #44475A #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #F8F8F2
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
+    }
+}
+
+# Chicago95 retro cursor (instalado em ~/.local/share/icons)
+seat * xcursor_theme Chicago95_Standard_Cursors 24
+
+# GIMP runs inside a nested sway compositor (one contained window).
+# Its internal layout lives in ~/.config/sway-gimp/config (separate setup).
+# The nested compositor's host window has app_id="wlroots". Launch:
+#   ~/.config/sway/scripts/gimp-nested.sh
+# Float + fix to 1800x1100 so the nested px coordinates stay valid.
+for_window [app_id="wlroots"] floating enable, border normal, title_format "GIMP (nested sway)", resize set 1800 px 1100 px, move position center

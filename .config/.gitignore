@@ -19,6 +19,10 @@
 !sway/
 !sway/*
 
+!xkb/
+!xkb/symbols/
+!xkb/symbols/*
+
 !fontconfig
 !fontconfig/*
 

@@ -1,0 +1,21 @@
+// Custom layouts for sway (loaded by libxkbcommon from ~/.config/xkb).
+// Only change vs. stock br/us: Shift + numpad "/" types "?" instead of "/".
+
+partial keypad_keys
+xkb_symbols "kpq" {
+    key <KPDV> { [ KP_Divide, question ] };
+};
+
+partial alphanumeric_keys
+xkb_symbols "br" {
+    include "br(abnt2)"
+    include "custom(kpq)"
+    name[Group1] = "Portuguese (Brazil, KP ?)";
+};
+
+partial alphanumeric_keys
+xkb_symbols "us" {
+    include "us(basic)"
+    include "custom(kpq)"
+    name[Group1] = "English (US, KP ?)";
+};

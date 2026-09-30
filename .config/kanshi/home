@@ -1,0 +1,7 @@
+# BEGIN GENERATED CURRENT PROFILE
+# Saved from current Sway output state.
+profile current {
+    output eDP-1 enable mode 2560x1600@60.001Hz position 0,0 scale 1.0 transform normal
+    output DP-6 enable mode 1920x1080@60Hz position 2560,0 scale 1.0 transform normal
+}
+# END GENERATED CURRENT PROFILE
