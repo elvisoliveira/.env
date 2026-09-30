@@ -1,0 +1,4 @@
+# Launchers are generated/installed per machine (AM, waydroid, wine, JetBrains);
+# nothing here is worth versioning except this file.
+*
+!.gitignore

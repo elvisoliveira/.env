@@ -1,3 +1,6 @@
 *.cer
 *.p12
 *.pem
+*.zip
+wireguard.conf
+__pycache__/
