@@ -25,7 +25,6 @@ Detected from your current environment (`command -v`) on 2026-03-26.
 | `playerctl` | Yes | Yes | Keep | Media keybinds |
 | `pcmanfm-qt` | Yes | Yes | Keep | File manager |
 | `wezterm` | Yes | Yes | Keep | Terminal (`$term`, native tabs) |
-| `alacritty` | Yes | Yes | Fallback | Terminal (kept as fallback) |
 | `tabbed` | Yes | Mostly X11-centric | Optional replace | Replaced by wezterm native tabs |
 | `scrcpy` | Yes | Yes | Keep | Works; script logic moved to `swaymsg` |
 | `pactl` | Yes | Yes | Keep | Audio sink switching |

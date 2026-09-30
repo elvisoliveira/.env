@@ -5,7 +5,7 @@ the home dotfiles are symlinks into it (`~/.config`, `~/.local`, `~/.bashrc`,
 `~/.inputrc`, `~/.themes`, `~/.icons`, SciTE files, `~/bookmarks`, `~/desktop`).
 
 Stack: sway + swaylock/swayidle/swaybg, kanshi, rofi, dunst, conky (two panels),
-WezTerm (alacritty kept as fallback), fish + bash, tmux, neovim, SciTE,
+WezTerm, fish + bash, tmux, neovim, SciTE,
 Chicago95 GTK theme, Mononoki Nerd Font with anti-aliasing off on purpose.
 
 - `AGENTS.md`: font/theming rules and where each setting lives.

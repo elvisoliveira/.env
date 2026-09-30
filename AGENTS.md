@@ -28,8 +28,7 @@ the **font configuration** across the system so it stays consistent and any agen
 | GTK 3 | `.config/gtk-3.0/settings.ini` | `gtk-font-name` | Mononoki Nerd Font 11 |
 | sway window titles | `.config/sway/config` (~line 10) | `font pango:` | Mononoki Nerd Font 11 |
 | swaybar (workspaces, `mode hide`) | `.config/sway/config` (`bar {}`) | `font pango:` | Mononoki Nerd Font 11 |
-| WezTerm terminal (default, `$term` in sway) | `.config/wezterm/wezterm.lua` | `config.font` + `freetype_load_target = "Mono"` (aliased) | Mononoki Nerd Font Mono |
-| Alacritty terminal (fallback) | `.config/alacritty/alacritty.toml` | `[font.normal] family` | Mononoki Nerd Font Mono |
+| WezTerm terminal (`$term` in sway) | `.config/wezterm/wezterm.lua` | `config.font` + `freetype_load_target = "Mono"` (aliased) | Mononoki Nerd Font Mono |
 | SciTE editor | `.SciTEUser.properties` | `font.monospace` | `Courier New` → falls back to Mononoki Nerd Font Mono via fontconfig |
 | gVim GUI | `.vimrc/.vimrc` | `set guifont` | `Fira Mono Medium 10` → falls back to Mononoki Nerd Font Mono (Fira not installed) |
 
@@ -77,7 +76,6 @@ earlier experiment; it is unused by the current config and can be removed.)
 - **sway**: `swaymsg reload` (or `Mod+Shift+c`).
 - **GTK**: reopen the app; running apps don't reload `settings.ini`.
 - **WezTerm**: live-reloads its Lua on save; open windows pick it up.
-- **Alacritty**: live-reloads its TOML; new windows pick it up immediately.
 
 ## Verifying what a generic resolves to
 
