@@ -1,1 +1,1 @@
-../../config.fish/config.fish
+/home/elvisoliveira/.env/config.fish/config.fish
