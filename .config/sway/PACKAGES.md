@@ -23,7 +23,7 @@ What these cover:
 - `rofi-wayland`: launcher on Wayland.
 - `kanshi`: output profiles for multi-monitor setups on Wayland.
 - `brightnessctl`: backlight keys (no xbacklight fallback).
-- `swayimg`: Wayland image viewer, default for `image/*` in mimeapps.list and rifle.conf (imv would clash with renameutils).
+- `swayimg`: Wayland image viewer, default for `image/*` in mimeapps.list (imv would clash with renameutils).
 
 ## Optional but recommended
 
