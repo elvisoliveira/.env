@@ -16,6 +16,8 @@
 
 !sway/
 !sway/*
+!sway/scripts/
+!sway/scripts/*
 
 !xkb/
 !xkb/symbols/
@@ -88,3 +90,6 @@
 # appman: install dir + list of managed AppImages (regenerate with the command in sway/PACKAGES.md)
 !appman/
 !appman/*
+
+# chromium: no crashpad handler processes
+!chromium-flags.conf

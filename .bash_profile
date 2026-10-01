@@ -11,6 +11,7 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
     export XDG_DOWNLOAD_DIR="$HOME/downloads"
     export XDG_CURRENT_DESKTOP=sway
     export XDG_SESSION_TYPE=wayland
+    export GTK_A11Y=none NO_AT_BRIDGE=1
     pgrep -x sway >/dev/null || exec sway
 fi
 

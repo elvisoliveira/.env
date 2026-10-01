@@ -268,9 +268,3 @@ bar {
 # Chicago95 retro cursor (instalado em ~/.local/share/icons)
 seat * xcursor_theme Chicago95_Standard_Cursors 24
 
-# GIMP runs inside a nested sway compositor (one contained window).
-# Its internal layout lives in ~/.config/sway-gimp/config (separate setup).
-# The nested compositor's host window has app_id="wlroots". Launch:
-#   ~/.config/sway/scripts/gimp-nested.sh
-# Float + fix to 1800x1100 so the nested px coordinates stay valid.
-for_window [app_id="wlroots"] floating enable, border normal, title_format "GIMP (nested sway)", resize set 1800 px 1100 px, move position center
