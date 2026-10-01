@@ -67,18 +67,12 @@
 
 !zathura
 !zathura/*
-# GIMP 3.2: versionar só as configs editáveis (tema/ícones/atalhos),
-# não o estado/cache (sessionrc, dockrc, pluginrc, tags.xml, devicerc...).
-!GIMP/
-!GIMP/3.2/
-!GIMP/3.2/gimprc
-!GIMP/3.2/shortcutsrc
 
 # editor / tools (hand-edited files only; caches stay local)
-!Code - OSS/
-!Code - OSS/User/
-!Code - OSS/User/settings.json
-!Code - OSS/User/keybindings.json
+!Code/
+!Code/User/
+!Code/User/settings.json
+!Code/User/keybindings.json
 !htop/
 !htop/htoprc
 !git/
