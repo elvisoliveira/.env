@@ -7,13 +7,8 @@ WARN_SECONDS=$((IDLE_TIMEOUT_SECONDS - 10))
 for proc in kanshi conky swayidle wl-paste; do
     pkill -x "$proc" 2>/dev/null
 done
-pkill -f 'sway/scripts/tray-output.sh --watch' 2>/dev/null
 
 kanshi &
-
-# tray-output.sh --watch foi desativado: a barra principal agora é fixa no
-# eDP-1 (tray_output *), então apontar o tray para o monitor externo o
-# deixaria invisível. O pkill acima segue limpando watchers antigos.
 
 "$HOME/.config/sway/scripts/conky-output.sh" start &
 

@@ -1,7 +1,6 @@
 # Sway configuration based on ~/.config/i3/config
 
 # Ensure that Desktop Portal is running (required by Chromium)
-exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 
 # Clipboard management
 exec_always --no-startup-id ~/.config/sway/scripts/autostart.sh
