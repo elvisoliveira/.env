@@ -12,6 +12,8 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
     export XDG_CURRENT_DESKTOP=sway
     export XDG_SESSION_TYPE=wayland
     export GTK_A11Y=none NO_AT_BRIDGE=1
+    # firefox: no crashhelper process (crash reports are never sent anyway)
+    export MOZ_CRASHREPORTER_DISABLE=1
     pgrep -x sway >/dev/null || exec sway
 fi
 
