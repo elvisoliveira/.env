@@ -251,7 +251,7 @@ bar {
     font pango:Mononoki Nerd Font 11
     workspace_buttons yes
     strip_workspace_numbers yes
-    tray_output none
+    tray_output *
     colors {
         background #282A36
         statusline #F8F8F2
