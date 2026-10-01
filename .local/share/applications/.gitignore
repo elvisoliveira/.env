@@ -2,3 +2,5 @@
 # nothing here is worth versioning except this file.
 *
 !.gitignore
+# chromium: stock .desktop + --disable-crashpad-for-testing (no chrome_crashpad_handler processes)
+!chromium.desktop
