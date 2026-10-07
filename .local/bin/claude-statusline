@@ -1,0 +1,34 @@
+#!/bin/sh
+# Claude Code status line. Reads the session JSON on stdin and prints:
+#   Opus 5.5 │ ~/.env (master*) │ ctx 12% │ 5h 15% │ $2.31
+
+json=$(cat)
+
+# Orca (rate-limit tracker) reads the same JSON
+orca=~/.orca/agent-hooks/claude-statusline.sh
+if [ -x "$orca" ]; then
+	echo "$json" | sh "$orca" >/dev/null 2>&1 &
+fi
+
+field() {
+	echo "$json" | jq -r "$1 // empty" 2>/dev/null
+}
+
+model=$(field '.model.display_name')
+dir=$(field '.workspace.current_dir')
+context=$(field '.context_window.used_percentage | floor')
+quota=$(field '.rate_limits.five_hour.used_percentage | floor')
+cost=$(field '.cost.total_cost_usd * 100 | round / 100')
+
+branch=$(git -C "$dir" branch --show-current 2>/dev/null)
+if [ -n "$(git -C "$dir" status --porcelain 2>/dev/null)" ]; then
+	branch="$branch*"
+fi
+
+line="$model │ $(echo "$dir" | sed "s|^$HOME|~|")"
+[ -n "$branch" ] && line="$line ($branch)"
+[ -n "$context" ] && line="$line │ ctx $context%"
+[ -n "$quota" ] && line="$line │ 5h $quota%"
+[ -n "$cost" ] && line="$line │ \$$cost"
+
+echo "$line"
