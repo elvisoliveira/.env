@@ -7,7 +7,8 @@ local config = wezterm.config_builder()
 
 -- font: "Mono" load target = no anti-aliasing, matching the system-wide
 -- fontconfig antialias=false (see ~/.env/AGENTS.md).
-config.font = wezterm.font("Mononoki Nerd Font Mono")
+-- Unifont (AUR ttf-unifont) covers CJK etc.; auto-fallback skips it, so list it.
+config.font = wezterm.font_with_fallback({ "Mononoki Nerd Font Mono", "Unifont" })
 config.font_size = 11
 config.freetype_load_target = "Mono"
 config.freetype_render_target = "Mono"
