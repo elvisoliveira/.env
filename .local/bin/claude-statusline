@@ -31,4 +31,15 @@ line="$model │ $(echo "$dir" | sed "s|^$HOME|~|")"
 [ -n "$quota" ] && line="$line │ 5h $quota%"
 [ -n "$cost" ] && line="$line │ \$$cost"
 
-echo "$line"
+# tmux shows it on this pane's border (pane-border-format in .tmux.conf)
+if [ -n "$TMUX_PANE" ] && [ "$(tmux show -pv -t "$TMUX_PANE" @claude 2>/dev/null)" != "$line" ]; then
+	tmux set -p -t "$TMUX_PANE" @claude "$line"
+	# setting a pane option doesn't redraw borders by itself
+	for client in $(tmux list-clients -F '#{client_name}'); do
+		tmux refresh-client -t "$client"
+	done
+fi
+
+# inside tmux the pane border shows it; only print for Claude's own row outside
+[ -z "$TMUX_PANE" ] && echo "$line"
+exit 0
