@@ -90,3 +90,6 @@
 # appman: install dir + list of managed AppImages (regenerate with the command in sway/PACKAGES.md)
 !appman/
 !appman/*
+
+!yazi/
+!yazi/*

@@ -1,0 +1,5 @@
+# Only overrides; defaults: https://yazi-rs.github.io/docs/configuration/yazi
+[mgr]
+show_hidden = true      # like NERDTreeShowHidden=1
+sort_by = "natural"     # file2 before file10
+sort_dir_first = true
