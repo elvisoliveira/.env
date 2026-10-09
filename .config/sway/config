@@ -185,6 +185,9 @@ bindsym $mod+Down [class="scrcpy"] focus, resize set 364 px 804 px, exec --no-st
 # Waydroid — floating com proporção de smartphone (mesmo tamanho do scrcpy)
 for_window [app_id="(?i)^waydroid"] floating enable, resize set 364 px 804 px
 
+# FireSparkle (editor de imagens) — sempre na tela do notebook (eDP-1), no workspace visível ali
+for_window [app_id="firesparkle"] move container to output eDP-1, focus
+
 # General
 for_window [class="^Handy$" title="^Recording$"] border none
 for_window [app_id="mpv"] floating enable
