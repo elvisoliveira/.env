@@ -185,8 +185,10 @@ bindsym $mod+Down [class="scrcpy"] focus, resize set 364 px 804 px, exec --no-st
 # Waydroid — floating com proporção de smartphone (mesmo tamanho do scrcpy)
 for_window [app_id="(?i)^waydroid"] floating enable, resize set 364 px 804 px
 
-# Firechores (editor de imagens) — sempre na tela do notebook (eDP-1), no workspace visível ali
-for_window [app_id="firechores"] move container to output eDP-1, focus
+# Firechores (editor de imagens): o instalado (app_id firechores) flutuante, centralizado na tela em uso;
+# o de desenvolvimento (firechores-dev, build debug) sempre na tela do notebook (eDP-1), no workspace visível ali
+for_window [app_id="^firechores$"] floating enable, resize set 1280 px 800 px, move position center
+for_window [app_id="^firechores-dev$"] floating disable, move container to output eDP-1, focus
 
 # General
 for_window [class="^Handy$" title="^Recording$"] border none

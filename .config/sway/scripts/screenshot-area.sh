@@ -13,4 +13,7 @@ geom=$(slurp) || exit 0
 
 file="$dir/$(date +%Y-%m-%d_%H-%M-%S).png"
 grim -g "$geom" "$file" || exit 1
+# um Firechores já aberto vem para a tela em uso, centralizado (o arquivo vira uma aba nele)
+out=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused).name')
+swaymsg "[app_id=\"^firechores\$\"] move container to output $out, move position center" >/dev/null 2>&1
 exec "$HOME/applications/Firechores/firechores" "$file"
