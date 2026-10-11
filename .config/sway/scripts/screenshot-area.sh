@@ -1,16 +1,16 @@
 #!/bin/sh
 
 # Screenshot: slurp seleciona área (cruza todos monitores, sem picker)
-# -> grim captura -> satty anota.
-# Enter: salva ~/Pictures/Screenshots/<data>.png + copia path absoluto + sai.
-# Esc no slurp = cancela (nada capturado).
+# -> grim captura -> Firechores abre para anotar (vira uma aba se ele já estiver aberto).
+# Quick Save (Export, no Firechores) salva na pasta escolhida + copia o path absoluto.
+# Fechar a aba sem salvar descarta; Esc no slurp = cancela (nada capturado).
+# /tmp: o Firechores só lê imagens de $HOME e /tmp.
 
-dir="${SCREENSHOT_DIR:-$HOME/Pictures/Screenshots}"
+dir=/tmp/firechores-shots
 mkdir -p "$dir"
 
 geom=$(slurp) || exit 0
 
-grim -g "$geom" - | satty -f - \
-    --output-filename "$dir/%Y-%m-%d_%H-%M-%S.png" \
-    --actions-on-enter save-to-file,copy-filepath-to-clipboard,exit \
-    --copy-command wl-copy
+file="$dir/$(date +%Y-%m-%d_%H-%M-%S).png"
+grim -g "$geom" "$file" || exit 1
+exec "$HOME/applications/Firechores/firechores" "$file"
