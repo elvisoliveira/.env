@@ -16,4 +16,4 @@ grim -g "$geom" "$file" || exit 1
 # um Firechores já aberto vem para a tela em uso, centralizado (o arquivo vira uma aba nele)
 out=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused).name')
 swaymsg "[app_id=\"^firechores\$\"] move container to output $out, move position center" >/dev/null 2>&1
-exec "$HOME/applications/Firechores/firechores" "$file"
+exec "$HOME/applications/Firechores.AppImage" "$file"
