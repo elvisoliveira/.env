@@ -5,11 +5,24 @@
 # Quick Save (Export, no Firechores) salva na pasta escolhida + copia o path absoluto.
 # Fechar a aba sem salvar descarta; Esc no slurp = cancela (nada capturado).
 # /tmp: o Firechores só lê imagens de $HOME e /tmp.
+# --delay N: seleciona a área agora e captura N s depois (dá tempo de abrir um menu, passar o mouse em algo);
+# a contagem aparece no dunst.
 
 dir=/tmp/firechores-shots
 mkdir -p "$dir"
 
+delay=0
+[ "$1" = "--delay" ] && delay=${2:-3}
+
 geom=$(slurp) || exit 0
+
+i=$delay
+while [ "$i" -gt 0 ]; do
+    dunstify -r 9101 -t 1100 -u low "Screenshot" "Capturando em ${i}s…"
+    sleep 1
+    i=$((i - 1))
+done
+[ "$delay" -gt 0 ] && { dunstify -C 9101; sleep 0.2; } # a notificação some antes da captura
 
 file="$dir/$(date +%Y-%m-%d_%H-%M-%S).png"
 grim -g "$geom" "$file" || exit 1

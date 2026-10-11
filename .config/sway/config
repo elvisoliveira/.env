@@ -74,6 +74,7 @@ bindsym $mod+Shift+r              reload
 bindsym $mod+Shift+q              exec swaymsg exit
 
 bindsym --release $mod+Shift+s    exec --no-startup-id "~/.config/sway/scripts/screenshot-area.sh"
+bindsym --release $mod+Shift+d    exec --no-startup-id "~/.config/sway/scripts/screenshot-area.sh --delay 3"
 
 bindsym $mod+f                    floating toggle, resize set 50 ppt 50 ppt, move position center
 bindsym $mod+Shift+f              focus mode_toggle
