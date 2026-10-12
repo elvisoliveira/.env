@@ -12,6 +12,9 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
     export XDG_CURRENT_DESKTOP=sway
     export XDG_SESSION_TYPE=wayland
     export GTK_A11Y=none NO_AT_BRIDGE=1
+    # GIO without gvfs (gvfs-metadata is masked; apps warned about it). Thunar opts out (sway config and its
+    # launcher in ~/.local/share/applications): it needs gvfs for Trash, removable drives and network places.
+    export GIO_USE_VFS=local
     # firefox: no crashhelper process (crash reports are never sent anyway)
     export MOZ_CRASHREPORTER_DISABLE=1
     pgrep -x sway >/dev/null || exec sway

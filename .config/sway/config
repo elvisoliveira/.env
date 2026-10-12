@@ -87,8 +87,8 @@ bindsym $mod+c                    exec --no-startup-id "~/.config/sway/scripts/l
 bindsym $mod+z                    fullscreen toggle
 bindsym $mod+Shift+z              fullscreen toggle
 
-bindsym $mod+t                    exec --no-startup-id thunar
-bindsym $mod+Shift+t              exec --no-startup-id thunar
+bindsym $mod+t                    exec --no-startup-id env -u GIO_USE_VFS thunar
+bindsym $mod+Shift+t              exec --no-startup-id env -u GIO_USE_VFS thunar
 
 mode "handy" {
     bindsym Escape                exec --no-startup-id handy --cancel; mode "default"
