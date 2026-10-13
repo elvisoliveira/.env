@@ -25,7 +25,11 @@ done
 [ "$delay" -gt 0 ] && { dunstify -C 9101; sleep 0.2; } # a notificação some antes da captura
 
 file="$dir/$(date +%Y-%m-%d_%H-%M-%S).png"
-grim -g "$geom" "$file" || exit 1
+# com atraso, o ponteiro entra na imagem (é para isso que se espera: o mouse sobre algo); sem, ele estaria
+# no canto da área recém-selecionada
+cursor=""
+[ "$delay" -gt 0 ] && cursor="-c"
+grim $cursor -g "$geom" "$file" || exit 1
 # um Firechores já aberto vem para a tela em uso, centralizado (o arquivo vira uma aba nele)
 out=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused).name')
 swaymsg "[app_id=\"^firechores\$\"] move container to output $out, move position center" >/dev/null 2>&1
