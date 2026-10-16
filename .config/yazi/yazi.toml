@@ -3,3 +3,6 @@
 show_hidden = true      # like NERDTreeShowHidden=1
 sort_by = "natural"     # file2 before file10
 sort_dir_first = true
+
+[preview]
+wrap = "yes"            # soft-wrap long lines in text previews

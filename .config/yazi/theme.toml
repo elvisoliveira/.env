@@ -1,0 +1,13 @@
+[flavor]
+dark  = "dracula"
+light = "dracula"
+
+# Square status-bar blocks: drop the rounded powerline caps ( / ).
+[status]
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+# Square tabs (same rounded caps as the status bar).
+[tabs]
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
