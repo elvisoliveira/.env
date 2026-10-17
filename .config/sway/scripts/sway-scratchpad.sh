@@ -5,6 +5,10 @@ if ! command -v swaymsg >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1; then
   exit 0
 fi
 
+# Zero-length pointer motion: with focus_follows_mouse, focus moves to the
+# output under the cursor, so the scratchpad opens where the mouse is.
+swaymsg 'seat - cursor move 0 0' >/dev/null
+
 workspace_output=$(
   swaymsg -t get_workspaces -r |
     jq -r 'first(.[] | select(.focused) | .output) // empty'
