@@ -66,3 +66,4 @@ text/markdown=notepadnext-AM.desktop;firefox.desktop;
 application/x-tiled-tsx=notepadnext-AM.desktop;
 image/jpeg=swayimg.desktop;gimp.desktop;
 image/png=swayimg.desktop;gimp.desktop;
+application/xml=notepadnext-AM.desktop;
