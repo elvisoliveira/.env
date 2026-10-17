@@ -1,8 +1,24 @@
-# BEGIN GENERATED CURRENT PROFILE
-# Saved from current Sway output state.
-profile current {
-    output DP-3 enable mode 1920x1080@60Hz position 0,0 scale 1.0 transform 90
-    output DP-6 enable mode 1920x1080@60Hz position 1080,0 scale 1.0 transform normal
-    output eDP-1 enable mode 2560x1600@60.001Hz position 3000,0 scale 1.0 transform normal
+# kanshi picks the profile whose monitors are all connected, matching them by
+# "make model serial" so it survives dock/USB-C port renames (DP-3, DP-6, ...).
+#   $mod+m        re-apply the matching profile (kanshictl reload)
+#   $mod+Shift+m  save the current layout as a named profile
+#                 (~/.config/sway/scripts/save-output-profile.sh)
+# On tty1 login, ~/.bash_profile lists these bottom-up in fzf (laptop-only first).
+# laptop-only stays last: it matches any setup, so kanshi would always pick it first.
+
+profile office {
+    output "Iiyama North America PL2792H 1153714812165" enable mode 1920x1080@60Hz position 0,0 scale 1.0 transform 270
+    output "Iiyama North America PL2792H 1153714812168" enable mode 1920x1080@60Hz position 1080,840 scale 1.0 transform normal
+    output eDP-1 enable mode 2560x1600@60.001Hz position 3000,320 scale 1.0 transform normal
 }
-# END GENERATED CURRENT PROFILE
+
+profile home {
+    output "LG Electronics LG FULL HD 403NTZN4X053" enable mode 1920x1080@60Hz position 0,0 scale 1.0 transform 270
+    output "LG Electronics LG FULL HD 110NTSU1N302" enable mode 1920x1080@60Hz position 1080,840 scale 1.0 transform normal
+    output eDP-1 enable mode 2560x1600@60.001Hz position 3000,320 scale 1.0 transform normal
+}
+
+profile laptop-only {
+    output eDP-1 enable mode 2560x1600@60.001Hz position 0,0 scale 1.0 transform normal
+    ...output * disable
+}

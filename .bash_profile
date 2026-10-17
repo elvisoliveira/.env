@@ -17,7 +17,14 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
     export GIO_USE_VFS=local
     # firefox: no crashhelper process (crash reports are never sent anyway)
     export MOZ_CRASHREPORTER_DISABLE=1
-    pgrep -x sway >/dev/null || exec sway
+    if ! pgrep -x sway >/dev/null; then
+        # Monitor profile picked here, on the tty; sway's autostart.sh applies it via kanshictl.
+        # Esc: kanshi picks one on its own.
+        KANSHI_PROFILE=$(sed -n 's/^profile \([^ ]*\) {$/\1/p' ~/.config/kanshi/config |
+            fzf --tac --height=~10 --reverse --prompt="Monitor profile > ")
+        export KANSHI_PROFILE
+        exec sway
+    fi
 fi
 
 [[ -f "$HOME/.deno/env" ]] && . "$HOME/.deno/env"

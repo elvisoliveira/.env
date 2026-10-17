@@ -96,8 +96,9 @@ mode "handy" {
 }
 bindsym Control+Delete            exec --no-startup-id handy --toggle-transcription; mode "handy"
 
-# Output profiles under Sway should be handled by kanshi or swaymsg output rules
-bindsym $mod+m                    exec --no-startup-id "~/.config/sway/scripts/apply-output-profile.sh"
+# Monitor profiles (kanshi, ~/.config/kanshi/config): re-apply / save current layout
+bindsym $mod+m                    exec --no-startup-id kanshictl reload
+bindsym $mod+Shift+m              exec --no-startup-id "~/.config/sway/scripts/save-output-profile.sh"
 
 # Toggle which output conky renders on
 bindsym $mod+Shift+c              exec --no-startup-id "~/.config/sway/scripts/conky-output.sh toggle"
