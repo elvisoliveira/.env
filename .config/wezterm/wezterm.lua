@@ -15,6 +15,12 @@ config.freetype_render_target = "Mono"
 
 -- colors / window
 config.color_scheme = "Dracula (Official)"
+-- Dracula's selection (#44475a) barely shows over the translucent background;
+-- use Dracula orange with dark text instead.
+config.colors = {
+	selection_bg = "#ffb86c",
+	selection_fg = "#282a36",
+}
 config.window_background_opacity = 0.7
 config.window_decorations = "NONE"          -- sway draws the borders
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
