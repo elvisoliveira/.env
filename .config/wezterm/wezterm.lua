@@ -59,6 +59,9 @@ config.mouse_bindings = {
 config.keys = {
 	{ key = "Home", mods = "SHIFT", action = act.ScrollToTop },
 	{ key = "End", mods = "SHIFT", action = act.ScrollToBottom },
+	-- Shift+Insert pastes the clipboard (Handy writes only there); Ctrl+Shift+Insert keeps primary.
+	{ key = "Insert", mods = "SHIFT", action = act.PasteFrom("Clipboard") },
+	{ key = "Insert", mods = "CTRL|SHIFT", action = act.PasteFrom("PrimarySelection") },
 	-- Firefox-style tabs: Ctrl+T new, Ctrl+1..8 jump, Ctrl+9 last.
 	-- Ctrl+W / Ctrl+N deliberately NOT taken (bash word-delete, vim windows,
 	-- history); close/new window stay on the Ctrl+Shift+W / Ctrl+Shift+N defaults.
