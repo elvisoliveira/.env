@@ -1,0 +1,13 @@
+#!/bin/sh
+# Chromium in a private HOME (bwrap): ~/.config/chromium and ~/.pki live in
+# ~/.local/share/sandboxes/chromium. Transposed from bubblejail's chromium profile
+# (x11/wayland, pulse, notify, direct rendering, Downloads share) onto `sandboxed`.
+# NOTE: do not add --disable-crashpad-for-testing (the old chromium.desktop had it): on
+# Chromium 156 it makes the network service crash-loop ("FD ownership violation"),
+# sandboxed or not — verified 2026-10-28.
+# For Claude's chrome-devtools MCP start it as: chromium --remote-debugging-port=9222
+exec sandboxed chromium \
+	--bind "$HOME/documents" "$HOME/documents" \
+	--bind "$HOME/pictures" "$HOME/pictures" \
+	--bind "$HOME/projects" "$HOME/projects" \
+	-- /usr/bin/chromium "$@"
