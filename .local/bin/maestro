@@ -1,0 +1,11 @@
+#!/bin/sh
+# maestro (mobile UI testing) in a private HOME: it hardcodes ~/.maestro for analytics and
+# simulator deps, so that state lives in ~/.local/share/sandboxes/maestro. Flows come from
+# ~/projects / ~/toolstation; adb keys from ~/.android (ro); the adb server is reached over
+# localhost; /files rw for the JDK/Android SDK. Devices via USB come through /dev.
+exec sandboxed maestro \
+	--bind "$HOME/projects" "$HOME/projects" \
+	--bind "$HOME/toolstation" "$HOME/toolstation" \
+	--ro-bind "$HOME/.android" "$HOME/.android" \
+	--bind /files /files \
+	-- /files/tools/maestro/bin/maestro "$@"
