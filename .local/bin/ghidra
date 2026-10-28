@@ -1,0 +1,7 @@
+#!/bin/sh
+# Ghidra needs JDK >= 25 (application.java.min in Ghidra/application.properties); the session
+# default is Temurin 21. Pin the sdkman Temurin 25 for Ghidra only.
+# ponytail: appman symlink replaced by this wrapper; `appman -r ghidra` still removes it.
+J=/files/tools/sdkman/candidates/java/25.0.5-tem
+export JAVA_HOME=$J PATH="$J/bin:$PATH"
+exec "$HOME/appimages/ghidra/ghidraRun" "$@"
