@@ -73,7 +73,12 @@ export PATH=$CARGO_HOME/bin:$PATH
 export PATH=$PATH:/files/tools/maestro/bin
 
 export CODEX_HOME=/files/tools/codex
-export YARN_GLOBAL_FOLDER=$HOME/.cache/yarn   # yarn berry global cache (was ~/.yarn/berry)
+
+# Caches live on /files too (XDG_CACHE_HOME covers pip, composer, huggingface, fish,
+# wezterm, browsers…; npm reads ~/.npmrc `cache=`; kubectl reads KUBECACHEDIR).
+export XDG_CACHE_HOME=/files/cache
+export KUBECACHEDIR=/files/cache/kube
+export YARN_GLOBAL_FOLDER=/files/cache/yarn   # yarn berry global cache (was ~/.yarn/berry)
 
 export DENO_INSTALL=/files/tools/deno
 . "$DENO_INSTALL/env"
