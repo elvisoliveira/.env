@@ -70,7 +70,10 @@ export CARGO_HOME=/files/tools/cargo
 export RUSTUP_HOME=/files/tools/rustup
 export PATH=$CARGO_HOME/bin:$PATH
 
-export PATH=$PATH:$HOME/.maestro/bin
+export PATH=$PATH:/files/tools/maestro/bin
+
+export CODEX_HOME=/files/tools/codex
+export YARN_GLOBAL_FOLDER=$HOME/.cache/yarn   # yarn berry global cache (was ~/.yarn/berry)
 
 export DENO_INSTALL=/files/tools/deno
 . "$DENO_INSTALL/env"
