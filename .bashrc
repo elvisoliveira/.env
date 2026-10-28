@@ -23,12 +23,8 @@ PS1="[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\h\[\033[1;33m\] >\[\033[0m\]"
 # The official build lacks -B and its server dies when the float opens.
 export PATH="/home/elvisoliveira/.local/bin:$PATH"
 
-# If ~/.inputrc doesn't exist yet: First include the original /etc/inputrc
-# so it won't get overriden
-if [ ! -a ~/.inputrc ]; then echo '$include /etc/inputrc' > ~/.inputrc; fi
-
-# Add shell-option to ~/.inputrc to enable case-insensitive tab completion
-echo 'set completion-ignore-case On' >> ~/.inputrc
+# readline config kept out of ~ (includes /etc/inputrc + completion-ignore-case)
+export INPUTRC=$HOME/.config/readline/inputrc
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
@@ -79,6 +75,7 @@ export CODEX_HOME=/files/tools/codex
 export XDG_CACHE_HOME=/files/cache
 export KUBECACHEDIR=/files/cache/kube
 export SUPABASE_HOME=/files/cache/supabase     # CLI telemetry/traces (was ~/.supabase)
+export NPM_CONFIG_USERCONFIG=$HOME/.config/npm/npmrc   # was ~/.npmrc
 export YARN_GLOBAL_FOLDER=/files/cache/yarn   # yarn berry global cache (was ~/.yarn/berry)
 
 # Dotfiles pushed out of ~ into XDG dirs (2026-10-28). git reads ~/.config/git/config natively.

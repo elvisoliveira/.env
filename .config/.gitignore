@@ -94,3 +94,15 @@
 !yazi/
 !yazi/*
 !wgetrc
+
+# tmux >= 3.1 reads ~/.config/tmux/tmux.conf natively (symlink into the .tmux.conf submodule)
+!tmux/
+!tmux/*
+
+# readline: bash reads it via INPUTRC (set in .bashrc)
+!readline/
+!readline/*
+
+# npm user config via NPM_CONFIG_USERCONFIG (set in the shell env files)
+!npm/
+!npm/npmrc
