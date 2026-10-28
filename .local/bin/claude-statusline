@@ -4,12 +4,6 @@
 
 json=$(cat)
 
-# Orca (rate-limit tracker) reads the same JSON
-orca=~/.orca/agent-hooks/claude-statusline.sh
-if [ -x "$orca" ]; then
-	echo "$json" | sh "$orca" >/dev/null 2>&1 &
-fi
-
 field() {
 	echo "$json" | jq -r "$1 // empty" 2>/dev/null
 }
