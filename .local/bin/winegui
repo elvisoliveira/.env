@@ -1,0 +1,4 @@
+#!/bin/sh
+# WineGUI + wine prefixes in a private home (~/.wine, ~/.config/winegui, ~/.local/share/winegui).
+# Installers go through ~/downloads, which the sandbox shares.
+exec sandboxed wine -- "$HOME/applications/WineGUI-v2.7.0/bin/winegui" "$@"

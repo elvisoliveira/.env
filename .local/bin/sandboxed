@@ -1,0 +1,39 @@
+#!/bin/bash
+# sandboxed NAME [bwrap options...] -- COMMAND [ARGS...]
+#
+# Runs COMMAND with a private HOME so an app that hardcodes ~ paths keeps its
+# state out of the real home. The private home is $SANDBOXED_ROOT/NAME
+# (default ~/.local/share/sandboxes/NAME); delete that dir to wipe the app.
+#
+# Inside: host filesystem read-only; writable = private home, ~/downloads,
+# /run (session sockets: wayland, pipewire, dbus, ssh-agent), /tmp, /dev.
+# Read-only from the real home: ~/applications, ~/appimages (the app binaries)
+# and the theming bits (~/.themes, ~/.icons, gtk/fontconfig config).
+# Per-app extras go before `--`, e.g. --bind ~/projects ~/projects.
+set -eu
+name=$1; shift
+root=${SANDBOXED_ROOT:-$HOME/.local/share/sandboxes}
+home=$root/$name
+mkdir -p "$home" "$HOME/downloads"
+
+ro=(applications appimages .themes .icons .config/gtk-2.0 .config/gtk-3.0 .config/fontconfig)
+extra=()
+for d in "${ro[@]}"; do [ -e "$HOME/$d" ] && extra+=(--ro-bind "$HOME/$d" "$HOME/$d"); done
+
+exec bwrap \
+	--ro-bind / / \
+	--dev-bind /dev /dev \
+	--proc /proc \
+	--bind /run /run \
+	--bind /tmp /tmp \
+	--tmpfs /home \
+	--bind "$home" "$HOME" \
+	--bind "$HOME/downloads" "$HOME/downloads" \
+	"${extra[@]}" \
+	--setenv XDG_CONFIG_HOME "$HOME/.config" \
+	--setenv XDG_DATA_HOME "$HOME/.local/share" \
+	--setenv XDG_STATE_HOME "$HOME/.local/state" \
+	--setenv XDG_CACHE_HOME "$HOME/.cache" \
+	--setenv APPIMAGE_EXTRACT_AND_RUN 1 \
+	--unshare-pid --die-with-parent \
+	"$@"

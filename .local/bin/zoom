@@ -1,0 +1,3 @@
+#!/bin/sh
+# ponytail: appman symlink replaced by this wrapper; `appman -r zoom` still removes it
+exec sandboxed zoom -- "$HOME/appimages/zoom/zoom" "$@"

@@ -3,3 +3,8 @@
 !chbg
 !fzf-bat-preview
 !claude-statusline
+# bwrap private-HOME launcher + the app wrappers that use it
+!sandboxed
+!zoom
+!smartgit
+!winegui

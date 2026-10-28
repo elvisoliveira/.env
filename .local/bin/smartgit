@@ -1,0 +1,9 @@
+#!/bin/sh
+# SmartGit in a private home (~/.swt, ~/.jgitconfig, ~/.config/smartgit live there).
+# Repos and git identity come from the real home.
+exec sandboxed smartgit \
+	--bind "$HOME/projects" "$HOME/projects" \
+	--bind "$HOME/toolstation" "$HOME/toolstation" \
+	--ro-bind "$HOME/.ssh" "$HOME/.ssh" \
+	--ro-bind "$HOME/.config/git" "$HOME/.config/git" \
+	-- "$HOME/applications/SmartGit-v20.2.6/bin/smartgit.sh" "$@"
