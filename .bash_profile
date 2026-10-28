@@ -27,4 +27,4 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
     fi
 fi
 
-[[ -f "$HOME/.deno/env" ]] && . "$HOME/.deno/env"
+[[ -f /files/tools/deno/env ]] && . /files/tools/deno/env

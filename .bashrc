@@ -33,36 +33,53 @@ echo 'set completion-ignore-case On' >> ~/.inputrc
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
-# Android Dev — dir lives in ~/tools (symlink-free)
-export ANDROID_HOME=$HOME/tools/android/sdk
-export ANDROID_SDK_ROOT=$HOME/tools/android/sdk
+# Toolchains live in /files/tools (own partition). Every manager finds its dir
+# through the env var set here — resolve paths via these vars, not by guessing.
+export ANDROID_HOME=/files/tools/android/sdk
+export ANDROID_SDK_ROOT=/files/tools/android/sdk
 
-# Go
-export GOPATH=$HOME/tools/go
+export GOPATH=/files/tools/go
 export PATH=$GOPATH/bin:$PATH
 
-export GRADLE_HOME=/home/elvisoliveira/.sdkman/candidates/gradle/current
-export GRADLE_USER_HOME=$HOME/.gradle
+export SDKMAN_DIR=/files/tools/sdkman
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+export GRADLE_HOME=$SDKMAN_DIR/candidates/gradle/current
+export GRADLE_USER_HOME=/files/tools/gradle
 export PATH=$GRADLE_HOME/bin:$PATH
 
+export PYENV_ROOT=/files/tools/pyenv
+export WORKON_HOME=/files/tools/virtualenvs
 export CLOUDSDK_PYTHON=$(pyenv which python 3.11)
 
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export RBENV_ROOT=/files/tools/rbenv
+export PATH=$RBENV_ROOT/shims:$RBENV_ROOT/bin:$PATH
 
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR=/files/tools/nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export NVM_SYMLINK_CURRENT=true
 
 # bun
-export BUN_INSTALL="$HOME/.bun"
+export BUN_INSTALL=/files/tools/bun
 export PATH=$BUN_INSTALL/bin:$PATH
+
+# rust (rustup proxies in /usr/bin read these)
+export CARGO_HOME=/files/tools/cargo
+export RUSTUP_HOME=/files/tools/rustup
+export PATH=$CARGO_HOME/bin:$PATH
 
 export PATH=$PATH:$HOME/.maestro/bin
 
-. "/home/elvisoliveira/.deno/env"
+export DENO_INSTALL=/files/tools/deno
+. "$DENO_INSTALL/env"
+
+# phpbrew: the PHPs were compiled with ~/.phpbrew baked in as ini path/scan dir; bash
+# does not init phpbrew, so for a direct call export
+#   PHPRC=$PHPBREW_ROOT/php/<ver>/etc[/cli]/php.ini PHP_INI_SCAN_DIR=$PHPBREW_ROOT/php/<ver>/var/db
+export PHPBREW_ROOT=/files/tools/phpbrew
+export PHPBREW_HOME=/files/tools/phpbrew
 
 # sudo without a tty: password popup on the active tmux client (see .tmux.conf/bin/askpass/README.md)
 export SUDO_ASKPASS="$HOME/.env/.tmux.conf/bin/askpass/askpass-tmux"
