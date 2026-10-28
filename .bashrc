@@ -78,6 +78,7 @@ export CODEX_HOME=/files/tools/codex
 # wezterm, browsers…; npm reads ~/.npmrc `cache=`; kubectl reads KUBECACHEDIR).
 export XDG_CACHE_HOME=/files/cache
 export KUBECACHEDIR=/files/cache/kube
+export SUPABASE_HOME=/files/cache/supabase     # CLI telemetry/traces (was ~/.supabase)
 export YARN_GLOBAL_FOLDER=/files/cache/yarn   # yarn berry global cache (was ~/.yarn/berry)
 
 # Dotfiles pushed out of ~ into XDG dirs (2026-10-28). git reads ~/.config/git/config natively.
