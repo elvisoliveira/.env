@@ -106,3 +106,7 @@
 # npm user config via NPM_CONFIG_USERCONFIG (set in the shell env files)
 !npm/
 !npm/npmrc
+
+# systemd --user environment (keeps user services on /files/cache too)
+!environment.d/
+!environment.d/*

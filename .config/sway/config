@@ -26,7 +26,7 @@ set $ws10 "10:X"
 set $term wezterm
 
 # Startup
-exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP
+exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_CACHE_HOME
 # Static image wallpaper at startup. See scripts/wallpaper.sh
 exec --no-startup-id "~/.config/sway/scripts/wallpaper.sh"
 # Handy in background, for the Ctrl+Delete binding (--toggle-* only talks to a running one)
@@ -111,6 +111,8 @@ bindsym $mod+i                    exec --no-startup-id "~/.config/sway/scripts/s
 # Clipboard menu (Wayland first, X11 fallback)
 bindsym $mod+v                    exec --no-startup-id "~/.config/sway/scripts/clipboard-menu.sh"
 
+# Bitwarden (rbw): pick "name | login"; Enter copies login, then password
+bindsym $mod+b                    exec --no-startup-id "~/.config/rofi/scripts/rbw-menu.sh"
 bindsym $mod+s                    exec --no-startup-id "~/.config/rofi/scripts/rofi-bookmarks.sh &>> /tmp/LGFYZv"
 bindsym $mod+Insert               exec --no-startup-id "~/.config/rofi/scripts/cliptype.sh &>> /tmp/LGFYZv"
 
@@ -177,11 +179,11 @@ bindsym XF86AudioNext           exec --no-startup-id playerctl next
 bindsym XF86AudioPrev           exec --no-startup-id playerctl previous
 
 # scrcpy
-for_window [class="scrcpy"] floating enable, sticky enable
-for_window [app_id="scrcpy"] floating enable, sticky enable
+for_window [class="^scrcpy$"] floating enable, sticky enable
+for_window [app_id="^scrcpy$"] floating enable, sticky enable
 
-bindsym $mod+Up   [class="scrcpy"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 0"
-bindsym $mod+Down [class="scrcpy"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 1"
+bindsym $mod+Up   [class="^scrcpy$"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 0"
+bindsym $mod+Down [class="^scrcpy$"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 1"
 
 # Waydroid — floating com proporção de smartphone (mesmo tamanho do scrcpy)
 for_window [app_id="(?i)^waydroid"] floating enable, resize set 364 px 804 px
@@ -200,6 +202,7 @@ for_window [app_id="swayimg"] floating enable
 # Restaurar a barra de título (border normal) em apps específicos.
 # O padrão é 'pixel 1' (sem barra). Adicione mais app_ids aqui conforme precisar.
 for_window [app_id="thunar"] border normal
+for_window [class="^Thunar$" title="^(?!.* - Thunar$)"] floating enable
 
 # Kill update notifications, I want to use SmartGit on version 20
 for_window [class="SmartGit" title="Restart(.*)"] kill
