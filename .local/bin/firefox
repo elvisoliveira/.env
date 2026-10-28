@@ -1,0 +1,10 @@
+#!/bin/sh
+# Firefox in a private HOME (bwrap): ~/.mozilla lives in ~/.local/share/sandboxes/firefox.
+# Transposed from bubblejail's firefox_wayland profile: wayland + pulse/pipewire + dbus
+# (notifications, mpris) come through /run, GPU through /dev, network is not unshared.
+# Visible user dirs: ~/downloads (default), plus documents, pictures, projects.
+exec sandboxed firefox \
+	--bind "$HOME/documents" "$HOME/documents" \
+	--bind "$HOME/pictures" "$HOME/pictures" \
+	--bind "$HOME/projects" "$HOME/projects" \
+	-- /usr/bin/firefox "$@"

@@ -18,7 +18,7 @@ root=${SANDBOXED_ROOT:-$HOME/.local/share/sandboxes}
 home=$root/$name
 mkdir -p "$home" "$HOME/downloads"
 
-ro=(applications appimages .themes .icons .config/gtk-2.0 .config/gtk-3.0 .config/fontconfig)
+ro=(applications appimages .themes .icons .config/gtk-2.0 .config/gtk-3.0 .config/fontconfig .config/user-dirs.dirs .config/mimeapps.list)
 extra=()
 for d in "${ro[@]}"; do [ -e "$HOME/$d" ] && extra+=(--ro-bind "$HOME/$d" "$HOME/$d"); done
 
