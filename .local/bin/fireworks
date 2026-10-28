@@ -1,0 +1,9 @@
+#!/bin/sh
+# Macromedia Fireworks 8 under wine, in a private HOME (prefix = ~/.wine inside the sandbox).
+# The prefix's Documents/Pictures/Downloads point at the real dirs, so they are bound in;
+# files to open can be passed as unix paths (wine maps them to Z:\ itself).
+exec sandboxed fireworks \
+	--bind "$HOME/documents" "$HOME/documents" \
+	--bind "$HOME/pictures" "$HOME/pictures" \
+	--bind "$HOME/projects" "$HOME/projects" \
+	-- wine "C:\\Program Files (x86)\\Macromedia\\Fireworks 8\\Fireworks.exe" "$@"
