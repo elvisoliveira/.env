@@ -1,0 +1,16 @@
+#!/bin/sh
+# VS Code (appman) in a private HOME: ~/.vscode (extensions, argv.json, cli) and
+# ~/.vscode-shared live in ~/.local/share/sandboxes/code. The real ~/.config/Code is
+# bound in so settings/keybindings stay versioned in ~/.env. Only ~/projects and
+# ~/toolstation are visible as workspaces; /files is rw for the toolchains/caches
+# the integrated terminal needs. ponytail: appman symlink replaced; `appman -r code` still removes it.
+# Runs the Electron binary directly (as appman did), not bin/code: the CLI script daemonizes
+# and exits, and inside --unshare-pid that tears the whole sandbox down with it.
+exec sandboxed code \
+	--bind "$HOME/projects" "$HOME/projects" \
+	--bind "$HOME/toolstation" "$HOME/toolstation" \
+	--bind "$HOME/.config/Code" "$HOME/.config/Code" \
+	--ro-bind "$HOME/.ssh" "$HOME/.ssh" \
+	--ro-bind "$HOME/.config/git" "$HOME/.config/git" \
+	--bind /files /files \
+	-- "$HOME/appimages/code/code" "$@"

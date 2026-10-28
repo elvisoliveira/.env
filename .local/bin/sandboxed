@@ -10,6 +10,8 @@
 # Read-only from the real home: ~/applications, ~/appimages (the app binaries)
 # and the theming bits (~/.themes, ~/.icons, gtk/fontconfig config).
 # Per-app extras go before `--`, e.g. --bind ~/projects ~/projects.
+# /etc/ssh/ssh_config.d is masked: inside the user namespace root-owned files show as
+# nobody and ssh refuses Include'd configs with "Bad owner or permissions".
 set -eu
 name=$1; shift
 root=${SANDBOXED_ROOT:-$HOME/.local/share/sandboxes}
@@ -26,6 +28,7 @@ exec bwrap \
 	--proc /proc \
 	--bind /run /run \
 	--bind /tmp /tmp \
+	--tmpfs /etc/ssh/ssh_config.d \
 	--tmpfs /home \
 	--bind "$home" "$HOME" \
 	--bind "$HOME/downloads" "$HOME/downloads" \
