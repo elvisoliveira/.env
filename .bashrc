@@ -80,6 +80,14 @@ export XDG_CACHE_HOME=/files/cache
 export KUBECACHEDIR=/files/cache/kube
 export YARN_GLOBAL_FOLDER=/files/cache/yarn   # yarn berry global cache (was ~/.yarn/berry)
 
+# Dotfiles pushed out of ~ into XDG dirs (2026-10-28). git reads ~/.config/git/config natively.
+export HISTFILE=$HOME/.local/state/bash/history
+export WGETRC=$HOME/.config/wgetrc                 # sets hsts-file -> ~/.local/state/wget/hsts
+export W3M_DIR=$HOME/.config/w3m
+export RANDFILE=$XDG_CACHE_HOME/openssl.rnd        # openssl 1.1 tools' ~/.rnd
+export PASSWORD_STORE_DIR=$HOME/.local/share/password-store
+export TMUX_PLUGIN_MANAGER_PATH=$HOME/.local/share/tmux/plugins   # tpack/tpm (also set in .tmux.conf)
+
 export DENO_INSTALL=/files/tools/deno
 . "$DENO_INSTALL/env"
 
