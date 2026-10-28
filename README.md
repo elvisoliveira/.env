@@ -2,7 +2,9 @@
 
 Dotfiles for an Arch Linux + sway (Wayland) desktop. `~/.env` is the git repo;
 the home dotfiles are symlinks into it (`~/.config`, `~/.local`, `~/.bashrc`,
-`~/.inputrc`, `~/.themes`, `~/.icons`, `~/bookmarks`, `~/desktop`).
+`~/.bash_profile`, `~/.themes`, `~/.icons`, `~/bookmarks`, `~/desktop`). Everything
+else is reached through `~/.config` (tmux, readline via `INPUTRC`, npm via
+`NPM_CONFIG_USERCONFIG`, nvim's vimrc) — see `~/AGENTS.md` for the env-var map.
 
 Stack: sway + swaylock/swayidle/swaybg, kanshi, rofi, dunst, conky (two panels),
 WezTerm, fish + bash, tmux, neovim, NotepadNext (AppImage via appman),
