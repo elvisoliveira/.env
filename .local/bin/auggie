@@ -1,0 +1,20 @@
+#!/bin/sh
+# auggie (Augment CLI) in a private HOME, scoped to ~/toolstation — the only place it is used.
+# ~/.augment (session, rules, policies, task storage) and ~/.config/augment live in
+# ~/.local/share/sandboxes/auggie. Bound in: ~/toolstation rw, the nvm store (node + auggie
+# binary, ro), git identity + ssh (ro), and the cloud CLIs' state (gcloud, glab, kube) rw for
+# the Cloud mode. /files rw for toolchains/caches. Claude Code's auggie-* MCP servers and the
+# /auggie skill go through this wrapper too (PATH puts ~/.local/bin before nvm).
+A=$(ls -d "$HOME"/.local/share/nvm/*/bin/auggie 2>/dev/null | tail -1)
+[ -n "$A" ] || { echo "auggie: not found under ~/.local/share/nvm" >&2; exit 127; }
+exec sandboxed auggie \
+	--bind "$HOME/toolstation" "$HOME/toolstation" \
+	--ro-bind "$HOME/.local/share/nvm" "$HOME/.local/share/nvm" \
+	--ro-bind "$HOME/.ssh" "$HOME/.ssh" \
+	--ro-bind "$HOME/.config/git" "$HOME/.config/git" \
+	--bind "$HOME/.config/gcloud" "$HOME/.config/gcloud" \
+	--bind "$HOME/.config/glab-cli" "$HOME/.config/glab-cli" \
+	--bind "$HOME/.kube" "$HOME/.kube" \
+	--bind /files /files \
+	--setenv PATH "$(dirname "$A"):$PATH" \
+	-- "$A" "$@"
