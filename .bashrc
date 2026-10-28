@@ -87,6 +87,7 @@ export W3M_DIR=$HOME/.config/w3m
 export RANDFILE=$XDG_CACHE_HOME/openssl.rnd        # openssl 1.1 tools' ~/.rnd
 export PASSWORD_STORE_DIR=$HOME/.local/share/password-store
 export TMUX_PLUGIN_MANAGER_PATH=$HOME/.local/share/tmux/plugins   # tpack/tpm (also set in .tmux.conf)
+export XAUTHORITY=$XDG_RUNTIME_DIR/Xauthority      # sway's Xwayland needs no cookie; keeps ssh -X / xauth out of ~
 
 export DENO_INSTALL=/files/tools/deno
 . "$DENO_INSTALL/env"
