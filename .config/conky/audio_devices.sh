@@ -28,14 +28,14 @@ line() {
     read -r state desc < <(pactl --format=json list "$kind" 2>/dev/null \
         | jq -r --arg n "$name" '.[] | select(.name == $n) | "\(.state) \(.description)"')
     if [[ -z "${desc:-}" ]]; then
-        printf '| ${color grey}%-12s${color} no default\n' "$label"
+        printf '| ${color grey}%-7s${color} no default\n' "$label"
         return
     fi
     [[ "$name" == bluez_input.* ]] && desc="$desc Mic"
     case "$state" in
         RUNNING) state=active ;; IDLE) state=idle ;; SUSPENDED) state=sleep ;; *) state="${state,,}" ;;
     esac
-    printf '| ${color grey}%-12s${color} %s [%s]\n' "$label" "$(short_name "$desc")" "$state"
+    printf '| ${color grey}%-7s${color} %s [%s]\n' "$label" "$(short_name "$desc")" "$state"
 }
 
 line 'Output:' sinks   "$(pactl get-default-sink 2>/dev/null)"
