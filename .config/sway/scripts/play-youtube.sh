@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-log_file="/tmp/play-youtube-mpv.log"
+log_file="/tmp/play-youtube.log"
+subtitle_file="/tmp/play-youtube.vtt"
 yt_dlp_cmd="${HOME}/.virtualenvs/python3/bin/yt-dlp"
 
 notify() {
     local message="$1"
 
     if command -v notify-send >/dev/null 2>&1; then
-        notify-send "play-youtube-mpv" "${message}"
+        notify-send "play-youtube" "${message}"
     fi
 
     printf '%s\n' "${message}" >&2
@@ -43,7 +44,8 @@ prompt_text() {
 
 prompt_menu() {
     local prompt="$1"
-    rofi -dmenu -i -p "${prompt}"
+    shift
+    rofi -dmenu -i -p "${prompt}" "$@"
 }
 
 format_menu_entries() {
@@ -53,9 +55,9 @@ format_menu_entries() {
         (
           $video.formats
           | map(select(.vcodec != "none"))
+          | unique_by(.format_id)
           | sort_by(.height // 0, .fps // 0, .tbr // 0)
           | reverse
-          | unique_by(.format_id)
           | .[]
           | [
               (if .acodec != "none" then .format_id else (.format_id + "+bestaudio") end),
@@ -83,18 +85,11 @@ trap 'notify "Launcher failed. Check ${log_file}."' ERR
 
 exec >>"${log_file}" 2>&1
 
-# --wallpaper / -w: play as the desktop wallpaper (mpvpaper) instead of a window.
-# Everything up to the quality selection is shared with the normal player.
-wallpaper_mode=0
-case "${1:-}" in
-    --wallpaper | -w) wallpaper_mode=1; shift ;;
-esac
-
-require mpv
+require vlc
+require curl
 require jq
 yt_dlp="$(resolve_yt_dlp)"
 require rofi
-[ "${wallpaper_mode}" -eq 1 ] && require mpvpaper
 
 url="${*:-}"
 
@@ -111,17 +106,15 @@ notify "Fetching available formats for the video..."
 # Fetch video JSON
 video_json="$("${yt_dlp}" -J --no-warnings "${url}")"
 
-# Subtitles only matter for the windowed player; skip the extra calls for wallpaper.
-subtitle_url=""
-if [ "${wallpaper_mode}" -eq 0 ]; then
-    # Detect the video's main language
-    main_lang="$(printf '%s\n' "${video_json}" | jq -r '.language | if type == "string" then . else "en" end')"
-    # Fetch subtitle URL cleanly, grabbing only the first valid URL
-    subtitle_url="$("${yt_dlp}" --get-subs --sub-lang "${main_lang}.*" --skip-download --get-url --quiet "${url}" 2>/dev/null | head -n 1 || true)"
-fi
+# Detect the video's main language
+main_lang="$(printf '%s\n' "${video_json}" | jq -r '.language | if type == "string" then . else "en" end')"
+# Fetch subtitle URL cleanly, grabbing only the first valid URL
+subtitle_url="$("${yt_dlp}" --get-subs --sub-lang "${main_lang}.*" --skip-download --get-url --quiet "${url}" 2>/dev/null | head -n 1 || true)"
 
 formats="$(printf '%s\n' "${video_json}" | format_menu_entries)"
-selected_format="$(printf '%s\n' "${formats}" | prompt_menu 'Quality')"
+# Preselect the first 360p entry (0-based row); falls back to the top row.
+default_row="$(printf '%s\n' "${formats}" | awk -F'\t' '$2 ~ /(^| )360p( |$)/ { print NR - 1; exit }')"
+selected_format="$(printf '%s\n' "${formats}" | prompt_menu 'Quality' ${default_row:+-selected-row "${default_row}"})"
 
 if [ -z "${selected_format}" ]; then
     exit 0
@@ -129,18 +122,8 @@ fi
 
 format_selector="${selected_format%%$'\t'*}"
 
-# Wallpaper mode: hand the page URL + chosen format to mpvpaper. mpv re-resolves
-# via yt-dlp (so no pre-resolved URL to expire), loops silently on the background
-# layer. Drop "+bestaudio" from the selector — no audio is needed for a wallpaper.
-if [ "${wallpaper_mode}" -eq 1 ]; then
-    notify "Starting video wallpaper…"
-    pkill -x swaybg 2>/dev/null || true
-    pkill -x mpvpaper 2>/dev/null || true
-    exec mpvpaper -f -o "no-audio loop-file=inf hwdec=auto-safe panscan=1.0 ytdl-format=${format_selector//+bestaudio/} script-opts=ytdl_hook-ytdl_path=${yt_dlp}" '*' "${url}"
-fi
-
 mapfile -t media_urls < <(
-    "${yt_dlp}" -f "${format_selector}" --get-url --sponsorblock-remove default "${url}"
+    "${yt_dlp}" -f "${format_selector}" --get-url "${url}"
 )
 
 if [ "${#media_urls[@]}" -eq 0 ]; then
@@ -148,20 +131,18 @@ if [ "${#media_urls[@]}" -eq 0 ]; then
     exit 1
 fi
 
-mpv_args=()
+vlc_args=("${media_urls[0]}")
 
-if [ "${#media_urls[@]}" -eq 1 ]; then
-    mpv_args=("${media_urls[0]}")
-elif [ "${#media_urls[@]}" -eq 2 ]; then
-    mpv_args=("${media_urls[0]}" "--audio-file=${media_urls[1]}")
-else
+if [ "${#media_urls[@]}" -eq 2 ]; then
+    vlc_args+=("--input-slave=${media_urls[1]}")
+elif [ "${#media_urls[@]}" -ne 1 ]; then
     notify "Unexpected media stream selection"
     exit 1
 fi
 
-# Add the subtitle file AND force visibility flags
-if [ -n "${subtitle_url}" ]; then
-    mpv_args+=("--sub-file=${subtitle_url}" "--sub-visibility=yes" "--sid=1")
+# VLC's --sub-file only takes local paths, so download the subtitle first.
+if [ -n "${subtitle_url}" ] && curl -fsSL -o "${subtitle_file}" "${subtitle_url}"; then
+    vlc_args+=("--sub-file=${subtitle_file}")
 fi
 
-exec mpv "${mpv_args[@]}"
+exec vlc "${vlc_args[@]}"
