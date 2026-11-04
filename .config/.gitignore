@@ -1,6 +1,7 @@
 *
 !.gitignore
 !user-dirs.dirs
+!user-dirs.conf
 !mimeapps.list
 !pavucontrol.ini
 
@@ -64,6 +65,7 @@
 
 !conky
 !conky/*
+conky/lan_devices.map
 
 !weylus
 
