@@ -31,7 +31,7 @@ What these cover:
 sudo pacman -S --needed xorg-xwayland
 ```
 
-Install `xorg-xwayland` for the X11 apps still in use here (JetBrains IDEs, SmartGit, IDA, wine).
+Install `xorg-xwayland` for the X11 apps still in use here (JetBrains IDEs, SmartGit, IDA).
 
 Text editor: NotepadNext comes from appman (`appman -i notepadnext`); mimeapps.list
 points text/json types at its generated `notepadnext-AM.desktop`.
