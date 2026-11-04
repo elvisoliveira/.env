@@ -36,6 +36,10 @@ export ANDROID_SDK_ROOT=/files/tools/android/sdk
 
 export GOPATH=/files/tools/go
 export PATH=$GOPATH/bin:$PATH
+# arduino-cli: DATA also relocates inventory.yaml (otherwise ~/.arduino15)
+export ARDUINO_DIRECTORIES_DATA=/files/tools/arduino/data
+export ARDUINO_DIRECTORIES_USER=/files/tools/arduino/user
+export ARDUINO_DIRECTORIES_DOWNLOADS=/files/tools/arduino/dl
 
 export SDKMAN_DIR=/files/tools/sdkman
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
