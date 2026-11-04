@@ -33,5 +33,6 @@ swayidle -w \
     timeout "$IDLE_TIMEOUT_SECONDS" 'swaymsg "output * power off"' \
     resume 'swaymsg "output * power on"' &
 
-wl-paste --type text --watch cliphist store &
+wl-paste --type text --watch "$HOME/.config/sway/scripts/cliphist-store.sh" &
 wl-paste --type image --watch cliphist store &
+wl-paste --type text --watch "$HOME/.config/sway/scripts/clip-tilde.sh" &
