@@ -3,6 +3,7 @@
 show_hidden = true      # like NERDTreeShowHidden=1
 sort_by = "natural"     # file2 before file10
 sort_dir_first = true
+mouse_events = []       # don't capture the mouse (terminal selection works)
 
 [preview]
 wrap = "yes"            # soft-wrap long lines in text previews

@@ -67,6 +67,9 @@ config.keys = {
 	-- history); close/new window stay on the Ctrl+Shift+W / Ctrl+Shift+N defaults.
 	{ key = "t", mods = "CTRL", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "9", mods = "CTRL", action = act.ActivateTab(-1) },
+	-- Ctrl+Shift+K defaults to ClearScrollback; free it for nvim (move buffer right).
+	{ key = "k", mods = "CTRL|SHIFT", action = act.DisableDefaultAssignment },
+	{ key = "K", mods = "CTRL|SHIFT", action = act.DisableDefaultAssignment },
 }
 for i = 1, 8 do
 	table.insert(config.keys, { key = tostring(i), mods = "CTRL", action = act.ActivateTab(i - 1) })
