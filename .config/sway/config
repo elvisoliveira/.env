@@ -50,8 +50,8 @@ bindsym $alt+Control+6            exec sudo chvt 6
 for_window [class="^.*"] border pixel 3
 default_border pixel 3
 default_floating_border pixel 3
-smart_borders on
-hide_edge_borders smart
+smart_borders off
+hide_edge_borders none
 gaps inner 14
 gaps outer 10
 
@@ -77,6 +77,8 @@ bindsym --release $mod+Shift+d    exec --no-startup-id "~/.config/sway/scripts/s
 
 bindsym $mod+f                    floating toggle, resize set 50 ppt 50 ppt, move position center
 bindsym $mod+Shift+f              focus mode_toggle
+bindsym $mod+g                    exec --no-startup-id "~/.config/sway/scripts/floating-menu.fish"
+bindsym $mod+Shift+g              exec --no-startup-id "~/.config/sway/scripts/hide-window.fish"
 
 focus_follows_mouse yes
 mouse_warping none
@@ -111,8 +113,6 @@ bindsym $mod+i                    exec --no-startup-id "~/.config/sway/scripts/s
 # Clipboard menu (Wayland first, X11 fallback)
 bindsym $mod+v                    exec --no-startup-id "~/.config/sway/scripts/clipboard-menu.sh"
 
-# Bitwarden (rbw): pick "name | login"; Enter copies login, then password
-bindsym $mod+b                    exec --no-startup-id "~/.config/rofi/scripts/rbw-menu.sh"
 bindsym $mod+s                    exec --no-startup-id "~/.config/rofi/scripts/rofi-bookmarks.sh &>> /tmp/LGFYZv"
 bindsym $mod+Insert               exec --no-startup-id "~/.config/rofi/scripts/cliptype.sh &>> /tmp/LGFYZv"
 
@@ -181,6 +181,9 @@ bindsym XF86AudioPrev           exec --no-startup-id playerctl previous
 # scrcpy
 for_window [class="^scrcpy$"] floating enable, sticky enable
 for_window [app_id="^scrcpy$"] floating enable, sticky enable
+
+# iPhone Hand (~/projects/ihandclaw, iphone-hand-window): scrcpy for the iPhone
+for_window [app_id="^iphone-hand$"] floating enable, sticky enable
 
 bindsym $mod+Up   [class="^scrcpy$"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 0"
 bindsym $mod+Down [class="^scrcpy$"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 1"
