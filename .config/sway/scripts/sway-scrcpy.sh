@@ -7,6 +7,19 @@ if ! command -v swaymsg >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1; then
   exit 0
 fi
 
+# Called from for_window: remember the size scrcpy asked for (= device aspect)
+# before any resize, as a hidden mark.
+if [ "$slot" = "mark" ]; then
+  swaymsg -t get_tree -r | jq -r '
+    .. | select(.window_properties?.class? == "scrcpy")
+    | select(any(.marks[]; startswith("_scrcpy_ar_")) | not)
+    | "\(.id) \(.geometry.width) \(.geometry.height)"' |
+  while read -r id w h; do
+    swaymsg "[con_id=${id}] mark --add _scrcpy_ar_${w}x${h}" >/dev/null
+  done
+  exit 0
+fi
+
 workspace_output=$(
   swaymsg -t get_workspaces -r |
     jq -r 'first(.[] | select(.focused) | .output) // empty'
@@ -28,16 +41,25 @@ read -r screen_x screen_y screen_w screen_h < <(
     '
 )
 
-x=$((screen_x + screen_w - 364))
-y=$((screen_y + screen_h - 804))
+width=364
+peek=41  # px left visible when hidden (slot 1)
 
-if [ "$slot" = "1" ]; then
-  y=$((y + 763))
-fi
-
-# One column per scrcpy window, right to left, so they never overlap.
+# Natural content size per window: the _scrcpy_ar_WxH mark recorded at map time,
+# falling back to the current geometry for windows opened before the mark existed.
 i=0
-for id in $(swaymsg -t get_tree -r | jq -r '.. | select(.window_properties?.class? == "scrcpy") | .id'); do
-  swaymsg "[con_id=${id}] move absolute position $((x - i * 364)) ${y}" >/dev/null
+swaymsg -t get_tree -r | jq -r '
+  .. | select(.window_properties?.class? == "scrcpy")
+  | ((.marks | map(select(startswith("_scrcpy_ar_"))) | first // "") | ltrimstr("_scrcpy_ar_") | split("x")) as $ar
+  | [.id, ($ar[0] // .geometry.width), ($ar[1] // .geometry.height), .rect.width - .window_rect.width, .rect.height - .window_rect.height]
+  | @tsv' |
+while read -r id nat_w nat_h border_w border_h; do
+  height=$(( (width - border_w) * nat_h / nat_w + border_h ))
+  x=$((screen_x + screen_w - width * (i + 1)))
+  if [ "$slot" = "1" ]; then
+    y=$((screen_y + screen_h - peek))
+  else
+    y=$((screen_y + screen_h - height))
+  fi
+  swaymsg "[con_id=${id}] resize set ${width} px ${height} px, move absolute position ${x} ${y}" >/dev/null
   i=$((i + 1))
 done

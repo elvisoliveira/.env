@@ -179,14 +179,14 @@ bindsym XF86AudioNext           exec --no-startup-id playerctl next
 bindsym XF86AudioPrev           exec --no-startup-id playerctl previous
 
 # scrcpy
-for_window [class="^scrcpy$"] floating enable, sticky enable
+for_window [class="^scrcpy$"] floating enable, sticky enable, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh mark"
 for_window [app_id="^scrcpy$"] floating enable, sticky enable
 
 # iPhone Hand (~/projects/ihandclaw, iphone-hand-window): scrcpy for the iPhone
 for_window [app_id="^iphone-hand$"] floating enable, sticky enable
 
-bindsym $mod+Up   [class="^scrcpy$"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 0"
-bindsym $mod+Down [class="^scrcpy$"] focus, resize set 364 px 804 px, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 1"
+bindsym $mod+Up   [class="^scrcpy$"] focus, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 0"
+bindsym $mod+Down [class="^scrcpy$"] focus, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 1"
 
 # Waydroid — floating com proporção de smartphone (mesmo tamanho do scrcpy)
 for_window [app_id="(?i)^waydroid"] floating enable, resize set 364 px 804 px
