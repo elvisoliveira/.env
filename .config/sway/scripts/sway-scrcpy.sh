@@ -35,4 +35,9 @@ if [ "$slot" = "1" ]; then
   y=$((y + 763))
 fi
 
-swaymsg "[class=\"scrcpy\"] move absolute position ${x} ${y}"
+# One column per scrcpy window, right to left, so they never overlap.
+i=0
+for id in $(swaymsg -t get_tree -r | jq -r '.. | select(.window_properties?.class? == "scrcpy") | .id'); do
+  swaymsg "[con_id=${id}] move absolute position $((x - i * 364)) ${y}" >/dev/null
+  i=$((i + 1))
+done
