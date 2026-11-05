@@ -77,6 +77,7 @@ export CODEX_HOME=/files/tools/codex
 # Caches live on /files too (XDG_CACHE_HOME covers pip, composer, huggingface, fish,
 # wezterm, browsers…; npm reads ~/.npmrc `cache=`; kubectl reads KUBECACHEDIR).
 export XDG_CACHE_HOME=/files/cache
+export HF_HOME=/files/cache/huggingface      # hf-hub (Rust, Handy ≥0.10) ignores XDG and only reads HF_HOME; python huggingface_hub lands here via XDG anyway
 export KUBECACHEDIR=/files/cache/kube
 export SUPABASE_HOME=/files/cache/supabase     # CLI telemetry/traces (was ~/.supabase)
 export NPM_CONFIG_USERCONFIG=$HOME/.config/npm/npmrc   # was ~/.npmrc

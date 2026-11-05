@@ -26,7 +26,7 @@ set $ws10 "10:X"
 set $term wezterm
 
 # Startup
-exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_CACHE_HOME
+exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_CACHE_HOME HF_HOME
 # Static image wallpaper at startup. See scripts/wallpaper.sh
 exec --no-startup-id "~/.config/sway/scripts/wallpaper.sh"
 # Handy in background, for the Ctrl+Delete binding (--toggle-* only talks to a running one)
