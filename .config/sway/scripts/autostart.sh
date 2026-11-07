@@ -36,3 +36,4 @@ swayidle -w \
 wl-paste --type text --watch "$HOME/.config/sway/scripts/cliphist-store.sh" &
 wl-paste --type image --watch cliphist store &
 wl-paste --type text --watch "$HOME/.config/sway/scripts/clip-tilde.sh" &
+wl-paste --type text --watch "$HOME/.config/sway/scripts/clip-url.py" &
