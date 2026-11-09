@@ -43,6 +43,9 @@ read -r screen_x screen_y screen_w screen_h < <(
 
 width=364
 peek=41  # px left visible when hidden (slot 1)
+if [ "$slot" = "1" ]; then
+  width=300  # hidden windows a bit narrower: the strips take less room
+fi
 
 # Natural content size per window: the _scrcpy_ar_WxH mark recorded at map time,
 # falling back to the current geometry for windows opened before the mark existed.
