@@ -34,4 +34,6 @@ if [ -z "${screen_w:-}" ] || [ -z "${screen_h:-}" ]; then
   exit 0
 fi
 
-swaymsg "[con_mark=\"scratchpad\"] scratchpad show, resize set ${screen_w} px ${screen_h} px, move absolute position ${screen_x} px ${screen_y} px" >/dev/null
+# No border: the window covers the whole output, and 1080 px is exactly 72
+# terminal rows (15 px cells), so WezTerm leaves no leftover strip at the bottom.
+swaymsg "[con_mark=\"scratchpad\"] scratchpad show, border none, resize set ${screen_w} px ${screen_h} px, move absolute position ${screen_x} px ${screen_y} px" >/dev/null

@@ -11,6 +11,25 @@
 dir=/tmp/firechores-shots
 mkdir -p "$dir"
 
+# --press / --hold: the same key bound on press and on release; holding it for
+# at least hold_ms turns into --delay 3.
+hold_ms=500
+stamp="$XDG_RUNTIME_DIR/screenshot-press"
+# sway repeats press bindings while the key is held, so keep the first stamp;
+# one older than 10 s is stale (its release never fired) and gets replaced.
+if [ "$1" = "--press" ]; then
+    now=$(date +%s%N)
+    old=$(cat "$stamp" 2>/dev/null || echo 0)
+    [ $(( (now - old) / 1000000 )) -gt 10000 ] && echo "$now" > "$stamp"
+    exit 0
+fi
+if [ "$1" = "--hold" ]; then
+    held=$(( ($(date +%s%N) - $(cat "$stamp" 2>/dev/null || echo 0)) / 1000000 ))
+    rm -f "$stamp"
+    set --
+    [ "$held" -ge "$hold_ms" ] && set -- --delay 3
+fi
+
 delay=0
 [ "$1" = "--delay" ] && delay=${2:-3}
 

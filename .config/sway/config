@@ -37,6 +37,13 @@ input type:keyboard {
     # ABNT2 (br) é o primeiro -> layout padrão no start/reload. us fica como alternativo.
     xkb_layout custom,custom
     xkb_variant br,us
+    repeat_delay 250
+    repeat_rate 40
+}
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
 }
 
 # TTY switching
@@ -47,7 +54,6 @@ bindsym $alt+Control+4            exec sudo chvt 4
 bindsym $alt+Control+5            exec sudo chvt 5
 bindsym $alt+Control+6            exec sudo chvt 6
 
-for_window [class="^.*"] border pixel 3
 default_border pixel 3
 default_floating_border pixel 3
 smart_borders off
@@ -72,7 +78,9 @@ bindsym $mod+Shift+w              exec --no-startup-id "~/.config/sway/scripts/w
 bindsym $mod+Shift+r              reload
 bindsym $mod+Shift+q              exec swaymsg exit
 
-bindsym --release $mod+Shift+s    exec --no-startup-id "~/.config/sway/scripts/screenshot-area.sh"
+# tap = screenshot now; hold ≥0.5 s = 3 s delay (press stamps the time, release decides)
+bindsym $mod+Shift+s              exec --no-startup-id "~/.config/sway/scripts/screenshot-area.sh --press"
+bindsym --release $mod+Shift+s    exec --no-startup-id "~/.config/sway/scripts/screenshot-area.sh --hold"
 bindsym --release $mod+Shift+d    exec --no-startup-id "~/.config/sway/scripts/screenshot-area.sh --delay 3"
 
 bindsym $mod+f                    floating toggle, resize set 50 ppt 50 ppt, move position center
@@ -105,7 +113,7 @@ bindsym $mod+Shift+m              exec --no-startup-id "~/.config/sway/scripts/s
 bindsym $mod+Shift+c              exec --no-startup-id "~/.config/sway/scripts/conky-output.sh toggle"
 
 # Rofi PulseAudio Select SINK
-bindsym $mod+p                    exec --no-startup-id "~/.config/rofi/scripts/rofi-pulseaudio-select-sink.sh &>> /tmp/gVgRzCZ"
+bindsym $mod+p                    exec --no-startup-id "~/.config/rofi/scripts/rofi-pulseaudio-select-sink.sh"
 
 # Keyboard layout toggle for Sway
 bindsym $mod+i                    exec --no-startup-id "~/.config/sway/scripts/select-keyboard-layout.sh"
@@ -113,8 +121,8 @@ bindsym $mod+i                    exec --no-startup-id "~/.config/sway/scripts/s
 # Clipboard menu (Wayland first, X11 fallback)
 bindsym $mod+v                    exec --no-startup-id "~/.config/sway/scripts/clipboard-menu.sh"
 
-bindsym $mod+s                    exec --no-startup-id "~/.config/rofi/scripts/rofi-bookmarks.sh &>> /tmp/LGFYZv"
-bindsym $mod+Insert               exec --no-startup-id "~/.config/rofi/scripts/cliptype.sh &>> /tmp/LGFYZv"
+bindsym $mod+s                    exec --no-startup-id "~/.config/rofi/scripts/rofi-bookmarks.sh"
+bindsym $mod+Insert               exec --no-startup-id "~/.config/rofi/scripts/cliptype.sh"
 
 # Window management
 bindsym $mod+h                    focus left
@@ -136,13 +144,13 @@ bindsym $mod+Mod1+l               exec --no-startup-id swayresize right
 bindsym $mod+Next                 workspace next
 bindsym $mod+Prior                workspace prev
 
-set $scratchpad exec --no-startup-id "~/.config/sway/scripts/sway-scratchpad.sh &>> /tmp/HjdS8hD"
+set $scratchpad exec --no-startup-id "~/.config/sway/scripts/sway-scratchpad.sh"
 
 bindsym $alt+Tab $scratchpad
 bindsym $mod+Tab $scratchpad
 
 bindsym $mod+Shift+Tab mark "scratchpad", move scratchpad
-bindsym $mod+Shift+Ctrl+Tab unmark "scratchpad", floating toggle, fullscreen disable
+bindsym $mod+Shift+Ctrl+Tab unmark "scratchpad", border pixel 3, floating toggle, fullscreen disable
 
 # workspaces
 bindsym $mod+1    workspace $ws1
@@ -169,9 +177,6 @@ bindsym $mod+Shift+0    move container to workspace $ws10
 
 bindsym XF86MonBrightnessDown   exec --no-startup-id brightnessctl set 15%-
 bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl set +15%
-
-bindsym XF86AudioLowerVolume    exec --no-startup-id playerctl volume 0.1-
-bindsym XF86AudioRaiseVolume    exec --no-startup-id playerctl volume 0.1+
 
 bindsym XF86AudioPlay           exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop           exec --no-startup-id playerctl stop
