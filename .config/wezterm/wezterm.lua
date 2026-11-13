@@ -7,11 +7,15 @@ local config = wezterm.config_builder()
 
 -- font: "Mono" load target = no anti-aliasing, matching the system-wide
 -- fontconfig antialias=false (see ~/.env/AGENTS.md).
--- Unifont (AUR ttf-unifont) covers CJK etc.; auto-fallback skips it, so list it.
-config.font = wezterm.font_with_fallback({ "Mononoki Nerd Font Mono", "Unifont" })
+-- Unifont (AUR ttf-unifont) covers CJK etc. (BMP); Unifont Upper covers plane 1
+-- (emoji). auto-fallback skips both, so list them.
+config.font = wezterm.font_with_fallback({ "Mononoki Nerd Font Mono", "Unifont", "Unifont Upper" })
 config.font_size = 11
 config.freetype_load_target = "Mono"
 config.freetype_render_target = "Mono"
+-- Missing-glyph warnings fire even when the fallback (Unifont Upper) renders
+-- the glyph (seen with 🔒 from vim-airline), so they are noise; test with printf.
+config.warn_about_missing_glyphs = false
 
 -- colors / window
 config.color_scheme = "Dracula (Official)"
