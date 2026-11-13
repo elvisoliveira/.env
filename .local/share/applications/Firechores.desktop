@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Firechores
+GenericName=Image Editor
+Comment=Annotate screenshots and edit images, Fireworks style
+Exec=/bin/sh -c "exec \"\\$HOME/applications/Firechores.AppImage\" \"\\$@\"" firechores %F
+Icon=firechores
+Categories=Graphics;2DGraphics;RasterGraphics;VectorGraphics;
+MimeType=image/png;image/jpeg;image/gif;image/webp;image/bmp;image/svg+xml;image/avif;
+StartupWMClass=firechores
+Terminal=false

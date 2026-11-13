@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Ghidra
+Comment=Software Reverse Engineering Suite
+Exec=env GHIDRA_MCP_ALLOW_SCRIPTS=1 _JAVA_AWT_WM_NONREPARENTING=1 ghidra
+Icon=ghidra
+Terminal=false
+Categories=Development;Utility;
+StartupNotify=true

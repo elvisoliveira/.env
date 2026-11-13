@@ -1,0 +1,28 @@
+#!/bin/sh
+
+[ -z "$1" ] && echo "No direction provided" && exit 1
+distanceStr="2 px or 2 ppt"
+
+moveChoice() {
+  swaymsg resize "$1" "$2" "$distanceStr" | grep '"success":true' >/dev/null 2>&1 || \
+    swaymsg resize "$3" "$4" "$distanceStr" >/dev/null
+}
+
+case "$1" in
+  up)
+    moveChoice grow up shrink down
+    ;;
+  down)
+    moveChoice shrink up grow down
+    ;;
+  left)
+    moveChoice shrink right grow left
+    ;;
+  right)
+    moveChoice grow right shrink left
+    ;;
+  *)
+    echo "Unknown direction: $1" >&2
+    exit 1
+    ;;
+esac

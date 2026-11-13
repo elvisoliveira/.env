@@ -12,3 +12,8 @@
 !chromium
 !ghidra
 !maestro
+# sway helpers (bound in sway/config) and window inspectors
+!swapflush
+!swayresize
+!wininfo
+!wlprop

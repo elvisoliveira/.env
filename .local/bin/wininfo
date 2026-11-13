@@ -1,0 +1,175 @@
+#!/usr/bin/env python3
+
+import argparse
+import pprint
+import subprocess
+import sys
+
+import i3ipc
+
+
+def display(value):
+    if value is None or value == "":
+        return "-"
+    return str(value)
+
+
+def has_window_metadata(node):
+    return any(
+        (
+            node.app_id,
+            node.window_class,
+            node.window_instance,
+            node.window,
+        )
+    )
+
+
+def window_rows(tree):
+    rows = []
+    for node in tree.descendants():
+        if not has_window_metadata(node):
+            continue
+        rows.append(
+            {
+                "id": node.id,
+                "name": display(node.name),
+                "app_id": display(node.app_id),
+                "class": display(node.window_class),
+                "instance": display(node.window_instance),
+                "type": display(node.type),
+                "floating": display(node.floating),
+            }
+        )
+    return rows
+
+
+def print_rows(rows):
+    print("id | name | app_id | class | instance | type | floating")
+    for row in rows:
+        print(
+            f'{row["id"]} | {row["name"]} | {row["app_id"]} | '
+            f'{row["class"]} | {row["instance"]} | {row["type"]} | {row["floating"]}'
+        )
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--click",
+        action="store_true",
+        help="select a window by clicking it",
+    )
+    return parser.parse_args()
+
+
+def prompt_id():
+    try:
+        raw = input("window id> ").strip()
+    except EOFError:
+        return None
+
+    if not raw:
+        return None
+
+    try:
+        return int(raw)
+    except ValueError:
+        print("wininfo: window id must be a number", file=sys.stderr)
+        return None
+
+
+def contains_point(rect, x, y):
+    return rect.x <= x < rect.x + rect.width and rect.y <= y < rect.y + rect.height
+
+
+def select_point():
+    try:
+        result = subprocess.run(
+            ["slurp", "-p", "-f", "%x %y"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except FileNotFoundError:
+        print("wininfo: slurp is required for --click", file=sys.stderr)
+        return None
+
+    if result.returncode != 0:
+        return None
+
+    raw = result.stdout.strip()
+    if not raw:
+        return None
+
+    try:
+        x_text, y_text = raw.split()
+        return int(x_text), int(y_text)
+    except ValueError:
+        print(f"wininfo: failed to parse slurp output: {raw}", file=sys.stderr)
+        return None
+
+
+def select_node_by_click(ipc):
+    print("click a window...", file=sys.stderr)
+    point = select_point()
+    if point is None:
+        return None
+
+    x, y = point
+    tree = ipc.get_tree()
+    candidates = []
+    for node in tree.descendants():
+        if not has_window_metadata(node):
+            continue
+        rect = node.rect
+        if rect.width <= 0 or rect.height <= 0:
+            continue
+        if contains_point(rect, x, y):
+            candidates.append(node)
+
+    if not candidates:
+        print(f"wininfo: no window found at {x},{y}", file=sys.stderr)
+        return None
+
+    return min(candidates, key=lambda node: node.rect.width * node.rect.height)
+
+
+def main():
+    args = parse_args()
+
+    try:
+        ipc = i3ipc.Connection()
+    except Exception as exc:
+        print(f"wininfo: failed to connect to sway/i3 IPC: {exc}", file=sys.stderr)
+        return 1
+
+    if args.click:
+        selected = select_node_by_click(ipc)
+        if selected is None:
+            return 1
+
+        pprint.pp(selected.ipc_data)
+        return 0
+
+    tree = ipc.get_tree()
+    rows = window_rows(tree)
+    if not rows:
+        return 1
+
+    print_rows(rows)
+    selected_id = prompt_id()
+    if selected_id is None:
+        return 1
+
+    selected = next((node for node in tree.descendants() if node.id == selected_id), None)
+    if selected is None:
+        print(f"wininfo: no window found for id {selected_id}", file=sys.stderr)
+        return 1
+
+    pprint.pp(selected.ipc_data)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

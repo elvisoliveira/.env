@@ -12,6 +12,12 @@
 
 !fish/
 !fish/*
+# own functions (machine-specific paths); the portable ones are symlinks into the config.fish submodule
+!fish/functions/
+!fish/functions/bw.fish
+!fish/functions/mitmdump.fish
+!fish/functions/mitmproxy.fish
+!fish/functions/mitmweb.fish
 
 !sway/
 !sway/*
@@ -59,6 +65,10 @@ conky/lan_devices.map
 # sway session pieces outside .config/sway
 !xdg-desktop-portal/
 !xdg-desktop-portal/*
+# gvfs-metadata masked (-> /dev/null), see .bash_profile
+!systemd/
+!systemd/user/
+!systemd/user/gvfs-metadata.service
 
 # appman: install dir + list of managed AppImages (regenerate with the command in sway/PACKAGES.md)
 !appman/
