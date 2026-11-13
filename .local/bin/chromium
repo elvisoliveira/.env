@@ -10,4 +10,5 @@ exec sandboxed chromium \
 	--bind "$HOME/documents" "$HOME/documents" \
 	--bind "$HOME/pictures" "$HOME/pictures" \
 	--bind "$HOME/projects" "$HOME/projects" \
+	--ro-bind "$HOME/toolstation" "$HOME/toolstation" \
 	-- /usr/bin/chromium "$@"
