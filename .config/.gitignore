@@ -50,11 +50,7 @@
 !conky/*
 conky/lan_devices.map
 
-# editor / tools (hand-edited files only; caches stay local)
-!Code/
-!Code/User/
-!Code/User/settings.json
-!Code/User/keybindings.json
+# tools (hand-edited files only; caches stay local)
 !htop/
 !htop/htoprc
 !git/
@@ -63,9 +59,6 @@ conky/lan_devices.map
 # sway session pieces outside .config/sway
 !xdg-desktop-portal/
 !xdg-desktop-portal/*
-!systemd/
-!systemd/user/
-!systemd/user/chbg.*
 
 # appman: install dir + list of managed AppImages (regenerate with the command in sway/PACKAGES.md)
 !appman/
