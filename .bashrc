@@ -61,10 +61,6 @@ export NVM_DIR=/files/tools/nvm
 
 export NVM_SYMLINK_CURRENT=true
 
-# bun
-export BUN_INSTALL=/files/tools/bun
-export PATH=$BUN_INSTALL/bin:$PATH
-
 # rust (rustup proxies in /usr/bin read these)
 export CARGO_HOME=/files/tools/cargo
 export RUSTUP_HOME=/files/tools/rustup
