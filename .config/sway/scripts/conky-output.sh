@@ -18,9 +18,9 @@ if [ "$1" = "toggle" ]; then
     printf '%s\n' "$head" > "$STATE"
 fi
 
-# NÃO mover a swaybar por aqui: no sway 1.12, 'bar bar-N output' em runtime
-# derruba o swaybar (get_layer_surface com wl_output nulo) e o sway não o
-# respawna. Os outputs das barras são estáticos no config do sway.
+# Do NOT move the swaybar from here: on sway 1.12, 'bar bar-N output' at runtime
+# kills swaybar (get_layer_surface with a null wl_output) and sway does not
+# respawn it. The bars' outputs are static in the sway config.
 pkill -x conky 2>/dev/null
 
 export CONKY_HEAD="$head"

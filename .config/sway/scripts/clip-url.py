@@ -59,7 +59,7 @@ def test():
     for src, want in cases.items():
         got = tidy(src)
         assert got == want, f"{src!r}: {got!r} != {want!r}"
-    for not_link in ("veja https://x.com", "ftp://x.com", "texto\nqualquer", ""):
+    for not_link in ("see https://x.com", "ftp://x.com", "some\ntext", ""):
         assert tidy(not_link) is None, not_link
     assert tidy(tidy(next(iter(cases)))) == tidy(next(iter(cases)))  # idempotent
     print("ok")

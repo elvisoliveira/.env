@@ -1,12 +1,12 @@
 #!/bin/sh
 
-# Screenshot: slurp seleciona área (cruza todos monitores, sem picker)
-# -> grim captura -> Firechores abre para anotar (vira uma aba se ele já estiver aberto).
-# Quick Save (Export, no Firechores) salva na pasta escolhida + copia o path absoluto.
-# Fechar a aba sem salvar descarta; Esc no slurp = cancela (nada capturado).
-# /tmp: o Firechores só lê imagens de $HOME e /tmp.
-# --delay N: seleciona a área agora e captura N s depois (dá tempo de abrir um menu, passar o mouse em algo);
-# a contagem aparece no dunst.
+# Screenshot: slurp selects an area (spans all outputs, no picker)
+# -> grim captures -> firechores opens it for annotation (as a new tab if it is already open).
+# Quick Save (Export, in firechores) saves to the chosen folder + copies the absolute path.
+# Closing the tab without saving discards it; Esc in slurp = cancel (nothing captured).
+# /tmp: firechores only reads images from $HOME and /tmp.
+# --delay N: select the area now and capture N s later (time to open a menu, hover something);
+# the countdown shows in dunst.
 
 dir=/tmp/firechores-shots
 mkdir -p "$dir"
@@ -37,19 +37,19 @@ geom=$(slurp) || exit 0
 
 i=$delay
 while [ "$i" -gt 0 ]; do
-    dunstify -r 9101 -t 1100 -u low "Screenshot" "Capturando em ${i}s…"
+    dunstify -r 9101 -t 1100 -u low "Screenshot" "Capturing in ${i}s…"
     sleep 1
     i=$((i - 1))
 done
-[ "$delay" -gt 0 ] && { dunstify -C 9101; sleep 0.2; } # a notificação some antes da captura
+[ "$delay" -gt 0 ] && { dunstify -C 9101; sleep 0.2; } # the notification is gone before the capture
 
 file="$dir/$(date +%Y-%m-%d_%H-%M-%S).png"
-# com atraso, o ponteiro entra na imagem (é para isso que se espera: o mouse sobre algo); sem, ele estaria
-# no canto da área recém-selecionada
+# with a delay the pointer is included (that is what the wait is for: hovering something); without it, it
+# would sit in the corner of the area just selected
 cursor=""
 [ "$delay" -gt 0 ] && cursor="-c"
 grim $cursor -g "$geom" "$file" || exit 1
-# um Firechores já aberto vem para a tela em uso, centralizado (o arquivo vira uma aba nele)
+# an already open firechores moves to the focused output, centred (the file becomes a tab in it)
 out=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused).name')
 swaymsg "[app_id=\"^firechores\$\"] move container to output $out, move position center" >/dev/null 2>&1
-exec "$HOME/applications/Firechores.AppImage" "$file"
+exec "$HOME/applications/firechores.AppImage" "$file"

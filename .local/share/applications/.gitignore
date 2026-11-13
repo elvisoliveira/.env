@@ -7,5 +7,5 @@
 # pcmanfm: env -u GIO_USE_VFS so it gets gvfs (Trash, drives)
 !pcmanfm.desktop
 # firechores: AppImage launcher; ghidra: MCP + non-reparenting WM env
-!Firechores.desktop
+!firechores.desktop
 !ghidra.desktop

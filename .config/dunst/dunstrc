@@ -7,8 +7,8 @@ dmenu = /usr/bin/rofi -dmenu
 force_xwayland = false
 per_monitor_dpi = false
 font = Mononoki Nerd Font 11
-# Notificações no tema Dracula: fundo escuro, texto claro;
-# a moldura sinaliza a urgência.
+# Dracula-themed notifications: dark background, light text;
+# the frame colour signals the urgency.
 frame_width = 2
 corner_radius = 0
 transparency = 0

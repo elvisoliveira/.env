@@ -34,7 +34,7 @@ exec --no-startup-id handy --start-hidden
 
 # input
 input type:keyboard {
-    # ABNT2 (br) é o primeiro -> layout padrão no start/reload. us fica como alternativo.
+    # ABNT2 (br) comes first -> default layout on start/reload; us is the alternative.
     xkb_layout custom,custom
     xkb_variant br,us
     repeat_delay 250
@@ -193,11 +193,11 @@ for_window [app_id="^iphone-hand$"] floating enable, sticky enable
 bindsym $mod+Up   [class="^scrcpy$"] focus, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 0"
 bindsym $mod+Down [class="^scrcpy$"] focus, exec --no-startup-id "~/.config/sway/scripts/sway-scrcpy.sh 1"
 
-# Waydroid — floating com proporção de smartphone (mesmo tamanho do scrcpy)
+# Waydroid — floating with a phone aspect ratio (same size as scrcpy)
 for_window [app_id="(?i)^waydroid"] floating enable, resize set 364 px 804 px
 
-# Firechores (editor de imagens): o instalado (app_id firechores) flutuante, centralizado na tela em uso
-# (o de desenvolvimento, firechores-dev, abre como qualquer janela; os testes rodam num sway headless próprio)
+# firechores (image editor): the installed build (app_id firechores) floats, centred on the focused output
+# (the dev build, firechores-dev, opens like any window; its tests run in their own headless sway)
 for_window [app_id="^firechores$"] floating enable, resize set 1280 px 800 px, move position center
 
 # General
@@ -238,8 +238,8 @@ for_window [title="^data:application/pdf"] move to workspace $ws1, floating enab
 floating_modifier $mod
 focus_on_window_activation focus
 
-# Paleta Dracula para a barra de título / bordas de janela.
-# Foco em ciano, urgente em vermelho — combina com o lock.sh (já dracula).
+# Dracula palette for title bars / window borders.
+# Focus in cyan, urgent in red — matches lock.sh (already Dracula).
 # class                 border  bground text    indicator child_border
 client.focused          #8BE9FD #282A36 #F8F8F2 #FF79C6   #8BE9FD
 client.focused_inactive #44475A #282A36 #F8F8F2 #44475A   #44475A
@@ -249,8 +249,8 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
 client.background       #282A36
 
-# Barra nativa fixa: workspaces + status de texto puro (status.sh, que
-# reaproveita os scripts da barra do tmux). O resto das métricas é do conky.
+# Native docked bar: workspaces + a plain-text status (status.sh, which
+# reuses the tmux status bar scripts). The other metrics are conky's.
 bar {
     output *
     position top

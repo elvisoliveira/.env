@@ -1,6 +1,6 @@
 #!/bin/sh
-# swaybar status (texto puro, sem protocolo JSON). Reaproveita os scripts da
-# barra do tmux (~/.env/.tmux.conf/bin) para ter uma única fonte dos segmentos.
+# swaybar status (plain text, no JSON protocol). Reuses the tmux status bar
+# scripts (~/.env/.tmux.conf/bin) so the segments have a single source.
 B="$HOME/.env/.tmux.conf/bin"
 while :; do
     printf '%s%s | %s | BR %s | UK %s | NL %s \n' \
