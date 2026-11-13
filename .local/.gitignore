@@ -7,3 +7,4 @@ share/*
 !share/applications
 .crates.toml
 .crates2.json
+!share/file-manager

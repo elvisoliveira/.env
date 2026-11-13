@@ -8,7 +8,7 @@ This file is intentionally limited to Sway/Wayland-related packages.
 sudo pacman -S --needed \
   sway swaybg swaylock swayidle \
   grim slurp wl-clipboard cliphist wtype jq \
-  satty rofi-wayland kanshi brightnessctl swayimg
+  rofi-wayland kanshi brightnessctl swayimg mpv
 ```
 
 What these cover:
@@ -16,7 +16,7 @@ What these cover:
 - `swaybg`: wallpaper backend used in your config.
 - `swaylock` / `swayidle`: lock and idle handling.
 - `grim` + `slurp` + `wl-clipboard`: Wayland screenshot + clipboard flow.
-- `satty`: screenshot annotator (`$mod+Shift+s` bind: slurp -> grim -> satty; salva + copia path).
+- `mpv`: video player (default for `video/mp4` in mimeapps.list; its .desktop claims the other video types) and `$mod+y` (`play-youtube.fish`: rofi URL/quality -> mpv via yt-dlp).
 - `cliphist`: Wayland clipboard history used in your `$mod+v` bind.
 - `wtype`: Wayland-native key typing (rofi bookmarks / cliptype helpers).
 - `jq`: parses `swaymsg` JSON for saving the current layout into Kanshi config.

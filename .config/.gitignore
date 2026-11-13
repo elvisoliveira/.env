@@ -3,8 +3,6 @@
 !user-dirs.dirs
 !user-dirs.conf
 !mimeapps.list
-!pavucontrol.ini
-
 
 !wezterm/
 !wezterm/*
@@ -27,13 +25,8 @@
 !fontconfig
 !fontconfig/*
 
-
 !dunst/
 !dunst/*
-
-
-!neofetch/
-!neofetch/*
 
 !rofi/
 !rofi/*
@@ -47,30 +40,15 @@
 !gtk-3.0
 !gtk-3.0/*
 
-!zathura
-!zathura/*
-
-
-!Thunar
-!Thunar/*
+!libfm
+!libfm/*
 
 !mpv
 !mpv/*
 
-!flameshot
-!flameshot/*
-
-!qt5ct
-!qt5ct/*
-
 !conky
 !conky/*
 conky/lan_devices.map
-
-!weylus
-
-!zathura
-!zathura/*
 
 # editor / tools (hand-edited files only; caches stay local)
 !Code/

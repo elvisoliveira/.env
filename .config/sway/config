@@ -67,7 +67,7 @@ bindsym $mod+Shift+Return         exec $term
 
 bindsym $mod+q                    kill
 bindsym $mod+r                    exec --no-startup-id rofi -combi-modi drun#run -show combi
-bindsym $mod+y                    exec --no-startup-id "~/.config/sway/scripts/play-youtube.sh"
+bindsym $mod+y                    exec --no-startup-id "~/.config/sway/scripts/play-youtube.fish"
 bindsym $mod+Shift+w              exec --no-startup-id "~/.config/sway/scripts/wallpaper.sh"
 bindsym $mod+Shift+r              reload
 bindsym $mod+Shift+q              exec swaymsg exit
@@ -88,8 +88,8 @@ bindsym $mod+c                    exec --no-startup-id "~/.config/sway/scripts/l
 bindsym $mod+z                    fullscreen toggle
 bindsym $mod+Shift+z              fullscreen toggle
 
-bindsym $mod+t                    exec --no-startup-id env -u GIO_USE_VFS thunar
-bindsym $mod+Shift+t              exec --no-startup-id env -u GIO_USE_VFS thunar
+bindsym $mod+t                    exec --no-startup-id env -u GIO_USE_VFS pcmanfm
+bindsym $mod+Shift+t              exec --no-startup-id env -u GIO_USE_VFS pcmanfm
 
 mode "handy" {
     bindsym Escape                exec --no-startup-id handy --cancel; mode "default"
@@ -197,15 +197,9 @@ for_window [app_id="^firechores$"] floating enable, resize set 1280 px 800 px, m
 
 # General
 for_window [class="^Handy$" title="^Recording$"] border none
-for_window [class="vlc"] floating enable
 for_window [window_type="tooltip"] floating enable
 # swayimg image viewer — always floating
 for_window [app_id="swayimg"] floating enable
-
-# Restaurar a barra de título (border normal) em apps específicos.
-# O padrão é 'pixel 1' (sem barra). Adicione mais app_ids aqui conforme precisar.
-for_window [app_id="thunar"] border normal
-for_window [class="^Thunar$" title="^(?!.* - Thunar$)"] floating enable
 
 # Kill update notifications, I want to use SmartGit on version 20
 for_window [class="SmartGit" title="Restart(.*)"] kill
@@ -218,7 +212,7 @@ for_window [class="2010-02-23aragexere.exe"] floating disable
 for_window [title="Picture-in-Picture"] sticky enable, sticky enable
 
 # Video player for meeting
-for_window [window_role="vlc-video"] floating enable, resize set 1280px 720px, move to workspace $ws10
+for_window [app_id="mpv"] floating enable, resize set 1280px 720px, move to workspace $ws10
 
 # Generated windows.
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
@@ -233,7 +227,6 @@ for_window [window_type="dropdown_menu"] floating enable
 # Tray apps that (incorrectly) spawn their context menu as a bare toplevel
 for_window [app_id="^$" title="^$"] floating enable, move position cursor
 for_window [app_id = "xdg-desktop-portal-gtk"] floating enable;
-for_window [app_id="com.gabm.satty"] floating enable
 for_window [title="^EPOS Print Preview$"] move to workspace $ws1, floating enable, exec swaymsg '[app_id="chromium"] opacity 0.99, opacity 1'
 for_window [title="^data:application/pdf"] move to workspace $ws1, floating enable, exec swaymsg '[app_id="chromium"] opacity 0.99, opacity 1'
 
@@ -275,6 +268,6 @@ bar {
     }
 }
 
-# Chicago95 retro cursor (instalado em ~/.local/share/icons)
-seat * xcursor_theme Chicago95_Standard_Cursors 24
+# Cursor Adwaita (adwaita-icon-theme)
+seat * xcursor_theme Adwaita 24
 

@@ -8,7 +8,7 @@ else is reached through `~/.config` (tmux, readline via `INPUTRC`, npm via
 
 Stack: sway + swaylock/swayidle/swaybg, kanshi, rofi, dunst, conky (two panels),
 WezTerm, fish + bash, tmux, neovim, NotepadNext (AppImage via appman),
-Chicago95 GTK theme, Mononoki Nerd Font with anti-aliasing off on purpose.
+Adwaita dark (built-in GTK theme), Mononoki Nerd Font with anti-aliasing off on purpose.
 
 - `AGENTS.md`: font/theming rules and where each setting lives.
 - `.config/sway/PACKAGES.md`, `CURRENT_TOOLS.md`: packages and tools the sway

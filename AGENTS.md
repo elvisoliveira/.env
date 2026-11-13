@@ -7,7 +7,7 @@ the **font configuration** across the system so it stays consistent and any agen
 ## Font philosophy
 
 - **Sharp / no anti-aliasing on purpose.** Rendering is intentionally aliased for
-  a crisp, retro look that fits the Chicago95 GTK theme. Do **not** re-enable
+  a crisp, retro look (originally chosen for the Chicago95 theme, removed 2026-11-12; GTK is now built-in Adwaita dark). Do **not** re-enable
   anti-aliasing globally to "fix" rendering — it is a deliberate choice.
 - **Standardized on Mononoki Nerd Font.** One Nerd Font everywhere: it carries
   its own icon glyphs (no separate symbols font needed) and was validated to
@@ -66,7 +66,6 @@ earlier experiment; it is unused by the current config and can be removed.)
 
 ## Not font config (ignore when sweeping)
 
-- `.local/share/icons/Chicago95/**/icons.html` — vendored theme gallery pages.
 - `.vimrc/markdown-preview.css` — vendored GitHub-style markdown CSS.
 
 ## Applying changes

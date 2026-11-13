@@ -1,6 +1,4 @@
-*.cer
-*.p12
-*.pem
-*.zip
-wireguard.conf
-__pycache__/
+# only the addon scripts; the CA lives in ~/documents/secrets (fish confdir)
+*
+!.gitignore
+!*.py

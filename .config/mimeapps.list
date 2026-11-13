@@ -1,12 +1,6 @@
 [Default Applications]
-inode/directory=thunar.desktop
-application/pdf=atril.desktop
-application/postscript=atril.desktop
-application/eps=atril.desktop
-application/x-eps=atril.desktop
-image/eps=atril.desktop
-image/x-eps=atril.desktop
-image/vnd.djvu=atril.desktop
+inode/directory=pcmanfm.desktop
+application/pdf=firefox.desktop
 image/bmp=swayimg.desktop
 image/gif=swayimg.desktop
 image/jpg=swayimg.desktop
@@ -50,7 +44,7 @@ text/markdown=firefox.desktop
 text/plain=notepadnext-AM.desktop;
 application/x-shellscript=notepadnext-AM.desktop;
 application/octet-stream=notepadnext-AM.desktop;mpv.desktop;xarchiver.desktop;
-application/pdf=atril.desktop;xreader.desktop;org.gnome.Evince.desktop;firefox.desktop;
+application/pdf=firefox.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 text/html=notepadnext-AM.desktop;firefox.desktop;

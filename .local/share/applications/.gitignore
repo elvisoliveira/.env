@@ -1,6 +1,8 @@
 # Launchers are generated/installed per machine (AM, waydroid, JetBrains);
-# nothing here is worth versioning except this file.
+# only the hand-made overrides are versioned.
 *
 !.gitignore
-# chromium: stock .desktop + --disable-crashpad-for-testing (no chrome_crashpad_handler processes)
-!chromium.desktop
+# firefox: menu goes through the bwrap wrapper (~/.local/bin/firefox)
+!firefox.desktop
+# pcmanfm: env -u GIO_USE_VFS so it gets gvfs (Trash, drives)
+!pcmanfm.desktop

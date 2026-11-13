@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Action
+Name=Copy absolute path
+Icon=edit-copy
+Profiles=all;
+
+[X-Action-Profile all]
+MimeTypes=all/all;
+Exec=sh -c 'printf "%%s\n" "$@" | head -c -1 | wl-copy' sh %F

@@ -8,7 +8,7 @@
 # Inside: host filesystem read-only; writable = private home, ~/downloads,
 # /run (session sockets: wayland, pipewire, dbus, ssh-agent), /tmp, /dev.
 # Read-only from the real home: ~/applications, ~/appimages (the app binaries)
-# and the theming bits (~/.themes, ~/.icons, gtk/fontconfig config).
+# and the theming bits (gtk/fontconfig config; themes are system Adwaita).
 # Per-app extras go before `--`, e.g. --bind ~/projects ~/projects.
 # /etc/ssh/ssh_config.d is masked: inside the user namespace root-owned files show as
 # nobody and ssh refuses Include'd configs with "Bad owner or permissions".
@@ -18,7 +18,7 @@ root=${SANDBOXED_ROOT:-$HOME/.local/share/sandboxes}
 home=$root/$name
 mkdir -p "$home" "$HOME/downloads"
 
-ro=(applications appimages .themes .icons .config/gtk-2.0 .config/gtk-3.0 .config/fontconfig .config/user-dirs.dirs .config/mimeapps.list)
+ro=(applications appimages .config/gtk-2.0 .config/gtk-3.0 .config/fontconfig .config/user-dirs.dirs .config/mimeapps.list)
 extra=()
 for d in "${ro[@]}"; do [ -e "$HOME/$d" ] && extra+=(--ro-bind "$HOME/$d" "$HOME/$d"); done
 
