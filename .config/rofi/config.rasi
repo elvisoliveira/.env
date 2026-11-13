@@ -3,4 +3,3 @@ configuration {
     modi: "drun,run,combi";
 }
 @import "dracula"
-/* @import "~/.cache/wal/colors-rofi-dark" */

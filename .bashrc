@@ -1,23 +1,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-# (cat ~/.cache/wal/sequences &)
-
-# Alternative (blocks terminal for 0-3ms)
-# cat ~/.cache/wal/sequences
-
 PS1="[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\h\[\033[1;33m\] >\[\033[0m\]"
 
-# To add support for TTYs this line can be optionally added.
-# source ~/.cache/wal/colors-tty.sh
-
-# export TERM="xterm-256color"
-
-# export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/bin"
-# export PATH="$PATH:$XDG_DATA_DIRS"
 # Prepend (not append): ~/.local/bin must win over /usr/bin so a locally-built
 # tmux (next-3.8, has `new-pane -B` for the git float) beats /usr/bin/tmux 3.7b.
 # The official build lacks -B and its server dies when the float opens.
