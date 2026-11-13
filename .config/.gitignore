@@ -18,6 +18,7 @@
 !fish/functions/mitmdump.fish
 !fish/functions/mitmproxy.fish
 !fish/functions/mitmweb.fish
+!fish/functions/sandbox-android.fish
 
 !sway/
 !sway/*
