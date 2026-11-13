@@ -13,8 +13,8 @@ profile office {
 }
 
 profile home {
-    output "LG Electronics LG FULL HD 403NTZN4X053" enable mode 1920x1080@60Hz position 0,0 scale 1.0 transform 270
-    output "LG Electronics LG FULL HD 110NTSU1N302" enable mode 1920x1080@60Hz position 1080,840 scale 1.0 transform normal
+    output "LG Electronics LG FULL HD 403NTZN4X053" enable mode 1920x1080@74.973Hz position 0,0 scale 1.0 transform 270
+    output "LG Electronics LG FULL HD 110NTSU1N302" enable mode 1920x1080@74.973Hz position 1080,840 scale 1.0 transform normal
     output eDP-1 enable mode 2560x1600@60.001Hz position 3000,320 scale 1.0 transform normal
 }
 
