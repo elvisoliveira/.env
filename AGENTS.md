@@ -27,7 +27,7 @@ the **font configuration** across the system so it stays consistent and any agen
 | fontconfig generics | `.config/fontconfig/fonts.conf` | `sans-serif` (`<match>` strong prepend) | Mononoki Nerd Font |
 | GTK 3 | `.config/gtk-3.0/settings.ini` | `gtk-font-name` | Mononoki Nerd Font 11 |
 | sway window titles | `.config/sway/config` (~line 10) | `font pango:` | Mononoki Nerd Font 11 |
-| swaybar (workspaces, `mode hide`) | `.config/sway/config` (`bar {}`) | `font pango:` | Mononoki Nerd Font 11 |
+| swaybar (workspaces, `mode dock`) | `.config/sway/config` (`bar {}`) | `font pango:` | Mononoki Nerd Font 11 |
 | WezTerm terminal (`$term` in sway) | `.config/wezterm/wezterm.lua` | `config.font` + `freetype_load_target = "Mono"` (aliased) | Mononoki Nerd Font Mono |
 | gVim GUI | `.vimrc/.vimrc` | `set guifont` | `Fira Mono Medium 10` → falls back to Mononoki Nerd Font Mono (Fira not installed) |
 
@@ -61,8 +61,8 @@ tree uses `monospace`; that is why the monospace alias matters there.
 
 Mononoki Nerd Font includes Nerd Font icon glyphs, so the swaybar / conky
 status line gets both text and icons from the single font — no separate symbols
-font in the Pango string. (`ttf-nerd-fonts-symbols-mono` may be installed from an
-earlier experiment; it is unused by the current config and can be removed.)
+font in the Pango string. (`ttf-nerd-fonts-symbols` and `-mono`, left over from an
+earlier experiment, were removed 2026-11-10.)
 
 ## Not font config (ignore when sweeping)
 

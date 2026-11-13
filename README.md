@@ -11,8 +11,7 @@ WezTerm, fish + bash, tmux, neovim, NotepadNext (AppImage via appman),
 Adwaita dark (built-in GTK theme), Mononoki Nerd Font with anti-aliasing off on purpose.
 
 - `AGENTS.md`: font/theming rules and where each setting lives.
-- `.config/sway/PACKAGES.md`, `CURRENT_TOOLS.md`: packages and tools the sway
-  config expects.
+- `.config/sway/PACKAGES.md`: packages the sway config expects.
 - `.config/*/.gitignore` files are allow-lists: only the listed configs are
   versioned, everything else under `~/.config` and `~/.local` stays local.
 
