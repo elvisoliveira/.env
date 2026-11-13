@@ -42,21 +42,28 @@ read -r screen_x screen_y screen_w screen_h < <(
 )
 
 width=300  # same in both slots; height follows each device's aspect
-peek=41  # px left visible when hidden (slot 1)
+peek=32  # px of the phone screen left visible when hidden (border added automatically); 32 = whole Pixel status bar
 
 # Natural content size per window: the _scrcpy_ar_WxH mark recorded at map time,
 # falling back to the current geometry for windows opened before the mark existed.
+# The Pixel (scrcpy titles the window with the device model) always takes the
+# rightmost slot and is the only one that keeps the peek when hidden; the rest
+# hide completely below the screen.
 i=0
 swaymsg -t get_tree -r | jq -r '
-  .. | select(.window_properties?.class? == "scrcpy")
+  [.. | select(.window_properties?.class? == "scrcpy")]
+  | sort_by(.name | test("^Pixel") | not)
+  | .[]
   | ((.marks | map(select(startswith("_scrcpy_ar_"))) | first // "") | ltrimstr("_scrcpy_ar_") | split("x")) as $ar
-  | [.id, ($ar[0] // .geometry.width), ($ar[1] // .geometry.height), .rect.width - .window_rect.width, .rect.height - .window_rect.height]
+  | [.id, ($ar[0] // .geometry.width), ($ar[1] // .geometry.height), .rect.width - .window_rect.width, .rect.height - .window_rect.height, .window_rect.y, (.name | test("^Pixel"))]
   | @tsv' |
-while read -r id nat_w nat_h border_w border_h; do
+while read -r id nat_w nat_h border_w border_h border_top is_pixel; do
   height=$(( (width - border_w) * nat_h / nat_w + border_h ))
   x=$((screen_x + screen_w - width * (i + 1)))
-  if [ "$slot" = "1" ]; then
-    y=$((screen_y + screen_h - peek))
+  if [ "$slot" = "1" ] && [ "$is_pixel" = "true" ]; then
+    y=$((screen_y + screen_h - peek - border_top))
+  elif [ "$slot" = "1" ]; then
+    y=$((screen_y + screen_h))
   else
     y=$((screen_y + screen_h - height))
   fi
