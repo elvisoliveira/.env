@@ -12,18 +12,18 @@ BG="$HOME/.config/bg"
 pkill -x swaybg   2>/dev/null    # restart so new $BG-* (e.g. from chbg) show
 
 set --
-if command -v swaymsg >/dev/null 2>&1; then
-    for out in $(swaymsg -t get_outputs | jq -r '.[] | select(.active) | .name'); do
-        if [ -f "$BG-$out" ]; then
-            set -- "$@" -o "$out" -m fill -i "$BG-$out"
-        fi
-    done
-fi
+for out in $(swaymsg -t get_outputs | jq -r '.[] | select(.active) | .name'); do
+    if [ -f "$BG-$out" ]; then
+        set -- "$@" -o "$out" -m fill -i "$BG-$out"
+    fi
+done
 
+# Launched through sway so swaybg is sway's child, not ours: when chbg.service
+# calls this script, swaybg would otherwise stay in the service's cgroup.
 if [ "$#" -gt 0 ]; then
-    swaybg "$@" >/dev/null 2>&1 &
+    swaymsg -- exec swaybg "$@" >/dev/null
 elif [ -f "$BG" ]; then
-    swaybg -m fill -i "$BG" >/dev/null 2>&1 &
+    swaymsg -- exec swaybg -m fill -i "$BG" >/dev/null
 else
-    swaybg -c '#67645B' >/dev/null 2>&1 &
+    swaymsg -- exec swaybg -c "'#67645B'" >/dev/null
 fi

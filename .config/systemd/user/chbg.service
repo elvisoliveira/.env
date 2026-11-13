@@ -7,9 +7,8 @@ PartOf=graphical-session.target
 
 [Service]
 Type=oneshot
-# wallpaper.sh backgrounds swaybg; default control-group kill would reap it when
-# this oneshot exits. Kill only the wrapper, let swaybg keep painting.
-KillMode=process
+# wallpaper.sh starts swaybg through `swaymsg exec`, so it lives under sway and
+# nothing is left in this unit's cgroup.
 # sway exports WAYLAND_DISPLAY to the user manager but NOT SWAYSOCK, so
 # rediscover the newest sway IPC socket before running chbg.
 # DIR arg forces a fresh random image per output (bare chbg would reuse the
