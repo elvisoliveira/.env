@@ -8,7 +8,8 @@ This file is intentionally limited to Sway/Wayland-related packages.
 sudo pacman -S --needed \
   sway swaybg swaylock swayidle \
   grim slurp wl-clipboard cliphist wtype jq \
-  rofi-wayland kanshi brightnessctl swayimg mpv
+  rofi kanshi brightnessctl swayimg mpv yt-dlp playerctl dunst \
+  xdg-desktop-portal-wlr xdg-desktop-portal-gtk
 ```
 
 What these cover:
@@ -18,9 +19,13 @@ What these cover:
 - `grim` + `slurp` + `wl-clipboard`: Wayland screenshot + clipboard flow.
 - `mpv`: video player (default for `video/mp4` in mimeapps.list; its .desktop claims the other video types) and `$mod+y` (`play-youtube.fish`: rofi URL/quality -> mpv via yt-dlp).
 - `cliphist`: Wayland clipboard history used in your `$mod+v` bind.
+- `yt-dlp`: resolves YouTube streams/subtitles for mpv (`$mod+y`).
+- `playerctl`: media keys (play/pause/next/previous).
+- `dunst`: notifications (`dunstify` countdown in `screenshot-area.sh`).
+- `xdg-desktop-portal-wlr` + `-gtk`: screencast/screenshot (wlr) and file chooser / open-with (gtk), as set in `.config/xdg-desktop-portal/`; Firefox opens folders and files through the portal so handlers run outside its bwrap sandbox.
 - `wtype`: Wayland-native key typing (rofi bookmarks / cliptype helpers).
 - `jq`: parses `swaymsg` JSON for saving the current layout into Kanshi config.
-- `rofi-wayland`: launcher on Wayland.
+- `rofi`: launcher (Wayland support is built in since 2.0; `rofi-wayland` was merged into it).
 - `kanshi`: output profiles for multi-monitor setups on Wayland.
 - `brightnessctl`: backlight keys (no xbacklight fallback).
 - `swayimg`: Wayland image viewer, default for `image/*` in mimeapps.list (imv would clash with renameutils).
