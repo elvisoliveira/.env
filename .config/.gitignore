@@ -7,9 +7,6 @@
 !wezterm/
 !wezterm/*
 
-!kanshi/
-!kanshi/*
-
 !fish/
 !fish/*
 # own functions (machine-specific paths); the portable ones are symlinks into the config.fish submodule
@@ -87,10 +84,5 @@ conky/lan_devices.map
 !readline/
 !readline/*
 
-# npm user config via NPM_CONFIG_USERCONFIG (set in the shell env files)
-!npm/
-!npm/npmrc
-
-# systemd --user environment (keeps user services on /files/cache too)
-!environment.d/
-!environment.d/*
+# Machine-specific, kept local only: kanshi/ (monitor serials), npm/npmrc and
+# environment.d/ (/files paths). Shells read environment.d/*.conf if present.
